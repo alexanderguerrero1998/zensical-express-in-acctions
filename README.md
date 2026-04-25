@@ -1,4 +1,4 @@
-Para subir a git hub desde cero
+Para subir a github desde cero
 ```sh
 git init
 git add .
