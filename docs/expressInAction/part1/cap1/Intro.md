@@ -1,11 +1,12 @@
 # What is express?
 Este capítulo abarca:
 
-- __Node.js, una plataforma JavaScript que se utiliza habitualmente para ejecutar JavaScript en servidores.__
-- __Express, un framework que se ejecuta sobre el servidor web de Node.js y facilita su uso.__
-- __Middleware y enrutamiento, dos características de Express.__
-- __Funciones de manejo de solicitudes.__
+- [x] __Node.js, una plataforma JavaScript que se utiliza habitualmente para ejecutar JavaScript en servidores.__
+- [x] __Express, un framework que se ejecuta sobre el servidor web de Node.js y facilita su uso.__
+- [x] __Middleware y enrutamiento, dos características de Express.__
+- [x] __Funciones de manejo de solicitudes.__
   
+
 Node.js surgió en 2009 con una idea revolucionaria: tomar el motor V8 de Google Chrome —conocido por su velocidad— y llevarlo fuera del navegador para ejecutar JavaScript en servidores. Hasta ese momento, JavaScript vivía exclusivamente en el navegador, donde los desarrolladores no tenían otra opción que usarlo. Con Node.js, JavaScript se convirtió en una alternativa real frente a lenguajes como Ruby, Python, Java o C# para el desarrollo del lado del servidor.
 
 Las ventajas de Node.js son varias: el motor V8 es muy rápido, fomenta un estilo de programación asíncrono que evita los problemas del multihilo, cuenta con una gran cantidad de librerías gracias a la popularidad previa de JavaScript, y sobre todo, permite compartir código entre el cliente y el servidor, eliminando el cambio de contexto mental que antes sufrían los desarrolladores al pasar de uno a otro.

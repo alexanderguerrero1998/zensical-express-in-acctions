@@ -1,0 +1,1573 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../cap3/buldingApi/">
+      
+      
+        <link rel="next" href="../../../part3/cap0/ExpressInContext/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>Views and templates: Pug and EJS - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#views-and-templates-pug-and-ejs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Views and templates: Pug and EJS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap2/ThebasicsofNode.js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap1/middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap2/Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap3/buldingApi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#expresss-view-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Express’s view features
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Express’s view features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-view-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A simple view rendering
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-complicated-view-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A complicated view rendering
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-all-view-engines-compatible-with-express-consolidatejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Making all view engines compatible with Express: Consolidate.js
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-you-need-to-know-about-ejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Everything you need to know about EJS
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Everything you need to know about EJS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-syntax-of-ejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The syntax of EJS
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The syntax of EJS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-your-own-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ADDING YOUR OWN FILTERS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-you-need-to-know-about-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Everything you need to know about Pug
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Everything you need to know about Pug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-syntax-of-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The syntax of Pug
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layouts-in-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Layouts in Pug
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixins-in-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mixins in Pug
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap3/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap4/Deplyment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap5/bestPractices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#expresss-view-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Express’s view features
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Express’s view features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-view-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A simple view rendering
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-complicated-view-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A complicated view rendering
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-all-view-engines-compatible-with-express-consolidatejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Making all view engines compatible with Express: Consolidate.js
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-you-need-to-know-about-ejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Everything you need to know about EJS
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Everything you need to know about EJS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-syntax-of-ejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The syntax of EJS
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The syntax of EJS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-your-own-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ADDING YOUR OWN FILTERS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-you-need-to-know-about-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Everything you need to know about Pug
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Everything you need to know about Pug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-syntax-of-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The syntax of Pug
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layouts-in-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Layouts in Pug
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixins-in-pug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mixins in Pug
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../part1/cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="views-and-templates-pug-and-ejs">Views and templates: Pug and EJS<a class="headerlink" href="#views-and-templates-pug-and-ejs" title="Permanent link">&para;</a></h1>
+<p>Este capítulo abarca:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>El sistema de vistas de Express</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>El lenguaje de plantillas EJS</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>El lenguaje de plantillas Pug</strong></li>
+</ul>
+<p>En los capítulos anteriores, aprendiste qué es Express, cómo funciona y cómo
+utilizar su función de enrutamiento. A partir de este capítulo, dejarás de aprender
+sobre Express.</p>
+<p>Bueno, no exactamente. Seguirás usando Express para potenciar tus aplicaciones,
+pero como hemos comentado hasta ahora, Express no impone una filosofía y requiere muchos complementos de terceros para crear una aplicación completa. En este capítulo y en los siguientes, empezarás a explorar algunos de estos módulos, aprendiendo cómo funcionan y cómo pueden mejorar tus aplicaciones.</p>
+<p>En este capítulo hablaremos de las vistas, que te ofrecen una forma práctica de generar contenido dinámicamente (normalmente HTML). Ya has visto un motor de vistas; EJS te ha ayudado a inyectar variables especiales en HTML. Pero aunque EJS proporcionó una comprensión conceptual de las vistas, nunca exploramos realmente todo lo que Express (y los demás motores de vistas) tenían para ofrecer. Aprenderás las diversas formas de inyectar valores en las plantillas; verás las características de EJS, Pug y otros motores de vistas compatibles con Express; y exploremos las sutilezas del mundo de las perspectivas. ¡Comencemos!</p>
+<div class="admonition note">
+<p class="admonition-title">JADE AHORA PUG.</p>
+<p>Pug se llamaba originalmente Jade, pero se cambió por motivos legales. El proyecto ha sido renombrado, pero Jade todavía se usa en gran parte del código. Durante el período de transición, tendrás que recordar ambos nombres.</p>
+</div>
+<h2 id="expresss-view-features">Express’s view features<a class="headerlink" href="#expresss-view-features" title="Permanent link">&para;</a></h2>
+<p>Antes de empezar, permítanme definir un término que usaré mucho: motor de vistas. Cuando digo motor de vistas, me refiero básicamente al módulo que realiza la renderización de las vistas. Pug y EJS son motores de vistas, y hay muchos otros.</p>
+<p>La cantautora estadounidense India Arie tiene una excelente canción titulada “Brown Skin”. Sobre la piel morena, canta: “No puedo distinguir dónde empieza la tuya, no puedo distinguir dónde termina la mía”. De manera similar, cuando empecé a usar las vistas de Express, me confundía dónde terminaba Express y dónde empezaban los motores de vistas. Por suerte, no es demasiado difícil.</p>
+<p>Express no impone restricciones sobre el motor de vistas que utilices. Siempre que el motor de vistas exponga una API que Express espera, no tendrás problemas. Express ofrece una función práctica para ayudarte a renderizar tus vistas; veamos cómo funciona.</p>
+<h3 id="a-simple-view-rendering">A simple view rendering<a class="headerlink" href="#a-simple-view-rendering" title="Permanent link">&para;</a></h3>
+<p>Ya has visto ejemplos simples de cómo renderizar vistas antes, pero en caso de que necesites un repaso, la siguiente lista proporciona una aplicación que renderiza una vista EJS simple.</p>
+<p><img alt="" src="../simplerendering.png" title="Ejemplo de renderizado de vista simple" /></p>
+<p>Una vez que haya realizado una instalación npm de EJS (y Express, por supuesto), esto debería funcionar. Cuando visite la raíz, encontrará views/index.ejs y lo renderizará con EJS. Harás algo como esto el 99% del tiempo: un motor de visualización todo el tiempo. Pero las cosas pueden complicarse más si decides mezclar las cosas.</p>
+<h3 id="a-complicated-view-rendering">A complicated view rendering<a class="headerlink" href="#a-complicated-view-rendering" title="Permanent link">&para;</a></h3>
+<p>El siguiente listado es un ejemplo complejo de cómo representar una vista a partir de una respuesta, utilizando dos motores de visualización: Pug y EJS. Esto debería ilustrar cuán locas pueden llegar a ser las cosas.</p>
+<p><img alt="" src="../complexexample.png" title="Ejemplo de renderizado complejo" /></p>
+<p>Esto es lo que pasa cuando llamas a <code>render</code> en estos tres casos. Aunque a alto nivel parezca complicado, en realidad solo se trata de una serie de pasos sencillos:</p>
+<ol>
+<li>
+<p><strong>Express crea el objeto de contexto cada vez que llamas a <code>render</code>.</strong><br />
+   Estos objetos de contexto se pasan a los motores de vistas cuando llega el momento de renderizar. Son, efectivamente, las variables disponibles para las vistas.  </p>
+</li>
+<li>
+<p>Primero, Express añade todas las propiedades de <code>app.locals</code>, un objeto disponible para todas las peticiones.  </p>
+</li>
+<li>Luego añade todas las propiedades de <code>res.locals</code>, sobrescribiendo cualquier valor que ya se haya añadido desde <code>app.locals</code> si ya existía.  </li>
+<li>
+<p>Finalmente, añade las propiedades del objeto que hayas pasado a <code>render</code> (una vez más, sobrescribiendo cualquier propiedad previa).<br />
+   Al final, si visitas <code>/about</code>, crearás un objeto de contexto con tres propiedades: <code>appName</code>, <code>userAgent</code> y <code>currentUser</code>.<br />
+<code>/contact</code> solo tendrá <code>appName</code> y <code>userAgent</code> en su contexto; el manejador de 404 tendrá <code>appName</code>, <code>userAgent</code> y <code>urlAttempted</code>.</p>
+</li>
+<li>
+<p><strong>Decides si el caché de vistas está habilitado.</strong><br />
+   El “caché de vistas” puede sonar como si Express cacheara todo el proceso de renderizado de la vista, pero no es así; solo se guarda en caché la búsqueda del archivo de vista y su asignación al motor de vistas correspondiente.<br />
+   Por ejemplo, se guarda en caché la búsqueda de <code>views/my_view.ejs</code> y se determina que esa vista usa EJS, pero <strong>no</strong> se guarda en caché la renderización real de la vista.  </p>
+</li>
+</ol>
+<p>Es un poco engañoso.  </p>
+<p>Express decide si el caché de vistas está habilitado de dos formas, solo una de las cuales está documentada.  </p>
+<ul>
+<li><strong>La forma documentada:</strong> existe una opción que puedes configurar en la aplicación. Si <code>app.enabled("view cache")</code> es verdadero, Express cacheará la búsqueda de la vista.<br />
+     Por defecto está deshabilitado en modo desarrollo y habilitado en producción, pero puedes cambiarlo tú mismo con <code>app.enable("view cache")</code> o <code>app.disable("view cache")</code>.  </li>
+<li>
+<p><strong>La forma no documentada:</strong> si el objeto de contexto generado en el paso anterior tiene una propiedad <code>cache</code> con valor verdadero, el caché se habilitará para esa vista concreta.<br />
+     Esto anula cualquier configuración a nivel de aplicación.<br />
+     Esto permite cachear vistas vista por vista, pero en mi opinión es más importante saber que existe para poder evitar usarlo sin querer.</p>
+</li>
+<li>
+<p><strong>Buscas dónde reside el archivo de la vista y qué motor de vistas usar.</strong><br />
+   En este caso, quieres convertir <code>about</code> en <code>/path/to/my/app/views/about.jade</code> + Pug, y <code>contact.ejs</code> en <code>/path/to/my/app/views/contact.ejs</code> + EJS.  </p>
+</li>
+</ul>
+<p>El manejador de 404 debería asociar <code>404.html</code> con EJS mirando tu llamada anterior a <code>app.engine</code>.  </p>
+<p>Si ya has hecho esta búsqueda y el caché de vistas está habilitado, se usará la caché y se saltará al último paso.  </p>
+<p>Si no, se continúa adelante.</p>
+<ol>
+<li><strong>Si no proporcionas una extensión de archivo (como con <code>about</code> en el paso anterior), Express añade la extensión por defecto que especifiques.</strong><br />
+   En este caso, <code>about</code> se convierte en <code>about.jade</code>, pero <code>contact.ejs</code> y <code>404.html</code> se mantienen igual.  </li>
+</ol>
+<p>Si no proporcionas una extensión y no has definido un motor de vistas por defecto, Express lanzará un error.  </p>
+<p>De lo contrario, continúa.</p>
+<ol>
+<li><strong>Express usa la extensión del archivo para determinar qué motor usar.</strong>  </li>
+<li>
+<p>Si coincide con alguno de los motores que ya hayas especificado, lo usará.  </p>
+</li>
+<li>
+<p>En este caso, <code>about.jade</code> coincidirá con Pug porque Pug es el motor por defecto.  </p>
+</li>
+<li><code>contact.ejs</code> intentará hacer <code>require("ejs")</code> basándose en la extensión del archivo.  </li>
+<li>
+<p>Asignaste explícitamente <code>404.html</code> a la función <code>renderFile</code> de EJS, así que se usará esa.</p>
+</li>
+<li>
+<p><strong>Express busca el archivo en tu directorio de vistas.</strong><br />
+   Si no lo encuentra, lanza un error, pero si encuentra algo continúa.</p>
+</li>
+<li>
+<p><strong>Express guarda en caché toda la lógica de búsqueda si debe.</strong><br />
+   Si el caché de vistas está habilitado, se guarda en caché toda esta lógica de búsqueda para la próxima vez.</p>
+</li>
+<li>
+<p><strong>Renderizas la vista.</strong><br />
+   Esto invoca al motor de vistas y, en el código fuente de Express, es literalmente una sola línea.<br />
+   Aquí es donde el motor de vistas toma el control y genera el HTML real (o cualquier otro formato que quieras).  </p>
+</li>
+</ol>
+<p>Al final resulta un poco complicado, pero en el 99% de los casos basta con elegir un motor de vistas y ceñirse a él, así que probablemente estarás protegido de la mayoría de esta complejidad.</p>
+<blockquote>
+<p><strong>Renderizar vistas no HTML</strong></p>
+</blockquote>
+<p>El tipo de contenido por defecto de Express es HTML, por lo tanto, si no haces nada especial, <code>res.render</code> renderizará tus respuestas y las enviará al cliente como HTML.<br />
+En la mayoría de los casos, esto es suficiente.<br />
+Pero no tiene por qué ser así.<br />
+Puedes renderizar texto plano, XML, JSON o cualquier otro formato que desees.<br />
+Solo tienes que cambiar el <code>content-type</code> modificando el parámetro de <code>res.type</code>:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s2">&quot;myview&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">currentUser</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Gilligan&quot;</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Existen a menudo formas mejores de renderizar algunos de estos formatos; por ejemplo, <code>res.json</code> debería usarse en lugar de una vista que renderiza JSON, pero esto es otra manera de hacerlo.</p>
+<h3 id="making-all-view-engines-compatible-with-express-consolidatejs">Making all view engines compatible with Express: Consolidate.js<a class="headerlink" href="#making-all-view-engines-compatible-with-express-consolidatejs" title="Permanent link">&para;</a></h3>
+<p>Hemos hablado de motores de visualización como EJS y Pug, pero hay muchos más entre los que quizás quieras elegir. Es posible que haya oído hablar de las plantillas de Moustache, Manillars o Underscore.js. Es posible que también desee utilizar un puerto de nodo de otros lenguajes de plantillas como Jinja2 o HAML. 
+Muchos de estos motores de visualización, como EJS y Pug, funcionarán con Express desde el primer momento. Otros no tienen una API compatible con Express y deben incluirse en algo que Express pueda entender. </p>
+<p>Ingrese a Consolidate.js (<a href="https://github.com/tj/consolidate.js">https://github.com/tj/consolidate.js</a>), una biblioteca que incluye una gran cantidad de motores de visualización para que sea compatible con Express. Tiene soporte para clásicos como EJS, Pug, Moustache, Manillars y Hogan. También es compatible con muchos otros, en caso de que estés usando un motor de visualización más oscuro/hipster. Puede ver la lista completa de motores compatibles en la página del proyecto. </p>
+<p>Supongamos que está utilizando Walrus, un motor de visualización de JavaScript que no es compatible con Express de fábrica. Deberá utilizar Consolidate para que sea compatible con Express. </p>
+<p>Después de instalar Walrus y Consolidate (con npm install walrus consolidate),
+Podrás usar Walrus con Express, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../renderingWarlus.png" title="Renderizado con morsa" /></p>
+<h2 id="everything-you-need-to-know-about-ejs">Everything you need to know about EJS<a class="headerlink" href="#everything-you-need-to-know-about-ejs" title="Permanent link">&para;</a></h2>
+<p>Uno de los motores de visualización más simples y populares que existen se llama EJS (JavaScript integrado). Puede crear plantillas para cadenas simples, HTML, texto sin formato, lo que sea. Se integra ligeramente con cualquier herramienta que utilices. Funciona en el navegador y en Node. Si alguna vez ha utilizado ERB del mundo Ruby, encontrará que EJS es muy similar. En cualquier caso, es bastante sencillo.</p>
+<div class="admonition warning">
+<p class="admonition-title">DOS VERSIONES DE EJS</p>
+<p>Hay dos versiones de EJS mantenidas por dos grupos diferentes de personas. Son similares pero no idénticos. El que usaremos es de TJ Holowaychuck, el creador de Express. Si busca un paquete llamado ejs en npm, este es el que encontrará. Pero si visita <a href="http://embeddedjs.com/">http://embeddedjs.com/</a>, encontrará una biblioteca muy similar con el mismo nombre. Gran parte de la funcionalidad es la misma, pero es una biblioteca diferente, actualizada por última vez en 2009. No funciona en Node y tiene algunas frases discutiblemente sexistas en su documentación. ¡Evítalo!</p>
+</div>
+<h3 id="the-syntax-of-ejs">The syntax of EJS<a class="headerlink" href="#the-syntax-of-ejs" title="Permanent link">&para;</a></h3>
+<p>EJS se puede utilizar para crear plantillas HTML, pero se puede utilizar para cualquier cosa. Mire un poco de EJS en la siguiente lista y vea cómo se ve cuando lo renderiza.</p>
+<p><img alt="" src="../ejstemplate.png" title="Una plantilla EJS" /></p>
+<p>Si pasa el siguiente contexto a EJS
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w"> </span><span class="kc">na</span><span class="err">me</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tony Hawk&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w"> </span><span class="err">bir</span><span class="kc">t</span><span class="err">hyear</span><span class="p">:</span><span class="w"> </span><span class="mi">1968</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w"> </span><span class="err">career</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;skateboarding&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w"> </span><span class="err">bio</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;b&gt;Tony Hawk&lt;/b&gt; is the coolest skateboarder around.&quot;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
+</span></code></pre></div>
+entonces obtendrás el siguiente resultado (al menos a partir de 2015):</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Hi Tony Hawk!
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>You were born in 1968, so that means you’re 47 years old.
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Skateboarding is a cool career!
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Oh, let’s read your bio: Tony Hawk is the coolest skateboarder around. See
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>you later!
+</span></code></pre></div>
+Este pequeño ejemplo muestra cuatro características principales de EJS: </p>
+<ul>
+<li>JavaScript es evaluado se escapa y se imprime; </li>
+<li>JavaScript es evaluado pero no se imprime; </li>
+<li>JavaScript es evaluado y se imprime (pero no se escapa para HTML); </li>
+<li>y filtros.</li>
+</ul>
+<p>Puedes imprimir los resultados de las expresiones JavaScript de dos maneras: <code>&lt;% expression %&gt;</code> imprime el resultado de la expresión; <code>&lt;%- expression %&gt;</code> imprime el resultado de la expresión y escapa cualquier entidad HTML que pueda contener. En general, recomiendo usar la segunda opción siempre que sea posible, ya que es más segura.</p>
+<p>También puedes ejecutar código JavaScript arbitrario y evitar que se imprima. Esto es útil para bucles y condicionales, como viste en el ejemplo anterior. Esto se logra con <code>&lt;% expresión %&gt;</code>. Como puedes ver, puedes usar corchetes para agrupar bucles y condicionales en varias líneas. También puedes evitar añadir saltos de línea innecesarios con <code>&lt;% expresión -%&gt;</code> (observa el guion al final).</p>
+<p>Agregar dos puntos (:) a la salida permitirá aplicar filtros. Los filtros toman la salida de una expresión y la modifican. El ejemplo anterior usó el filtro de mayúsculas, pero existen muchos otros, y puedes definir el tuyo propio (como verás en breve).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Si quieres experimentar con EJS, he creado Try EJS (<a href="https://evanhahn.github.io/try-EJS/">https://evanhahn.github.io/try-EJS/</a>), una sencilla aplicación para navegador. Admito que no está muy pulida, pero es suficiente para trastear con EJS en tu navegador y ver el resultado.</p>
+</div>
+<p>Veamos dos ejemplos. Primero, imaginemos que tienes páginas que comparten el mismo encabezado y pie de página. En lugar de duplicar todo una y otra vez, podrías crear un archivo EJS para el encabezado, un archivo EJS para el pie de página y las páginas que se encuentran entre el encabezado y el pie de página. El siguiente listado muestra cómo podría verse un archivo de encabezado (guardado como header.ejs).</p>
+<p><img alt="" src="../header.png" title="Archivo header EJS" /></p>
+<p>Luego, definirías un pie de página en footer.ejs, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../footer.png" title="Archivo footer EJS" /></p>
+<p>Ahora que has definido el encabezado y el pie de página, puedes incluirlos en las subpáginas con bastante facilidad, como se muestra en el siguiente ejemplo.</p>
+<p><img alt="" src="../includeheader.png" title="Incluyendo un encabezado y pie de página de EJS" /></p>
+<p>Se utiliza <code>include</code> para, incluir otros archivos EJS. Fíjese que no se usan <code>&lt;%= ... %&gt;</code> ni <code>&lt;%- ... %&gt;</code>; todo lo imprime EJS, no usted.</p>
+<p>También podras imaginarte usar esto para construir un widget. Digamos que tiene un widget que muestra perfiles de usuario. Dado un objeto llamado <code>user</code>, esta plantilla generaría HTML para ese usuario. El siguiente listado muestra cómo podría verse <code>userwidget.ejs</code>.</p>
+<p><img alt="" src="../widget.png" title="Un widget de usuario en userwidget.ejs" /></p>
+<p>Ahora puedes usar esa plantilla cuando renderices al usuario actual.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&lt;% user = currentUser %&gt;
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&lt;% include userwidget %&gt;
+</span></code></pre></div>
+O puedes usarlo cuando renderices una lista de usuarios</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;% userList.forEach(function(user) { %&gt;
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a> &lt;% include userwidget %&gt;
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>&lt;% } %&gt;
+</span></code></pre></div>
+<p>La función «include» de EJS es muy versátil; se puede utilizar para crear plantillas o para renderizar subvistas en múltiples ocasiones.</p>
+<h4 id="adding-your-own-filters">ADDING YOUR OWN FILTERS<a class="headerlink" href="#adding-your-own-filters" title="Permanent link">&para;</a></h4>
+<p>Hay 22 filtros integrados, que van desde operaciones matemáticas hasta inversión de matrices/cadenas y clasificación. A menudo son suficientes para tus necesidades, pero a veces querrás agregar los tuyos propios. </p>
+<p>Suponiendo que hayas importado EJS a una variable llamada ejs, solo tienes que añadir una propiedad a <code>ejs.filters.</code> Si sueles sumar matrices con frecuencia, te resultará útil crear tu propio filtro personalizado para sumar matrices. El siguiente fragmento de código muestra cómo se puede añadir dicho filtro</p>
+<p><img alt="" src="../addingfilter.png" /></p>
+<p>Ahora puedes usarlo como cualquier otro filtro.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;%=: myarray | sum %&gt;
+</span></code></pre></div>
+Es muy sencillo. Se te pueden ocurrir un montón de filtros: programalos según los necesites.</p>
+<h2 id="everything-you-need-to-know-about-pug">Everything you need to know about Pug<a class="headerlink" href="#everything-you-need-to-know-about-pug" title="Permanent link">&para;</a></h2>
+<p>Los motores de visualización como Manillar, Moustache y EJS no reemplazan completamente el HTML, sino que lo aumentan con nuevas caracteristicas. Esto es realmente bueno si tienes diseñadores, por ejemplo, que ya han aprendido HTML y no quieren aprender un lenguaje completamente nuevo. También es útil para soluciones de plantillas que no sean HTML. Si te encuentras en este tipo de situación, Pug probablemente sea la elección equivocada.</p>
+<p>Pero Pug ofrece otras características. Le permite escribir muchas menos líneas de código y las líneas que escribe son mucho más bonitas. Los tipos de documentos son fáciles; Las etiquetas se anidan por sangría, no por etiquetas cerradas. Tiene una serie de características de estilo EJS integradas en el lenguaje, como condicionales y bucles. Es más para aprender pero más poderoso.</p>
+<h3 id="the-syntax-of-pug">The syntax of Pug<a class="headerlink" href="#the-syntax-of-pug" title="Permanent link">&para;</a></h3>
+<p>Los lenguajes como HTML están anidados. Hay un elemento raíz (<html>) y luego varios subelementos (como <head> y <body>), cada uno de los cuales tiene sus propios subelementos, y así sucesivamente. HTML y XML eligen tener una apertura (<a>) y una cierre (</a>) para cada elemento.</p>
+<p>Pug adopta un enfoque diferente al utilizar sangría y una sintaxis diferente para HTML. El siguiente listado muestra una página web sencilla que utiliza Pug.</p>
+<p><img alt="" src="../simplepugexample.png" /></p>
+<p>Este listado se convierte en el siguiente HTML.</p>
+<p><img alt="" src="../examplehtml.png" /></p>
+<h3 id="layouts-in-pug">Layouts in Pug<a class="headerlink" href="#layouts-in-pug" title="Permanent link">&para;</a></h3>
+<p>Los diseños (Layouts ) son una característica importante de cualquier lenguaje de plantillas. Le permiten incluir, de una forma u otra, otro HTML. Esto le permite definir su encabezado y pie de página una vez y luego incluirlos en las páginas donde los necesite.</p>
+<p>Un caso muy habitual es definir un archivo de diseño (layout) para tus páginas. De esta forma, todas ellas pueden tener un encabezado y un pie de página uniformes, al tiempo que se permite que el contenido cambie en cada página.</p>
+<p>Como primer paso, defines el layout maestro. Este es el código Pug común a todas las páginas, como el encabezado y el pie de página. El layout maestro define bloques vacíos que se rellenan con el contenido de cualquier página que use este layout maestro. El siguiente listado es un ejemplo. Este archivo de layout simple será compartido por todas tus páginas.</p>
+<p><img alt="" src="../layoutPug.png" /></p>
+<p>Observa cómo has definido dos bloques con <code>block header</code> y <code>block body</code>. Estos bloques serán rellenados por otros archivos Pug que usen este layout. Guarda ese archivo como <code>layout.jade</code>. Puedes usarlos en páginas reales que empleen este layout, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../usingLayoutPug.png" /></p>
+<p>Eso generará el siguiente HTML</p>
+<p><img alt="" src="../html.png" /></p>
+<p>Observa que cuando extiendes un layout y pones contenido dentro de un bloque, ese contenido se inserta “mágicamente” en el lugar correspondiente del layout. También fíjate en que no estás obligado a usar un bloque solo porque esté definido: nunca tocas el bloque <code>header</code> porque no lo necesitas. Si quisieras, podrías definir otra página que use este layout de forma muy sencilla, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../usingPugAgain.png" /></p>
+<p>Los layouts te permiten separar componentes comunes, lo que significa que no tienes que escribir el mismo código una y otra vez.</p>
+<h3 id="mixins-in-pug">Mixins in Pug<a class="headerlink" href="#mixins-in-pug" title="Permanent link">&para;</a></h3>
+<p>Pug tiene otra característica muy útil llamada <em>mixins</em>, que son funciones que defines en tu archivo Pug para reducir tareas repetitivas. Reimplementemos el ejemplo del widget de usuario que vimos en la sección de EJS. Crearás un widget que recibe un objeto llamado <code>user</code> y devuelve un widget HTML para ese usuario. El siguiente listado muestra cómo podrías hacerlo.</p>
+<p><img alt="" src="../mixin.png" /></p>
+<p>Esto renderizaría el widget de usuario para <code>currentUser</code> y para cada uno de los demás usuarios en <code>userList</code>. ¡Sin código duplicado para ti! Eso es todo lo que veremos sobre Pug por ahora. Para más información sobre la sintaxis de Pug, consulta la documentación de referencia en <a href="http://jade-lang.com/reference/">http://jade-lang.com/reference/</a>.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Express tiene un sistema de vistas que puede renderizar páginas HTML de forma dinámica. Llamas a <code>res.render</code> para renderizar dinámicamente una vista con ciertas variables. Antes de hacer esto, debes configurar Express para usar el motor de vistas adecuado en la carpeta correcta.  </li>
+<li>El lenguaje de plantillas EJS es una capa ligera sobre HTML que añade la posibilidad de generar HTML de forma dinámica usando fragmentos de JavaScript.  </li>
+<li>El lenguaje de plantillas Pug es una reinterpretación de HTML que te permite renderizar HTML de forma dinámica con un lenguaje completamente nuevo. Intenta eliminar la verbosidad y reducir la cantidad de teclas que tienes que escribir.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cap3/buldingApi/" class="md-footer__link md-footer__link--prev" aria-label="Previous: BUILDING APIS">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                BUILDING APIS
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../part3/cap0/ExpressInContext/" class="md-footer__link md-footer__link--next" aria-label="Next: EXPRESS IN CONTEXT">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                EXPRESS IN CONTEXT
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

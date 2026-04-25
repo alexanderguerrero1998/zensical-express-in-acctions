@@ -1,10 +1,10 @@
 # Routing
 Este capitulo cubre:
 
-- __Enrutamiento simple y basado en coincidencia de patrones__
-- __Uso de middleware con enrutamiento__
-- __Servir archivos estáticos con express.static, el middleware integrado de archivos estáticos de Express__
-- __Uso de Express con el módulo HTTPS integrado de Node.js__
+- [x] __Enrutamiento simple y basado en coincidencia de patrones__
+- [x] __Uso de middleware con enrutamiento__
+- [x] __Servir archivos estáticos con express.static, el middleware integrado de archivos estáticos de Express__
+- [x] __Uso de Express con el módulo HTTPS integrado de Node.js__
   
 Como ya has visto, el enrutamiento es una de las grandes caracteristicas de Express, te permite mapear diferentes solicitudes para diferentes manejadores de solicitud. En este capitulo produndizaremos mas. Analizaremos el enrutamiento en datalle, veremos como usat Express con HTTP, exploraremos nuevas caractersticas de Express 4 y mas. Tambien construiremos un par de aplicaciones centradas en el enrutamiento, uno de ellos servira como  ejemplo recurrente a lo  largo del resto del libro.
 
@@ -65,12 +65,12 @@ Entonces `:userid` __acepta cualquier string__, no solo números enteros. Por es
 
 | Ruta | ¿Coincide? | Valor de `req.params.userid` |
 |------|-----------|------------------------------|
-| `/users/123` | ✅ | `"123"` |
-| `/users/8` | ✅ | `"8"` |
-| `/users/cake` | ✅ | `"cake"` |
-| `/users/horse_ebooks` | ✅ | `"horse_ebooks"` |
-| `/users/` | ❌ | — |
-| `/users/123/posts` | ❌ | — |
+| `/users/123` | :lucide-check: | `"123"` |
+| `/users/8` | :lucide-check: | `"8"` |
+| `/users/cake` | :lucide-check: | `"cake"` |
+| `/users/horse_ebooks` | :lucide-check: | `"horse_ebooks"` |
+| `/users/` | :lucide-x: | — |
+| `/users/123/posts` | :lucide-x: | — |
 
 El `parseInt()` que aparece en el código convierte el valor a número **después** de que la ruta ya coincidió, no antes. Si le pasas `"cake"`, `parseInt("cake", 10)` devuelve `NaN`, pero Express ya aceptó la solicitud.
 
@@ -126,8 +126,8 @@ Podrías imaginarte creando un enrutador con muchos subenrutadores. Quizás quie
 crear un enrutador de API que, a su vez, delegue en un enrutador de usuarios y un enrutador de mensajes, o tal vez algo más.
 
 ### Estos son temas complementatios 
-### La propiedad Router
-```js
+
+```js title="La propiedad Router"
 function createRouter() {
   const router = function(req, res, next) {
     router.handle(req, res, next);
@@ -416,12 +416,10 @@ Lo único que tienes que hacer es ejecutar ambos servidores en puertos diferente
 Let’s take what you’ve learned and build a simple web application that returns the
 temperature by your United States ZIP Code.
 
-> NOTA: Soy estadounidense, así que este ejemplo utilizará el código postal de EE. UU.,
-llamado código ZIP. Los códigos ZIP tienen cinco dígitos y pueden darte una ubicación aproximada bastante buena. Hay 42 522 códigos ZIP, y Estados Unidos abarca
-3,7 millones de millas cuadradas, por lo que cada código ZIP cubre aproximadamente 87 millas cuadradas
-en promedio. Dado que vamos a usar códigos ZIP, este ejemplo solo funcionará
-en Estados Unidos. No debería ser muy difícil crear una aplicación similar que funcione en otros lugares (si te inspiras, puedes probar con la
-API de geolocalización HTML5).
+!!! note
+
+    Soy estadounidense, así que este ejemplo utilizará el código postal de EE. UU.,
+    llamado código ZIP. Los códigos ZIP tienen cinco dígitos y pueden darte una ubicación aproximada bastante buena. Hay 42 522 códigos ZIP, y Estados Unidos abarca 3,7 millones de millas cuadradas, por lo que cada código ZIP cubre aproximadamente 87 millas cuadradas en promedio. Dado que vamos a usar códigos ZIP, este ejemplo solo funcionará en Estados Unidos. No debería ser muy difícil crear una aplicación similar que funcione en otros lugares (si te inspiras, puedes probar con la API de geolocalización HTML5).
 
 Esta aplicación constará de dos partes: una página de inicio que solicita al usuario su código postal y una ruta que envía la temperatura en formato JSON.
 ¡Comencemos!

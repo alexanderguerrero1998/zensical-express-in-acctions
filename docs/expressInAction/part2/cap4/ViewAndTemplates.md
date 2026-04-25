@@ -1,9 +1,9 @@
 # Views and templates: Pug and EJS
 Este capítulo abarca:
 
-- __El sistema de vistas de Express__
-- __El lenguaje de plantillas EJS__
-- __El lenguaje de plantillas Pug__
+- [x] __El sistema de vistas de Express__
+- [x] __El lenguaje de plantillas EJS__
+- [x] __El lenguaje de plantillas Pug__
 
 En los capítulos anteriores, aprendiste qué es Express, cómo funciona y cómo
 utilizar su función de enrutamiento. A partir de este capítulo, dejarás de aprender
@@ -14,7 +14,9 @@ pero como hemos comentado hasta ahora, Express no impone una filosofía y requie
 
 En este capítulo hablaremos de las vistas, que te ofrecen una forma práctica de generar contenido dinámicamente (normalmente HTML). Ya has visto un motor de vistas; EJS te ha ayudado a inyectar variables especiales en HTML. Pero aunque EJS proporcionó una comprensión conceptual de las vistas, nunca exploramos realmente todo lo que Express (y los demás motores de vistas) tenían para ofrecer. Aprenderás las diversas formas de inyectar valores en las plantillas; verás las características de EJS, Pug y otros motores de vistas compatibles con Express; y exploremos las sutilezas del mundo de las perspectivas. ¡Comencemos!
 
-> __JADE AHORA PUG.__ Pug se llamaba originalmente Jade, pero se cambió por motivos legales. El proyecto ha sido renombrado, pero Jade todavía se usa en gran parte del código. Durante el período de transición, tendrás que recordar ambos nombres.
+!!! note "JADE AHORA PUG."
+   
+    Pug se llamaba originalmente Jade, pero se cambió por motivos legales. El proyecto ha sido renombrado, pero Jade todavía se usa en gran parte del código. Durante el período de transición, tendrás que recordar ambos nombres.
 
 ## Express’s view features
 Antes de empezar, permítanme definir un término que usaré mucho: motor de vistas. Cuando digo motor de vistas, me refiero básicamente al módulo que realiza la renderización de las vistas. Pug y EJS son motores de vistas, y hay muchos otros.
@@ -133,8 +135,9 @@ Podrás usar Walrus con Express, como se muestra en el siguiente listado.
 ## Everything you need to know about EJS
 Uno de los motores de visualización más simples y populares que existen se llama EJS (JavaScript integrado). Puede crear plantillas para cadenas simples, HTML, texto sin formato, lo que sea. Se integra ligeramente con cualquier herramienta que utilices. Funciona en el navegador y en Node. Si alguna vez ha utilizado ERB del mundo Ruby, encontrará que EJS es muy similar. En cualquier caso, es bastante sencillo.
 
-> __DOS VERSIONES DE EJS__ Hay dos versiones de EJS mantenidas por dos grupos diferentes de personas. Son similares pero no idénticos. El que usaremos es de TJ Holowaychuck, el creador de Express. Si busca un paquete llamado ejs en npm, este es el que encontrará. Pero si visita http://embeddedjs.com/, encontrará una biblioteca muy similar con el mismo nombre. Gran parte de la funcionalidad es la misma, pero es una biblioteca diferente, actualizada por última vez en 2009. No funciona en Node y tiene algunas frases discutiblemente sexistas en su documentación.
-¡Evítalo!
+!!! warning "DOS VERSIONES DE EJS"
+
+    Hay dos versiones de EJS mantenidas por dos grupos diferentes de personas. Son similares pero no idénticos. El que usaremos es de TJ Holowaychuck, el creador de Express. Si busca un paquete llamado ejs en npm, este es el que encontrará. Pero si visita http://embeddedjs.com/, encontrará una biblioteca muy similar con el mismo nombre. Gran parte de la funcionalidad es la misma, pero es una biblioteca diferente, actualizada por última vez en 2009. No funciona en Node y tiene algunas frases discutiblemente sexistas en su documentación. ¡Evítalo!
 
 ###  The syntax of EJS
 
@@ -173,7 +176,9 @@ También puedes ejecutar código JavaScript arbitrario y evitar que se imprima. 
 
 Agregar dos puntos (:) a la salida permitirá aplicar filtros. Los filtros toman la salida de una expresión y la modifican. El ejemplo anterior usó el filtro de mayúsculas, pero existen muchos otros, y puedes definir el tuyo propio (como verás en breve).
 
-> __NOTA__: Si quieres experimentar con EJS, he creado Try EJS (https://evanhahn.github.io/try-EJS/), una sencilla aplicación para navegador. Admito que no está muy pulida, pero es suficiente para trastear con EJS en tu navegador y ver el resultado.
+!!! note 
+   
+    Si quieres experimentar con EJS, he creado Try EJS (https://evanhahn.github.io/try-EJS/), una sencilla aplicación para navegador. Admito que no está muy pulida, pero es suficiente para trastear con EJS en tu navegador y ver el resultado.
 
 Veamos dos ejemplos. Primero, imaginemos que tienes páginas que comparten el mismo encabezado y pie de página. En lugar de duplicar todo una y otra vez, podrías crear un archivo EJS para el encabezado, un archivo EJS para el pie de página y las páginas que se encuentran entre el encabezado y el pie de página. El siguiente listado muestra cómo podría verse un archivo de encabezado (guardado como header.ejs).
 

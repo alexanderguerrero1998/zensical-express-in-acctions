@@ -1,0 +1,1581 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../cap4/Deplyment/">
+      
+      
+        <link rel="next" href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>Best practices - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#best-practices" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Best practices
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap2/ThebasicsofNode.js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap1/middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap2/Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap3/buldingApi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap4/ViewAndTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap3/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap4/Deplyment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simplicidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Simplicidad
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patron-de-estructura-de-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Patrón de estructura de archivos
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloqueo-de-versiones-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bloqueo de versiones de dependencias
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bloqueo de versiones de dependencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-mayor-cero" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        VERSIÓN MAYOR CERO
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-forma-simple-evitando-el-versionado-optimista" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La forma simple: evitando el versionado optimista
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-forma-exhaustiva-el-comando-shrinkwrap-de-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La forma exhaustiva: el comando shrinkwrap de npm
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizando-y-agregando-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Actualizando y agregando dependencias
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencias-localizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dependencias localizadas
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependencias localizadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invocando-comandos-directamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Invocando comandos directamente
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejecutando-comandos-desde-scripts-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejecutando comandos desde scripts npm
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendice-otros-modulos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Apéndice: Otros módulos útiles
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simplicidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Simplicidad
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patron-de-estructura-de-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Patrón de estructura de archivos
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloqueo-de-versiones-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bloqueo de versiones de dependencias
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bloqueo de versiones de dependencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-mayor-cero" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        VERSIÓN MAYOR CERO
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-forma-simple-evitando-el-versionado-optimista" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La forma simple: evitando el versionado optimista
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-forma-exhaustiva-el-comando-shrinkwrap-de-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La forma exhaustiva: el comando shrinkwrap de npm
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizando-y-agregando-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Actualizando y agregando dependencias
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencias-localizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dependencias localizadas
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependencias localizadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invocando-comandos-directamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Invocando comandos directamente
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejecutando-comandos-desde-scripts-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejecutando comandos desde scripts npm
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendice-otros-modulos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Apéndice: Otros módulos útiles
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../part1/cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h1>
+<p>This chapter covers:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Beneficios de la simplicidad en tu código</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Estructurar los archivos de tu aplicación</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Usar el comando <code>npm shrinkwrap</code> para fijar versiones de dependencias</strong> por confiabilidad (y los beneficios de hacerlo)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Evitar instalar módulos globalmente</strong></li>
+</ul>
+<p>Es hora de cerrar este libro. Si fuera una tragedia, probablemente terminaríamos con una muerte dramática. Si fuera una comedia, tal vez tendríamos una boda romántica. Desafortunadamente, este es un libro sobre Express, un tema no conocido por su drama y romance. </p>
+<p><strong>Lo mejor que obtendrás es esto</strong>: un conjunto de <strong>mejores prácticas para aplicaciones Express grandes</strong>. Haré lo posible por hacerlo romántico y dramático.</p>
+<p>Con <strong>aplicaciones pequeñas</strong>, la organización no importa mucho. Puedes meter tu app en un solo archivo o unos pocos archivos pequeños. Pero a medida que tus apps se vuelven <strong>más grandes</strong>, estas consideraciones se vuelven <strong>más importantes</strong>.</p>
+<p><strong>¿Cómo deberías organizar tus archivos</strong> para que tu codebase sea fácil de trabajar? <strong>¿Qué tipo de convenciones deberías seguir</strong> para apoyar mejor a un equipo de desarrolladores?</p>
+<p>En este capítulo final, haré lo posible por compartir mi experiencia. Muy poco de este capítulo será estrictamente factual; daré opiniones a la filosofía sin opiniones de Express respecto a lo que se necesita para construir una <strong>aplicación mediana a grande</strong> con ella.</p>
+<p>Me aseguraré de repetir este descargo de responsabilidad, pero recuerda: <strong>Este capítulo son principalmente opiniones y convenciones que he encontrado</strong>. Puedes estar en desacuerdo o encontrar que tu aplicación no encaja en estos moldes. </p>
+<p><strong>Esa es la belleza de Express</strong> —tienes <strong>mucha flexibilidad</strong>. Esto no será tan emocional como una comedia o una tragedia, pero haré lo posible.</p>
+<h2 id="simplicidad">Simplicidad<a class="headerlink" href="#simplicidad" title="Permanent link">&para;</a></h2>
+<p>En este capítulo de mis opiniones, permíteme ofrecer una idea general antes de entrar en detalles. Hay muchas buenas prácticas para mantener grandes bases de código, pero creo que todas se reducen a una sola cosa: la simplicidad.</p>
+<p>Más específicamente, tu código debería ser fácil de seguir para otros desarrolladores y deberías minimizar la cantidad de contexto que una persona necesita mantener en su cabeza.</p>
+<p>Para entender una aplicación de Express, ya tienes que saber bastante. Debes ser razonablemente competente en el lenguaje de programación JavaScript para leer el código; debes entender cómo funciona HTTP para comprender el enrutamiento; debes entender Node y su I/O basado en eventos; y debes entender todas las características de Express como routing, middleware, vistas y más. Cada una de estas cosas toma mucho tiempo en aprender y probablemente se apoya en experiencia previa de tu carrera. ¡Es una enorme pila de cosas que mantener en la cabeza!</p>
+<p>Tus aplicaciones deberían intentar agregar lo menos posible a esa enorme pila de conocimiento requerido.</p>
+<p>Creo que todos hemos escrito código (yo ciertamente lo he hecho) que es un caos entrelazado que solo nosotros podemos esperar entender. Me gusta imaginar uno de esos tableros de corcho llenos de fotos, todos conectados en una red de hilos rojos.</p>
+<p>Aquí hay un par de formas de ver qué tan profundo es el “agujero del conejo” de tu código:</p>
+<ul>
+<li>
+<p>Toma una parte de tu código —quizás un manejador de rutas o una función de middleware— y pregúntate cuántas otras cosas necesitarías saber para entenderlo. ¿Depende de un middleware anterior en la cadena? ¿Cuántos modelos de base de datos diferentes necesita? ¿Qué tan profundo estás en routers? ¿Cuántos archivos has tenido que revisar para llegar a este punto?</p>
+</li>
+<li>
+<p>¿Qué tan confundidos están tus compañeros desarrolladores? ¿Qué tan rápido podrían añadir una nueva funcionalidad a tu app? Si están confundidos y no pueden trabajar rápido, eso puede significar que tu código está demasiado entrelazado.</p>
+</li>
+</ul>
+<p>Tienes que ser bastante riguroso con la simplicidad, especialmente porque Express es tan flexible y poco opinado.</p>
+<p>Hablaremos de algunos de estos métodos (y otros) en este capítulo, pero mucho de esto es más abstracto, así que tenlo en cuenta.</p>
+<p>Muy bien, ¡basta de teoría abstracta! Vamos a hablar de cosas específicas.</p>
+<p><img alt="" src="../commonfolder.png" title="Estructura de carpetas común para aplicaciones Express" /></p>
+<h2 id="patron-de-estructura-de-archivos">Patrón de estructura de archivos<a class="headerlink" href="#patron-de-estructura-de-archivos" title="Permanent link">&para;</a></h2>
+<p>Las aplicaciones de Express pueden organizarse como tú quieras. Podrías poner todo en un solo archivo gigante si quisieras. Como puedes imaginar, esto podría no resultar en una aplicación fácil de mantener.</p>
+<p>A pesar de que Express no es opinativo, la mayoría de las aplicaciones de Express con las que he trabajado tienen una estructura similar a la de la figura 12.1. (Esto es muy parecido a los tipos de aplicaciones que se generan con el generador oficial de express. ¡No es coincidencia!).</p>
+<p>Aquí están todos los archivos comunes en una aplicación de Express con esta estructura:</p>
+<ul>
+<li>
+<p><strong>package.json</strong> no debería sorprender—está presente en todos los proyectos Node. Contiene todas las dependencias de la aplicación así como todos tus scripts de npm. Has visto diferentes versiones de este archivo a lo largo del libro y no es diferente en una aplicación grande.</p>
+</li>
+<li>
+<p><strong>app.js</strong> es el código principal de la aplicación—el punto de entrada. Aquí es donde llamas a <code>express()</code> para instanciar una nueva aplicación de Express. También es donde colocas el middleware común a todas las rutas, como seguridad o middleware de archivos estáticos. Este archivo no inicia la aplicación, como verás—asigna la app a <code>module.exports</code>.</p>
+</li>
+<li>
+<p><strong>bin</strong> es una carpeta que contiene scripts ejecutables relevantes para tu aplicación. A menudo hay solo uno (listado aquí), pero a veces se requieren más.</p>
+</li>
+<li>
+<p><strong>bin/www</strong> es un script ejecutable de Node que requiere tu app (desde <code>app.js</code>) y la inicia. Ejecutar <code>npm start</code> debería correr este script.</p>
+</li>
+<li>
+<p><strong>config</strong> es una carpeta que contendrá cualquier configuración de tu aplicación. A menudo está llena de archivos JSON que especifican cosas como números de puerto por defecto o cadenas de localización.</p>
+</li>
+<li>
+<p><strong>public</strong> es una carpeta servida por middleware de archivos estáticos. Contendrá cualquier archivo estático—páginas HTML, archivos de texto, imágenes, videos, etc. El middleware de archivos estáticos también servirá cualquier subcarpeta dentro de <code>public</code>. El HTML5 Boilerplate en <a href="https://html5boilerplate.com/">https://html5boilerplate.com/</a>, por ejemplo, presenta una buena selección de archivos estáticos comunes que podrías añadir aquí.</p>
+</li>
+<li>
+<p><strong>routes</strong> es una carpeta que contiene numerosos archivos JavaScript, cada uno exportando un router de Express. Puedes tener un router para todas las URLs que empiezan con <code>/users</code> y otro para las que empiezan con <code>/photos</code>. El capítulo 5 tiene todos los detalles sobre routers y enrutamiento—consulta la sección 5.3 para ejemplos de cómo funciona esto.</p>
+</li>
+<li>
+<p><strong>test</strong> es una carpeta que contiene todo tu código de pruebas. El capítulo 9 tiene todos los detalles interesantes sobre esto.</p>
+</li>
+<li>
+<p><strong>views</strong> es una carpeta que contiene todas tus vistas. Normalmente están escritas en EJS o Pug, como se muestra en el capítulo 7, pero hay muchos otros lenguajes de plantillas que puedes usar.</p>
+</li>
+</ul>
+<p>La mejor forma de ver una aplicación que sigue la mayoría de estas convenciones es usando el generador oficial de aplicaciones de Express. Puedes instalarlo con <code>npm install -g express-generator</code>. Una vez instalado, puedes ejecutar <code>express my-new-app</code> y esto creará una carpeta llamada <code>my-express-app</code> con una aplicación base configurada, como se muestra en la figura 12.1.</p>
+<p>Aunque estas son solo patrones y convenciones, este tipo de estructuras tienden a aparecer en las aplicaciones de Express que he visto.</p>
+<h2 id="bloqueo-de-versiones-de-dependencias">Bloqueo de versiones de dependencias<a class="headerlink" href="#bloqueo-de-versiones-de-dependencias" title="Permanent link">&para;</a></h2>
+<p>Node está, sin lugar a dudas, en el mejor sistema de dependencias que he usado. Un compañero dijo, describiendo Node y npm: “Lo hicieron perfecto.”</p>
+<p>npm usa <strong>versionado semántico</strong> (a veces abreviado como <em>semver</em>) para todos sus paquetes. Las versiones se dividen en tres números: mayor, menor y parche. Por ejemplo, la versión 1.2.3 es versión mayor 1, versión menor 2 y parche 3.</p>
+<p>En las reglas del versionado semántico, una actualización de versión mayor puede incluir un cambio considerado “rompedor”. Un cambio rompedor es aquel en el que el código antiguo no es compatible con el nuevo. Por ejemplo, el código que funcionaba en la versión mayor 3 de Express no necesariamente funciona con la versión mayor 4. En contraste, los cambios de versión menor no son rompedores. Generalmente significan una nueva funcionalidad que no rompe el código existente. Las versiones de parche son, bueno, parches: están reservadas para correcciones de errores y mejoras de rendimiento. Los parches no deberían romper tu código; en general deberían mejorar las cosas.</p>
+<hr />
+<h3 id="version-mayor-cero">VERSIÓN MAYOR CERO<a class="headerlink" href="#version-mayor-cero" title="Permanent link">&para;</a></h3>
+<p>Hay una excepción: básicamente todo vale si la versión mayor es 0. En ese punto, el paquete se considera inestable.</p>
+<hr />
+<p>Por defecto, cuando haces <code>npm install --save</code> de un paquete, se descarga la última versión desde el registro de npm y luego se coloca un número de versión “optimista” en tu archivo <code>package.json</code>. Esto significa que si otra persona de tu equipo ejecuta <code>npm install</code> en el proyecto (o si tú lo reinstalas), puede que obtenga una versión más nueva que la que descargaste originalmente. Esa nueva versión puede tener una versión menor más alta o una versión de parche más alta, pero no puede tener una versión mayor más alta. Eso significa que no descarga la versión absolutamente más reciente de un paquete; descarga la última versión que aún debería ser compatible. La figura 12.2 amplía esto.</p>
+<p><img alt="" src="../versioning.png" /></p>
+<p>Todo bien, ¿verdad? Si todos los paquetes siguieran correctamente el versionado semántico, siempre querrías obtener la última versión compatible para tener todas las nuevas funcionalidades y las correcciones de errores más recientes.</p>
+<p>Pero aquí está el problema: no todos los paquetes cumplen perfectamente con el versionado semántico. Normalmente ocurre porque la gente usa los paquetes de formas que los desarrolladores originales no tenían previstas. Tal vez estás dependiendo de una función no probada o de un comportamiento extraño de la librería que pasó desapercibido para los desarrolladores. No se les puede culpar realmente: ningún programador tiene un historial limpio y libre de errores, especialmente cuando otros desarrolladores usan su código de maneras inesperadas.</p>
+<p>Considero que el 99% de las veces esto no es un problema. Los módulos que uso suelen respetar bastante bien el versionado semántico, y el versionado optimista de npm funciona correctamente. Pero cuando estoy desplegando una aplicación crítica para el negocio (también conocido como el mundo real), me gusta bloquear las versiones de mis dependencias para minimizar cualquier posible problema. ¡No quiero que algo se rompa por una nueva versión de un paquete!</p>
+<p>Hay dos formas de bloquear las versiones: una es simple pero menos completa, y la otra es mucho más estricta.</p>
+<h3 id="la-forma-simple-evitando-el-versionado-optimista">La forma simple: evitando el versionado optimista<a class="headerlink" href="#la-forma-simple-evitando-el-versionado-optimista" title="Permanent link">&para;</a></h3>
+<p>Una forma rápida de solucionar este problema es <strong>eliminando el versionado optimista</strong> en tu <code>package.json</code>. El <strong>versionado optimista</strong> en tu archivo <code>package.json</code> podría verse algo así como en el <strong>listado siguiente</strong>.</p>
+<p><div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w"> </span><span class="nt">&quot;express&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^5.0.0&quot;</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w"> </span><span class="nt">&quot;ejs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~2.3.2&quot;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</span></code></pre></div>
+El carácter ^ indica que se permite el versionado optimista. Recibirás todas las actualizaciones de parches y menores. El carácter ~ indica un versionado ligeramente menos optimista. Recibirás solo actualizaciones de parches.</p>
+<p>Si estás editando tu package.json, puedes especificar la dependencia a una versión exacta. El ejemplo anterior se vería como en el siguiente listado.</p>
+<p><div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w"> </span><span class="nt">&quot;express&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.0.0&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w"> </span><span class="nt">&quot;ejs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.3.2&quot;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
+</span></code></pre></div>
+Eliminar los caracteres ^ y ~ del número de versión indica que solo se debe descargar y usar esa versión específica del paquete. Estos cambios son relativamente fáciles de hacer y pueden fijar un paquete a una versión concreta.</p>
+<p>Si estás instalando nuevos paquetes, puedes desactivar el versionado optimista de npm cambiando la bandera <code>--save</code> por <code>--save-exact</code>. Por ejemplo, <code>npm install --save express</code> se convierte en <code>npm install --save-exact express</code>. Esto instalará la última versión de Express, como siempre, pero no la marcará de forma optimista en tu <code>package.json</code>; especificará una versión exacta.</p>
+<p>Esta solución simple tiene un inconveniente: no fija la versión de las subdependencias (las dependencias de tus dependencias). El siguiente listado muestra el árbol de dependencias de Express.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Listado<span class="w"> </span><span class="m">12</span>.3<span class="w"> </span>Árbol<span class="w"> </span>de<span class="w"> </span>dependencias<span class="w"> </span><span class="o">(</span>¡enorme!<span class="o">)</span><span class="w"> </span>de<span class="w"> </span>Express
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>your-express-app@0.0.0
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>└─┬<span class="w"> </span>express@5.0.0
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w"> </span>├─┬<span class="w"> </span>accepts@1.2.12
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w"> </span>│<span class="w"> </span>├─┬<span class="w"> </span>mime-types@2.1.6
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w"> </span>│<span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>mime-db@1.18.0
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>negotiator@0.5.3
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w"> </span>├──<span class="w"> </span>array-flatten@1.1.0
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w"> </span>├──<span class="w"> </span>content-disposition@0.5.0
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w"> </span>├──<span class="w"> </span>content-type@1.0.1
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w"> </span>├──<span class="w"> </span>cookie@0.1.3
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w"> </span>├──<span class="w"> </span>cookie-signature@1.0.6
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w"> </span>├─┬<span class="w"> </span>debug@2.2.0
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>ms@0.7.1
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w"> </span>├──<span class="w"> </span>depd@1.0.1
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w"> </span>├──<span class="w"> </span>escape-html@1.0.2
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w"> </span>├──<span class="w"> </span>etag@1.7.0
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w"> </span>├─┬<span class="w"> </span>finalhandler@0.4.0
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>unpipe@1.0.0
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w"> </span>├──<span class="w"> </span>fresh@0.3.0
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w"> </span>├──<span class="w"> </span>merge-descriptors@1.0.0
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w"> </span>├──<span class="w"> </span>methods@1.1.1
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w"> </span>├─┬<span class="w"> </span>on-finished@2.3.0
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>ee-first@1.1.1
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w"> </span>├──<span class="w"> </span>parseurl@1.3.0
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w"> </span>├──<span class="w"> </span>path-is-absolute@1.0.0
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w"> </span>├──<span class="w"> </span>path-to-regexp@0.1.6
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w"> </span>├─┬<span class="w"> </span>proxy-addr@1.0.8
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w"> </span>│<span class="w"> </span>├──<span class="w"> </span>forwarded@0.1.0
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>ipaddr.js@1.0.1
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w"> </span>├──<span class="w"> </span>qs@4.0.0
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w"> </span>├──<span class="w"> </span>range-parser@1.0.2
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w"> </span>├─┬<span class="w"> </span>router@1.1.3
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w"> </span>│<span class="w"> </span>├──<span class="w"> </span>array-flatten@1.1.1
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w"> </span>│<span class="w"> </span>├──<span class="w"> </span>path-to-regexp@0.1.7
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>setprototypeof@1.0.0
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w"> </span>├─┬<span class="w"> </span>send@0.13.0
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w"> </span>│<span class="w"> </span>├──<span class="w"> </span>destroy@1.0.3
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w"> </span>│<span class="w"> </span>├─┬<span class="w"> </span>http-errors@1.3.1
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w"> </span>│<span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>inherits@2.0.1
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w"> </span>│<span class="w"> </span>├──<span class="w"> </span>mime@1.3.4
+</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="w"> </span>│<span class="w"> </span>├──<span class="w"> </span>ms@0.7.1
+</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>statuses@1.2.1
+</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="w"> </span>├──<span class="w"> </span>serve-static@1.10.0
+</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a><span class="w"> </span>├─┬<span class="w"> </span>type-is@1.6.8
+</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a><span class="w"> </span>│<span class="w"> </span>├──<span class="w"> </span>media-typer@0.3.0
+</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a><span class="w"> </span>│<span class="w"> </span>└─┬<span class="w"> </span>mime-types@2.1.6
+</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a><span class="w"> </span>│<span class="w"> </span>└──<span class="w"> </span>mime-db@1.18.0
+</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="w"> </span>├──<span class="w"> </span>utils-merge@1.0.0
+</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>└──<span class="w"> </span>vary@1.0.1
+</span></code></pre></div>
+<p>Tuve un problema al intentar usar la librería <strong>Backbone.js</strong>. Quería fijar una <strong>versión exacta de Backbone</strong>, lo cual fue fácil: especifiqué la versión. </p>
+<p>Pero en el <code>package.json</code> de <strong>Backbone</strong> (que está fuera de mi control) especificaba una versión de <strong>Underscore.js</strong> que estaba <strong>versionada de forma optimista</strong>. </p>
+<p>Eso significa que podía obtener una <strong>nueva versión de Underscore</strong> si reinstalaba mis paquetes, y <strong>más peligrosamente</strong>, podía obtener una nueva versión de Underscore al <strong>desplegar mi código al mundo real</strong>.</p>
+<p><strong>Tu árbol de dependencias</strong> podría verse así un día.</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>your-express-app@0.0.0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>└─┬<span class="w"> </span>backbone@1.2.3
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w"> </span>└──<span class="w"> </span>underscore@1.0.0
+</span></code></pre></div>
+pero si Underscore se actualizara, podría verse así otro día:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>your-express-app@0.0.0
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>└─┬<span class="w"> </span>backbone@1.2.3
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w"> </span>└──<span class="w"> </span>underscore@1.1.0
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Note<span class="w"> </span>the<span class="w"> </span>difference<span class="w"> </span><span class="k">in</span><span class="w"> </span>Und
+</span></code></pre></div>
+<p>Nota la <strong>diferencia en la versión de Underscore</strong>. Con este método, <strong>no hay forma de asegurar</strong> que las versiones de tus <strong>subdependencias</strong> (o subsubdependencias, y así sucesivamente) estén <strong>fijadas</strong>. </p>
+<p>Esto <strong>podría estar bien</strong>, o <strong>podría no estarlo</strong>. Si no lo está, puedes usar una <strong>agradable característica de npm llamada shrinkwrap</strong>.</p>
+<h3 id="la-forma-exhaustiva-el-comando-shrinkwrap-de-npm">La forma exhaustiva: el comando shrinkwrap de npm<a class="headerlink" href="#la-forma-exhaustiva-el-comando-shrinkwrap-de-npm" title="Permanent link">&para;</a></h3>
+<p>El problema con la solución anterior es que <strong>no fija las versiones de las subdependencias</strong>. npm tiene un subcomando llamado <strong>shrinkwrap</strong> que resuelve este problema.</p>
+<p>Supongamos que has ejecutado <code>npm install</code> y todo funciona perfectamente. Estás en un estado donde quieres <strong>fijar tus dependencias</strong>. En este punto, ejecuta un solo comando desde cualquier lugar de tu proyecto:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>npm shrinkwrap
+</span></code></pre></div>
+<p>Puedes ejecutar esto en <strong>cualquier proyecto Node</strong> que tenga un archivo <code>package.json</code> y dependencias. Si todo va bien, verás una sola línea de salida:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>wrote npm-shrinkwrap.json
+</span></code></pre></div>
+<p>(Si falla, probablemente sea porque estás ejecutando esto desde un directorio que no es un proyecto o te falta un archivo <code>package.json</code>.)</p>
+<p>Mira el archivo en el <strong>listado siguiente</strong>. Verás que tiene una <strong>lista de dependencias</strong>, sus versiones, y luego las dependencias de esas dependencias, y así sucesivamente. El listado muestra un fragmento de un proyecto que solo tiene <strong>Express</strong> instalado.</p>
+<p><img alt="" src="../snniped.png" title="Fragmento de un ejemplo de archivo npm-shrinkwrap.json" /></p>
+<p>Lo principal a notar es que todo el árbol de dependencias está especificado, no solo la capa superior como en package.json.</p>
+<p><strong>Listado 12.4</strong> Fragmento de un ejemplo de archivo npm-shrinkwrap.json</p>
+<p>La próxima vez que ejecutes <code>npm install</code>, no mirará los paquetes en package.json; en su lugar, revisará los archivos en npm-shrinkwrap.json e instalará desde ahí. Cada vez que se ejecuta <code>npm install</code>, busca el archivo shrinkwrap e intenta instalar desde él. Si no tienes uno (como no hemos tenido en el resto del libro), entonces mirará package.json.</p>
+<p>Al igual que con package.json, normalmente se incluye npm-shrinkwrap.json en el control de versiones. Esto permite que todos los desarrolladores del proyecto utilicen las mismas versiones de los paquetes, que es precisamente el objetivo de “shrinkwrapping”.</p>
+<h3 id="actualizando-y-agregando-dependencias">Actualizando y agregando dependencias<a class="headerlink" href="#actualizando-y-agregando-dependencias" title="Permanent link">&para;</a></h3>
+<p>Todo esto está bien una vez que has <strong>fijado tus dependencias</strong>, pero probablemente <strong>no quieras congelar todas tus dependencias para siempre</strong>. Podrías querer obtener <strong>correcciones de bugs</strong>, <strong>parches</strong> o <strong>nuevas características</strong> —solo quieres que suceda <strong>en tus términos</strong>.</p>
+<p>Para actualizar o agregar una dependencia, necesitas ejecutar <code>npm install</code> con un <strong>nombre de paquete</strong> y una <strong>versión de paquete</strong>. Por ejemplo, si estás actualizando <strong>Express</strong> de <code>4.12.0</code> a <code>4.12.1</code>, ejecutarás:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>npm install express@4.12.1
+</span></code></pre></div>
+<p>Si quieres instalar un <strong>nuevo paquete</strong> (Helmet, por ejemplo), ejecuta:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>npm install helmet
+</span></code></pre></div>
+<p>Esto <strong>actualizará la versión</strong> o <strong>agregará el paquete</strong> en tu carpeta <code>node_modules</code>, y puedes comenzar a probar. Una vez que todo se vea bien para ti, puedes ejecutar <strong><code>npm shrinkwrap</code></strong> nuevamente para <strong>fijar esa versión de dependencia</strong>.</p>
+<p>A veces, el <strong>shrink-wrapping no es para ti</strong>. Podrías querer obtener <strong>todas las últimas y mejores características y parches</strong> sin tener que actualizar manualmente. Sin embargo, a veces quieres la <strong>seguridad de tener las mismas dependencias</strong> en todas las instalaciones de tu proyecto.</p>
+<h2 id="dependencias-localizadas">Dependencias localizadas<a class="headerlink" href="#dependencias-localizadas" title="Permanent link">&para;</a></h2>
+<p>Sigamos hablando de <strong>dependencias</strong> pero desde un <strong>ángulo diferente</strong>. npm te permite instalar paquetes <strong>globalmente</strong> en tu sistema que se ejecutan como comandos. Hay varios populares, como <strong>Bower</strong>, <strong>Grunt</strong>, <strong>Mocha</strong> y más.</p>
+<p><strong>No hay nada malo</strong> en hacer esto; hay muchas herramientas que necesitas instalar globalmente en tu sistema. Esto significa que para ejecutar el comando <strong>Grunt</strong>, puedes escribir <code>grunt</code> desde cualquier lugar de tu computadora.</p>
+<p>Pero puedes encontrar <strong>desventajas</strong> cuando alguien nuevo llega a tu proyecto. Toma <strong>Grunt</strong>, por ejemplo. Pueden ocurrir <strong>dos problemas</strong> al instalar Grunt globalmente:</p>
+<ul>
+<li>Un <strong>nuevo desarrollador</strong> no tiene <strong>Grunt instalado</strong> en su sistema en absoluto. Esto significa que tendrás que decirles que lo instalen en tu <strong>Readme</strong> o en otra documentación.</li>
+<li>¿Y si tienen <strong>Grunt instalado</strong> pero es la <strong>versión incorrecta</strong>? Podrías imaginar que tienen una versión de Grunt que es <strong>demasiado vieja</strong> o <strong>demasiado nueva</strong>, lo que podría llevar a <strong>errores extraños</strong> que podrían ser difíciles de rastrear.</li>
+</ul>
+<p><strong>Hay una solución bastante fácil</strong> a estos dos problemas: instala <strong>Grunt como una dependencia de tu proyecto</strong>, <strong>no globalmente</strong>.</p>
+<p>En el <strong>capítulo 9</strong>, usamos <strong>Mocha</strong> como framework de pruebas. Podríamos haberlo instalado globalmente, pero no lo hicimos —lo instalamos <strong>localmente</strong> en nuestro proyecto.</p>
+<p>Cuando instalas <strong>Mocha</strong>, instala el comando ejecutable <code>mocha</code> en <strong><code>node_modules/.bin/mocha</code></strong>. Puedes acceder a él de <strong>dos maneras</strong>: ejecutándolo directamente o poniéndolo dentro de un <strong>script de npm</strong>.</p>
+<h3 id="invocando-comandos-directamente">Invocando comandos directamente<a class="headerlink" href="#invocando-comandos-directamente" title="Permanent link">&para;</a></h3>
+<p>La forma más simple es <strong>invocar estos comandos directamente</strong>. Es bastante fácil, aunque requiere un poco de escritura: escribe la ruta al comando.</p>
+<p>Si estás intentando ejecutar <strong>Mocha</strong>, ejecuta:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>node_modules/.bin/mocha
+</span></code></pre></div>
+<p>Si estás intentando ejecutar <strong>Bower</strong>, ejecuta:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>node_modules/.bin/bower
+</span></code></pre></div>
+<p>(En <strong>Windows</strong>, ejecutar Mocha sería <code>node_modules\.bin\mocha</code>.)</p>
+<p><strong>¡Conceptualmente no hay mucho que esto!</strong></p>
+<h3 id="ejecutando-comandos-desde-scripts-npm">Ejecutando comandos desde scripts npm<a class="headerlink" href="#ejecutando-comandos-desde-scripts-npm" title="Permanent link">&para;</a></h3>
+<p>La otra forma de hacer esto es <strong>agregando el comando como un script npm</strong>. Una vez más, supongamos que quieres ejecutar <strong>Mocha</strong>. El <strong>listado siguiente</strong> muestra cómo especificarías eso como un <strong>script npm</strong>.
+<div class="language-json highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w"> </span><span class="nt">&quot;test&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mocha&quot;</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">},</span>
+</span></code></pre></div></p>
+<p>Al escribir <code>npm test</code>, el comando <code>mocha</code> se ejecuta automáticamente. Retomemos un diagrama del capítulo 9 que explica cómo funciona esto; véase la figura 12.3.</p>
+<p><img alt="" src="../npmtest.png" title="Al escribir npm test, se siguen algunos pasos antes de ejecutar el comando." /></p>
+<p>Esto suele ser útil cuando se quiere ejecutar el mismo tipo de comando repetidamente. ¡Además, evita que las dependencias se incluyan en la lista global!</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>La <strong>simplicidad</strong> es un <strong>objetivo de alto nivel</strong> para el software en general. Debes ser <strong>riguroso</strong> al eliminar complejidad en tu software.</li>
+<li>Existe una <strong>estructura de carpetas y archivos</strong> que emerge para la mayoría de las <strong>aplicaciones Express</strong>.</li>
+<li>Para <strong>máxima confiabilidad</strong>, debes <strong>fijar las versiones</strong> de tus dependencias. Esto tiene algunas desventajas —específicamente, no ejecutarás automáticamente el código más reciente— pero tiene la ventaja de que tu código <strong>no se actualizará automáticamente</strong> sin tu conocimiento.</li>
+<li>Instalar <strong>dependencias localmente</strong> ayudará a mantener tu sistema limpio y tus proyectos <strong>reproducibles</strong>. Usarás <strong>scripts npm</strong> para esto.</li>
+</ul>
+<p><strong>¡Ahora es tiempo de salir y construir cosas geniales con Express!</strong></p>
+<h2 id="apendice-otros-modulos-utiles">Apéndice: Otros módulos útiles<a class="headerlink" href="#apendice-otros-modulos-utiles" title="Permanent link">&para;</a></h2>
+<p>En este libro cubrí varios <strong>módulos Node de terceros</strong>, pero hay <strong>muchísimos</strong> que no pude incluir. Este apéndice es un <strong>recorrido rápido</strong> de un montón de módulos que encuentro útiles.</p>
+<p>Esta lista <strong>no es exhaustiva</strong>, pero espero que te ayude a encontrar módulos que te gusten:</p>
+<ul>
+<li><strong>Sequelize</strong> es un <strong>ORM para SQL</strong>. En este libro hablamos de <strong>Mongoose</strong>, que maneja MongoDB; <strong>Sequelize</strong> es el Mongoose de bases de datos SQL. Es un ORM que soporta <strong>migraciones</strong> e interfaces con varios SQL. Véalo en <a href="http://sequelizejs.com/">http://sequelizejs.com/</a>.</li>
+<li><strong>Lodash</strong> es una <strong>librería de utilidades</strong>. Puede que hayas oído de <strong>Underscore</strong>; <strong>Lodash</strong> es muy similar. Presume de <strong>mayor rendimiento</strong> y algunas características extra. Más en <a href="http://lodash.com/">http://lodash.com/</a>.</li>
+<li><strong>Async</strong> es una librería de utilidades que <strong>facilita manejar patrones de programación asíncrona</strong>. Véalo en <a href="https://github.com/caolan/async">https://github.com/caolan/async</a>.</li>
+<li><strong>Request</strong> es casi lo opuesto de Express. Mientras <strong>Express</strong> te permite aceptar peticiones HTTP entrantes, <strong>Request</strong> te permite hacer peticiones HTTP salientes. Tiene una <strong>API simple</strong>. Más en <a href="https://www.npmjs.com/package/request">https://www.npmjs.com/package/request</a>.</li>
+<li><strong>Gulp</strong> se llama a sí mismo el "<strong>streaming build system</strong>". Es una alternativa a herramientas como <strong>Grunt</strong>, y te permite compilar assets, minificar código, correr tests, etc. Usa <strong>streams de Node</strong> para mayor rendimiento. Véalo en <a href="http://gulpjs.com/">http://gulpjs.com/</a>.</li>
+<li><strong>node-canvas</strong> porta la <strong>HTML5 Canvas API</strong> a Node, permitiéndote dibujar gráficos en el servidor. Docs en <a href="https://github.com/Automattic/node-canvas">https://github.com/Automattic/node-canvas</a>.</li>
+<li><strong>Sinon.JS</strong> es útil en <strong>testing</strong>. A veces quieres probar que una función se llama y mucho más. <strong>Sinon</strong> te permite asegurarte de que una función se llame con argumentos específicos o un número específico de veces. Véalo en <a href="http://sinonjs.org/">http://sinonjs.org/</a>.</li>
+</ul>
+<p><strong>Zombie.js</strong> es un <strong>headless browser</strong>. Hay otras herramientas como <strong>Selenium</strong> y <strong>PhantomJS</strong> que levantan browsers reales. Cuando necesitas <strong>100% compatibilidad</strong>, son buena opción. Pero pueden ser lentos y engorrosos, ahí entra <strong>Zombie</strong>. Es un <strong>headless browser muy rápido</strong> que facilita testear tus apps en un navegador falso. Docs en <a href="http://zombie.labnotes.org/">http://zombie.labnotes.org/</a>.</p>
+<p><strong>Supererror</strong> sobreescribe <code>console.error</code>. Lo hace <strong>mejor</strong>, dándote números de línea, más info y mejor formato. Véalo en <a href="https://github.com/nebulade/supererror">https://github.com/nebulade/supererror</a>.</p>
+<p><strong>Es una lista corta</strong>, ¡pero amo estos módulos!</p>
+<p>Para más recursos y módulos Node útiles, revisa estos sitios:
+- <strong>Awesome Node.js</strong> por Sindre Sorhus (<a href="https://github.com/sindresorhus/awesome-nodejs">https://github.com/sindresorhus/awesome-nodejs</a>)
+- Lista del mismo nombre de Eduardo Rolim (<a href="https://github.com/vndmtrx/awesome-nodejs">https://github.com/vndmtrx/awesome-nodejs</a>) 
+- <strong>Node Weekly</strong> (<a href="http://nodeweekly.com/">http://nodeweekly.com/</a>)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cap4/Deplyment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: DEPLOYMENT">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                DEPLOYMENT
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-footer__link md-footer__link--next" aria-label="Next: NODE FUNDAMENTALS">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                NODE FUNDAMENTALS
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

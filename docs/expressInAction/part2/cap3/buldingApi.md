@@ -1,10 +1,10 @@
 # Building APIs
-Este capítulo abarca:
+__Este capítulo abarca:__
 
-- __Cómo usar Express para crear una API__
-- __Métodos HTTP y cómo responden a las operaciones CRUD comunes__
-- __Control de versiones de la API con los enrutadores de Express__
-- __Comprensión de los códigos de estado HTTP__
+- [x] __Cómo usar Express para crear una API__
+- [x] __Métodos HTTP y cómo responden a las operaciones CRUD comunes__
+- [x] __Control de versiones de la API con los enrutadores de Express__
+- [x] __Comprensión de los códigos de estado HTTP__
 
 Amigos, acérquense. Este capítulo marca un nuevo comienzo. Hoy dejamos atrás el
 núcleo abstracto pero fundamental de Express y entramos en el mundo real. Durante el resto de este libro, construiremos sistemas mucho más reales sobre Express. Comenzaremos con las API.
@@ -31,7 +31,7 @@ Tu API podría aceptar una solicitud HTTP a esta URL: `/timezone?tz=America+Los_
 
 and your API server might respond with JSON, like this:
 
-```sh
+```json title="Estructura JSON"
 {
  "time": "2015-06-09T16:20:00+01:00",
  "zone": "America/Los_Angeles"
@@ -125,7 +125,9 @@ Antes de hablar de cómo las operaciones CRUD se integran en las API, necesitamo
 
 La especificación HTTP define los métodos de la siguiente manera:
 
-> El token «Method» indica el método que se aplicará al recurso identificado por la URI de la solicitud. El método distingue entre mayúsculas y minúsculas.
+!!! note
+
+    El token «Method» indica el método que se aplicará al recurso identificado por la URI de la solicitud. El método distingue entre mayúsculas y minúsculas.
 
 Uf, eso es difícil de leer.
 
@@ -143,44 +145,43 @@ para eso están los demás métodos.
 - _POST_: Generalmente se usa para solicitar un cambio en el estado del servidor. Se usa POST para publicar una entrada de blog, una foto en la red social favorita o cuando se crea una cuenta en un sitio web. POST se usa para crear registros en los servidores, no para modificar los existentes.
 
     POST también se utiliza para acciones como «comprar este artículo». A diferencia de GET, POST no es idempotente. Esto significa que el estado cambiará la primera vez que se envíe un POST, y la segunda vez, y la tercera vez, y así sucesivamente.
+    ??? note
 
-    > El autor está explicando **qué significa que el método POST se usa para “cambios de estado” en un servidor**. Aquí te lo aclaro en pasos sencillos:
+        El autor está explicando **qué significa que el método POST se usa para “cambios de estado” en un servidor**. Aquí te lo aclaro en pasos sencillos:
 
-    >¿Qué es un “cambio de estado”?
-    > - Un **cambio de estado** es cuando algo en el servidor cambia: se crea una nueva cuenta, se publica una entrada, se sube una foto, etc.  
-    > - Antes no había esa entrada/foto/cuenta; **después sí existe**, es decir, el estado del servidor ha cambiado. [es.wikipedia](https://es.wikipedia.org/wiki/Cambio_de_estado)
+        !!!note "¿Qué es un “cambio de estado”?"
+        
+            Un **cambio de estado** es cuando algo en el servidor cambia: se crea una nueva cuenta, se publica una entrada, se sube una foto, etc.  
+            Antes no había esa entrada/foto/cuenta; **después sí existe**, es decir, el estado del servidor ha cambiado. [es.wikipedia](https://es.wikipedia.org/wiki/Cambio_de_estado)
+        
+        !!! note "Qué hace exactamente POST"
+            **POST = crear algo nuevo → cambia el estado del servidor.**  
+            No se usa para editar lo que ya existe; para eso normalmente se usa **PUT** o **PATCH**. [es.wikipedia](https://es.wikipedia.org/wiki/Cambio_de_estado)
 
-    > Qué hace exactamente POST
-    > - **POST se usa para crear cosas nuevas** en el servidor, no para cambiar algo que ya existe.  
-    >- Publicar una entrada de blog → se crea una entrada nueva.  
-    > - Subir una foto a una red social → se crea un registro de esa foto.  
-    > - Crear una cuenta en un sitio web → se crea un nuevo usuario en la base de datos.  
-    > - El verbo clave es **“crear”**, no “modificar”. [es.wikipedia](https://es.wikipedia.org/wiki/Cambio_de_estado)
-
-    > Por qué se dice que es para “cambios de estado”
-    > - Cada vez que haces un POST, el servidor **pasa de un estado sin ese recurso** a **un estado con ese recurso**.  
-    > - Por ejemplo, antes de POST /users, no existía tu cuenta; después de POST /users, ya existe → el estado del sistema ha cambiado.  
-
-    > En resumen:  
-    > **POST = crear algo nuevo → cambia el estado del servidor.**  
-    > No se usa para editar lo que ya existe; para eso normalmente se usa **PUT** o **PATCH**. [es.wikipedia](https://es.wikipedia.org/wiki/Cambio_de_estado)
-
-
+            Cuando se dice que POST cambia el estado del servidor, no se refiere solo al servidor como máquina (CPU, memoria), sino al estado lógico del sistema: qué datos existen, qué usuarios hay, qué entradas de blog, etc. 
+        
+            La base de datos forma parte del servidor (o del sistema del servidor), así que cuando creas un usuario ahí, estás cambiando el estado del sistema/servidor, no solo de un archivo aislado. 
     
-    > Cuando se dice que POST cambia el estado del servidor, 
-    >- No se refiere solo al servidor como máquina (CPU, memoria), sino al estado lógico del sistema: qué datos existen, qué usuarios hay, qué entradas de blog, etc. 
-    >- La base de datos forma parte del servidor (o del sistema del servidor), así que cuando creas un usuario ahí, estás cambiando el estado del sistema/servidor, no solo de un archivo aislado. 
+            Por qué se dice que es “cambio de estado” 
+            Antes del POST: no hay ese usuario en la base de datos → el estado del sistema es “sin ese usuario”. 
+            Después del POST: el usuario existe → el estado del sistema es “con ese usuario
+            Ese cambio (de “no existe” a “existe”) es el cambio de estado al que se refiere la frase. 
+   
+            Diferencia con métodos que no cambian estado  Un GET normalmente solo lee el estado, no lo modifica. 
+            Un POST (para crear) modifica el estado porque añade algo nuevo. 
+
+            - POST se usa para crear cosas nuevas** en el servidor, no para cambiar algo que ya existe.  
+            - Publicar una entrada de blog → se crea una entrada nueva.  
+            - Subir una foto a una red social → se crea un registro de esa foto.  
+            - Crear una cuenta en un sitio web → se crea un nuevo usuario en la base de datos.  
+            - El verbo clave es **“crear”**, no “modificar”. [es.wikipedia](https://es.wikipedia.org/wiki/Cambio_de_estado)
     
-    >Por qué se dice que es “cambio de estado” 
-   > - Antes del POST: no hay ese usuario en la base de datos → el estado del sistema es “sin ese usuario”. 
-   >- Después del POST: el usuario existe → el estado del sistema es “con ese usuario
-   >- Ese cambio (de “no existe” a “existe”) es el cambio de estado al que se refiere la frase. 
-   
-   > Diferencia con métodos que no cambian estado 
-   >- Un GET normalmente solo lee el estado, no lo modifica. 
-   >- Un POST (para crear) modifica el estado porque añade algo nuevo. 
-   
-   >En resumen: Sí, estás cambiando el estado en la base de datos, pero esa base de datos es parte del estado del servidor/sistema, así que decir que POST cambia el estado del servidor es correcto y coherente.
+        !!! note "Por qué se dice que es para “cambios de estado”"
+            Cada vez que haces un POST, el servidor **pasa de un estado sin ese recurso** a **un estado con ese recurso**. Por ejemplo, antes de POST /users, no existía tu cuenta; después de POST /users, ya existe → el estado del sistema ha cambiado.  
+
+    ??? success "En resumen"  
+        
+        Sí, estás cambiando el estado en la base de datos, pero esa base de datos es parte del estado del servidor/sistema, así que decir que POST cambia el estado del servidor es correcto y coherente.
 
 - _PUT_: Un nombre más apropiado podría ser actualizar o cambiar. Si he publicado (POST) un perfil de trabajo en línea y luego quiero actualizarlo, usaría PUT para esos cambios. Podría usar PUT para modificar un documento, una entrada de blog o cualquier otra cosa. (Sin embargo, no se usa PUT para eliminar entradas; para eso está DELETE, como verás).
 
@@ -190,42 +191,37 @@ para eso están los demás métodos.
 
     Vamos a dejarlo muy claro, paso a paso, usando solo PUT y el ejemplo que ya viste.
 
-    >1. ¿Qué significa idempotente?
-    >- Una operación es **idempotente** si la haces **1 vez o 100 veces**, el resultado final es el **mismo**.  
-    >- No importa cuántas veces la repitas, después de la primera vez el estado **no cambia más**. [richardpalacios](https://www.richardpalacios.dev/posts/2022/10/idempotencia-en-verbos-http/)
+    ??? note "¿Qué significa idempotente?"
 
-    >2. PUT es de “reemplazar”, no de “sumar”. <br>
-    El truco está en **cómo usas PUT**:
-    >- Cuando haces:
-    >- `PUT /user/1` → con el cuerpo:
-    > - Estás diciéndole al servidor:  
-    >  - “**Pon mi nombre en Max Fightmaster**”, sin importar cómo se llamaba antes. 
-    
-    >3. Ahora vamos a repetirlo muchas veces<br>
-        > Imagina estos escenarios:
+        Una operación es **idempotente** si la haces **1 vez o 100 veces**, el resultado final es el **mismo**.  
+        No importa cuántas veces la repitas, después de la primera vez el estado **no cambia más**. [richardpalacios](https://www.richardpalacios.dev/posts/2022/10/idempotencia-en-verbos-http/)
 
-    | Paso | Lo que haces                           | Estado del nombre     |
-    | ---- | -------------------------------------- | --------------------- |
-    | 0    | El nombre era “Evan Hahn”              | `Evan Hahn`             |
-    | 1    | `PUT /user/1` → `Max Fightmaster `         | `Max Fightmaster `      |
-    | 2    | `PUT /user/1` → `Max Fightmaster otra vez` | sigue `Max Fightmaster` |
-    | 500  | repetir `PUT` con el mismo valor         | sigue `Max Fightmaster` |
+        PUT es de “reemplazar”, no de “sumar”. <br>
+
+        Imagina estos escenarios:
+
+        | Paso | Lo que haces                           | Estado del nombre     |
+        | ---- | -------------------------------------- | --------------------- |
+        | 0    | El nombre era “Evan Hahn”              | `Evan Hahn`             |
+        | 1    | `PUT /user/1` → `Max Fightmaster `         | `Max Fightmaster `      |
+        | 2    | `PUT /user/1` → `Max Fightmaster otra vez` | sigue `Max Fightmaster` |
+        | 500  | repetir `PUT` con el mismo valor         | sigue `Max Fightmaster` |
    
-    > Después de la **primera vez**, el nombre ya es `Max Fightmaster`, y cualquier PUT adicional con el mismo valor **no lo cambia más**. Eso es idempotencia.
+        Después de la **primera vez**, el nombre ya es `Max Fightmaster`, y cualquier PUT adicional con el mismo valor **no lo cambia más**. Eso es idempotencia.
 
-    >4. En contraste con algo no idempotente <br>
-     Un ejemplo de **no idempotente** sería: <br>
-     “Añadir un ítem a la cesta”:  
-    > - Cada vez que haces POST a `/cart/items`, se **añade uno más**.  
-    > - 5 veces = 5 elementos nuevos (el estado cambia cada vez).  <br><br>
-     Con PUT no pasa eso:  
-      - Pones algo en un sitio y ya está; lo repites, y sigue siendo lo mismo.
+        - En contraste con algo no idempotente <br>
+        Un ejemplo de **no idempotente** sería: __Añadir un ítem a la cesta__:  
+        Cada vez que haces POST a `/cart/items`, se **añade uno más**.  
+        5 veces = 5 elementos nuevos (el estado cambia cada vez).  <br><br>
+     
+        - Con PUT no pasa eso:  
+        Pones algo en un sitio y ya está; lo repites, y sigue siendo lo mismo.
 
-    > 5. ¿Cómo lo aplicas en tu mente? <br>
-    > Cuando pienses en PUT, piensa en:
+        - ¿Cómo lo aplicas en tu mente? <br>
+        Cuando pienses en PUT, piensa en:
 
-    >- “**Sobrescribir todo el contenido de este recurso con este valor**”.  
-    >- No es:  
+        **Sobrescribir todo el contenido de este recurso con este valor**.  
+        No es:  
         - “añade 1”  
         - “cambia de X a Y dependiendo de X”  
         - sino: “este recurso ahora es este valor”.
@@ -265,11 +261,15 @@ cuatro verbos HTTP principales que mencioné anteriormente. Pero si GET es para 
 Los cuatro métodos HTTP principales se adaptan bastante bien a las aplicaciones de estilo CRUD,
 que son muy comunes en la web.
 
-> __POST vs. PUT__ <br> 
-Existe cierto debate sobre qué verbos HTTP corresponden a qué operaciones CRUD. La mayoría coincide en que `read` corresponde a `GET` y `delete` a `DELETE`, pero la correspondencia entre `create` y `update` es más compleja.
-Dado que `PUT` puede crear registros al igual que `POST`, se podría decir que `PUT` se corresponde mejor con `create`. `PUT` puede crear y actualizar registros, así que ¿por qué no incluirlo en ambas funciones?
-De forma similar, el método `PATCH` (que aún no hemos mencionado) a veces cumple la función de actualizar. Según la especificación, «el método `PUT` ya está definido para sobrescribir un recurso con un cuerpo completamente nuevo y no puede reutilizarse para realizar cambios parciales». `PATCH` permite sobrescribir parcialmente un recurso. `PATCH` se definió formalmente en 2010, por lo que es relativamente nuevo en el entorno HTTP, razón por la cual se utiliza menos.
-En cualquier caso, algunos opinan que `PATCH` es más adecuado para actualizar que `PUT`. Dado que HTTP no especifica estos aspectos con demasiada rigidez, depende de ti decidir qué quieres hacer. En este libro, utilizaremos la convención mostrada anteriormente, pero ten en cuenta que las expectativas son un tanto ambiguas en este caso.
+!!! note "POST vs. PUT"
+
+    Existe cierto debate sobre qué verbos HTTP corresponden a qué operaciones CRUD. La mayoría coincide en que `read` corresponde a `GET` y `delete` a `DELETE`, pero la correspondencia entre `create` y `update` es más compleja.
+
+    Dado que `PUT` puede crear registros al igual que `POST`, se podría decir que `PUT` se corresponde mejor con `create`. `PUT` puede crear y actualizar registros, así que ¿por qué no incluirlo en ambas funciones?
+
+    De forma similar, el método `PATCH` (que aún no hemos mencionado) a veces cumple la función de actualizar. Según la especificación, «el método `PUT` ya está definido para sobrescribir un recurso con un cuerpo completamente nuevo y no puede reutilizarse para realizar cambios parciales». `PATCH` permite sobrescribir parcialmente un recurso. `PATCH` se definió formalmente en 2010, por lo que es relativamente nuevo en el entorno HTTP, razón por la cual se utiliza menos.
+
+    En cualquier caso, algunos opinan que `PATCH` es más adecuado para actualizar que `PUT`. Dado que HTTP no especifica estos aspectos con demasiada rigidez, depende de ti decidir qué quieres hacer. En este libro, utilizaremos la convención mostrada anteriormente, pero ten en cuenta que las expectativas son un tanto ambiguas en este caso.
 
 ## API versioning
 Permítanme explicarles un escenario. Diseñan una API pública para su aplicación de zonas horarias y se convierte en un gran éxito. Personas de todo el mundo la usan para encontrar la hora en todo el planeta. Funciona de maravilla.
@@ -329,8 +329,9 @@ Rangos de estado HTTP en pocas palabras:
 - `4xx`: te equivocaste
 - `5xx`: me equivoqué
 
-> __¿Y HTTP 2?__ <br> 
-La mayoría de las solicitudes HTTP son HTTP 1.1, aunque algunas todavía usan la versión 1.0. HTTP 2, la siguiente versión del estándar, se está implementando y extendiendo gradualmente por toda la web. Por suerte, la mayoría de los cambios ocurren a bajo nivel y no tendrás que lidiar con ellos. HTTP 2 define un nuevo código de estado —el 421—, pero esto no debería afectarte demasiado.
+!!! note "¿Y HTTP 2?"
+
+    La mayoría de las solicitudes HTTP son HTTP 1.1, aunque algunas todavía usan la versión 1.0. HTTP 2, la siguiente versión del estándar, se está implementando y extendiendo gradualmente por toda la web. Por suerte, la mayoría de los cambios ocurren a bajo nivel y no tendrás que lidiar con ellos. HTTP 2 define un nuevo código de estado —el 421—, pero esto no debería afectarte demasiado.
 
 Pero antes, ¿cómo se configuran los códigos de estado HTTP en Express?
 

@@ -1,0 +1,1317 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../cap1/Intro/">
+      
+      
+        <link rel="next" href="../../cap3/FoundationsofExpress/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>The basics of Node.js - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-basics-of-nodejs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The basics of Node.js
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using modules
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiring-built-in-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Requiring built-in modules
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requiring-third-party-modules-with-packagejson-and-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Requiring third-party modules with package.json and npm
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-your-own-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Defining your own modules
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-an-asynchronous-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Node: an asynchronous world
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-a-web-server-with-node-the-http-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Building a web server with Node: the http module
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap1/middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap2/Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap3/buldingApi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap4/ViewAndTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap3/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap4/Deplyment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap5/bestPractices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using modules
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiring-built-in-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Requiring built-in modules
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requiring-third-party-modules-with-packagejson-and-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Requiring third-party modules with package.json and npm
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-your-own-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Defining your own modules
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-an-asynchronous-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Node: an asynchronous world
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-a-web-server-with-node-the-http-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Building a web server with Node: the http module
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="the-basics-of-nodejs">The basics of Node.js<a class="headerlink" href="#the-basics-of-nodejs" title="Permanent link">&para;</a></h1>
+<p>Este capítulo abarca:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Instalación de Node.js y uso de su sistema de módulos</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Uso de package.json para describir los metadatos de tu proyecto</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Uso de npm para instalar paquetes con npm install</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Realizar dos tareas simultáneamente con Node</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Uso del módulo http integrado de Node para crear un servidor web sencillo</strong></li>
+</ul>
+<p>En el capítulo 1, se presenta Node.js, destacando que es JavaScript, funciona de manera asíncrona y cuenta con un amplio conjunto de módulos de terceros. El objetivo es ofrecer una introducción breve y clara a Node, especialmente para quienes no lo entendieron del todo al comenzar.</p>
+<p>Se asume que el lector ya tiene un conocimiento sólido de JavaScript y que maneja la línea de comandos, por lo que el capítulo no profundiza en todos los detalles de Node, sino que ofrece una visión general rápida para empezar a trabajar con él. Para quienes quieran una guía más extensa, se recomienda el libro Node.js in Action de Mike Cantelon y otros.</p>
+<p>El capítulo busca preparar al lector para empezar a instalar y usar Node de manera práctica, sin abrumarlo con demasiada teoría.</p>
+<h2 id="using-modules">Using modules<a class="headerlink" href="#using-modules" title="Permanent link">&para;</a></h2>
+<p>La mayoría de los lenguajes de programación tienen una forma de
+incluir el código del archivo A desde el archivo
+B para que puedas dividir tu código en varios archivos. C y C++ tienen <code>#include</code>; Python tiene <code>import</code>; Ruby y PHP tienen <code>require</code>. Algunos lenguajes, como C#, realizan este tipo de comunicación entre archivos de forma implícita en tiempo de compilación.
+Durante la mayor parte de su existencia, JavaScript no tuvo una forma oficial de hacerlo.</p>
+<p>Para solucionar este problema, se crearon herramientas que concatenaban archivos JavaScript en un solo archivo,
+o se crearon gestores de dependencias como RequireJS. Muchos desarrolladores web simplemente llenan sus páginas web con etiquetas <code>&lt;script&gt;</code>.</p>
+<p>Node buscaba solucionar este problema de forma elegante, y sus desarrolladores implementaron un sistema de módulos estándar llamado <code>CommonJS</code>. En esencia, CommonJS permite incluir código de un archivo en otro.
+Este sistema de módulos consta de tres componentes principales: <strong>requerir módulos integrados</strong>, <strong>requerir módulos de terceros</strong> y <strong>crear módulos propios</strong>. Veamos cómo funcionan.</p>
+<h3 id="requiring-built-in-modules">Requiring built-in modules<a class="headerlink" href="#requiring-built-in-modules" title="Permanent link">&para;</a></h3>
+<p>Node cuenta con varios módulos integrados, desde el acceso al sistema de archivos en un módulo llamado <code>fs</code> hasta funciones de utilidad en otro módulo integrado llamado <code>util</code>.</p>
+<p>Una tarea común al crear aplicaciones web con Node es analizar la URL.
+Cuando un navegador envía una solicitud a tu servidor, pide una URL específica, como la página de inicio o la página "Acerca de". Estas URL se reciben como cadenas de texto, pero a menudo querrás analizarlas para obtener más información. Node tiene un módulo analizador de URL integrado; vamos a usarlo para ver cómo importar paquetes.</p>
+<p>El módulo <code>url</code> integrado de Node expone algunas funciones, pero la más importante es la llamada <code>parse</code>. Esta función toma la cadena de texto de la URL y extrae información útil, como el dominio o la ruta.</p>
+<p>Utilizarás la función <code>require</code> de Node para usar el módulo url. <code>require</code> es similar a palabras clave como <code>import</code> o <code>include</code> en otros lenguajes. <code>require</code> toma el nombre de un paquete como argumento de cadena de texto y devuelve el paquete. </p>
+<p>El objeto que se devuelve no tiene nada de especial; suele ser un objeto, pero también podría ser una función, una cadena de texto o un número. El siguiente ejemplo muestra cómo usar el módulo <code>url</code>.</p>
+<p><img alt="" src="../urlmodule.png" /></p>
+<p>En este ejemplo, <code>require("url")</code> devuelve un objeto que tiene la función <code>parse</code> incorporada. Luego puedes usarlo como cualquier otro objeto.</p>
+<p>Generalmente, al requerir un módulo, se usa una variable con el mismo nombre que el módulo que se esta requiriendo. Pero no es necesario. Podrías haberlo guardado en una variable con un nombre diferente, si lo hubieras deseado. </p>
+<p><img alt="" src="../requiring.png" /></p>
+<p>Es una convención informal dar a las variables el mismo nombre que a la variable que se está utilizando para evitar confusiones, pero no hay nada que lo imponga en el código.</p>
+<h3 id="requiring-third-party-modules-with-packagejson-and-npm">Requiring third-party modules with package.json and npm<a class="headerlink" href="#requiring-third-party-modules-with-packagejson-and-npm" title="Permanent link">&para;</a></h3>
+<p>Node incluye varios módulos integrados, pero generalmente no son suficientes para crear aplicaciones completas, por lo que los paquetes de terceros son indispensables. Cada proyecto de Node se organiza en una carpeta que contiene un archivo llamado package.json, donde se define la metadata del proyecto (nombre, autor, versión) y sus dependencias. Este archivo es esencial, ya que permite gestionar los módulos que tu proyecto necesita.</p>
+<p><img alt="" src="../pakagejson.png" /></p>
+<p>Para instalar dependencias se utiliza npm (Node Package Manager), que se instala junto con Node. npm gestiona la descarga y organización de módulos dentro de la carpeta node_modules, y con la opción <code>--save</code> actualiza automáticamente el package.json con las dependencias instaladas. Esto permite que otros desarrolladores puedan instalar fácilmente todas las dependencias de un proyecto con solo ejecutar <code>npm install.</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>En npm 5 y posteriores, <strong>--save</strong> ya no es estrictamente necesario, porque npm guarda las dependencias automáticamente en package.json cuando instalas un módulo. Pero todavía se usa en ejemplos por claridad histórica.</p>
+</div>
+<p>Por ejemplo, si queremos usar el módulo Mustache para plantillas, se ejecuta <code>npm install mustache --save</code> desde la raíz del proyecto. Esto crea la carpeta node_modules con la ultima version de Mustache dentro y agrega la dependencia en package.json. Luego, en el código podemos usarlo como cualquier módulo interno, mediante <code>require("mustache")</code>, y aprovechar sus funciones, como convertir plantillas en cadenas de texto dinámicas.</p>
+<p>Además, npm permite instalar versiones específicas de módulos, modificar manualmente package.json o incluso instalar desde fuentes distintas al registro oficial. Esto da mucha flexibilidad para gestionar dependencias y mantener la portabilidad del proyecto.</p>
+<h3 id="defining-your-own-modules">Defining your own modules<a class="headerlink" href="#defining-your-own-modules" title="Permanent link">&para;</a></h3>
+<p>En Node.js no solo puedes usar módulos de terceros, sino también crear tus propios módulos. Por ejemplo, si quieres una función que devuelva un número entero aleatorio entre 0 y 100, la escribirías como en un navegador, pero en Node necesitas exportarla para que otros archivos puedan usarla. Esto se hace con module.exports.</p>
+<p>Un ejemplo sería guardar la función en un archivo llamado random-integer.js y terminarlo con:</p>
+<p><img alt="" src="../randomInteger.png" />
+Esto indica que el módulo exporta la función <code>randomInteger</code>, mientras que variables internas como MAX permanecen privadas al módulo. Cabe destacar que<code>module.exports</code> puede ser cualquier tipo de dato que puedas agregarle a una variable: función, objeto, string, número o array.</p>
+<p>Para usar tu módulo desde otro archivo, basta con hacer un require con la ruta relativa:</p>
+<p><img alt="" src="../relativepath.png" /></p>
+<p>Puedes ejecutar este código como cualquier otro, ejecutando <code>node print-three-random integers.js</code>. Si todo se hizo correctamente, imprimirá tres números aleatorios entre 0 y 100.</p>
+<p>Si intentas ejecutar <code>node random-integer.js</code>, notarás que no
+parece hacer nada. Exporta un módulo, pero definir una función no significa que la función se ejecutará e imprimirá algo en la pantalla.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esto cubre solo módulos locales dentro de un proyecto. Para publicar paquetes abiertos en npm, hay guías específicas en línea.</p>
+</div>
+<h2 id="node-an-asynchronous-world">Node: an asynchronous world<a class="headerlink" href="#node-an-asynchronous-world" title="Permanent link">&para;</a></h2>
+<p>Node.js funciona de manera asíncrona, lo que significa que puede iniciar tareas y, mientras espera que recursos externos terminen, continuar con otras operaciones. El libro usa la analogía de hornear muffins: mientras los muffins están en el horno, no estás ocupado directamente con ellos y puedes hacer otras cosas, como salir a correr. De manera similar, cuando Node solicita un archivo grande o procesa una petición de red, no se bloquea, sino que sigue ejecutando otras tareas mientras espera la respuesta de ese recurso externo.</p>
+<p><img alt="" src="../syncasync.png" /></p>
+<p>Los recursos externos más comunes con los que tranajaras en Node y Express son:</p>
+<ul>
+<li>Sistema de archivos: leer y escribir archivos en disco.</li>
+<li>Red: recibir solicitudes, enviar respuestas o hacer peticiones HTTP.</li>
+</ul>
+<h2 id="building-a-web-server-with-node-the-http-module">Building a web server with Node: the http module<a class="headerlink" href="#building-a-web-server-with-node-the-http-module" title="Permanent link">&para;</a></h2>
+<p>Para entender Express, es importante comprender el módulo http de Node.js, porque Express se construye sobre él. Este módulo permite crear servidores web en Node y también tiene funciones para hacer solicitudes a otros servidores.</p>
+<p>El componente principal que se usa para servidores es http.createServer. Esta función recibe un callback que se ejecuta cada vez que llega una solicitud al servidor y devuelve un objeto servidor.</p>
+<p><img alt="" src="../serverhellow.png" /></p>
+<p>El código de ejemplo del servidor se divide en cuatro partes principales. La primera parte requiere el módulo http y lo almacena en una variable llamada http. Esto es igual a cómo se requieren otros módulos como url o fs.</p>
+<p>Luego, se define una función manejadora de solicitudes (request handler). Estas funciones son clave en Node y Express. Siempre reciben dos argumentos:</p>
+<ul>
+<li>req (request), que representa la solicitud y contiene información como la URL pedida, el tipo de navegador (user-agent), etc.</li>
+<li>res (response), que representa la respuesta que vamos a enviar; sobre este objeto llamamos métodos para enviar los datos al cliente.</li>
+</ul>
+<p>El resto del código apunta el servidor HTTP incorporado de Node hacia la función manejadora y lo inicia en el puerto 3000. Esto hace que cada solicitud que llegue sea procesada por esa función, enviando la respuesta adecuada.</p>
+<blockquote>
+<p>Si quieres usar HTTPS, Node también incluye un módulo llamado https, muy parecido a http. Crear un servidor HTTPS es casi idéntico, y cambiarlo después es rápido si ya conoces cómo funciona. Para un inicio básico, no es necesario preocuparse demasiado por HTTPS.</p>
+</blockquote>
+<p>Si quisieras diferenciar respuestas según la URL, podrías analizar req.url en tu función manejadora de solicitudes. Por ejemplo:</p>
+<p><div class="language-js highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Function Handler</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span>
+<span class="normal"><a href="#__codelineno-0-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">requestHandler</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&quot;Welcome to the homepage!&quot;</span><span class="p">);</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;/about&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&quot;Welcome to the about page!&quot;</span><span class="p">);</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&quot;Error! File not found.&quot;</span><span class="p">);</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Con este código, el servidor respondería distinto según la ruta solicitada: la raíz <code>(/)</code> muestra la página de inicio, <code>/about</code> muestra la página “about” y cualquier otra URL genera un mensaje de error.</p>
+<p>Podrías imaginarte construir todo un sitio web con esta única función de gestión de solicitudes. Para sitios muy pequeños, esto podría ser fácil, pero esta función podría volverse enorme y difícil de manejar rápidamente. Quizás necesites un framework que te ayude a limpiar este servidor HTTP; ¡Las cosas podrían complicarse! Ahí es donde entra Express.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hay varias maneras de instalar Node. Recomiendo usar un gestor de versiones para poder cambiar de versión y actualizar fácilmente según sea necesario.</li>
+<li>El sistema de módulos de Node utiliza una función global llamada <code>require</code> y un objeto global llamado <code>module.exports</code>. Ambos conforman un sistema de módulos sencillo.</li>
+<li>Puedes usar npm para instalar paquetes de terceros desde el registro de npm.</li>
+<li>Node.js tiene E/S basada en eventos. Esto significa que cuando ocurre un evento (como una solicitud web entrante), se llama a una función (o un conjunto de funciones).</li>
+<li>Node tiene un módulo integrado llamado <code>http</code>. Es útil para crear aplicaciones web.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cap1/Intro/" class="md-footer__link md-footer__link--prev" aria-label="Previous: WHAT IS EXPRESS">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                WHAT IS EXPRESS
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../cap3/FoundationsofExpress/" class="md-footer__link md-footer__link--next" aria-label="Next: FOUNDATIONS OF EXPRESS">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                FOUNDATIONS OF EXPRESS
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

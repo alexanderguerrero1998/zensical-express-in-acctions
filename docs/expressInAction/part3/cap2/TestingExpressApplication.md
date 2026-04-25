@@ -2,10 +2,10 @@
 
 Este capítulo cubre:
 
-- **Cómo las pruebas te ayudan a tener más confianza** en el comportamiento de tu código
-- **Prácticas comunes de testing**
-- **Ejecutar pruebas en Node.js con Mocha y Chai**
-- **Usar Mocha con SuperTest y Cheerio**
+- [x] **Cómo las pruebas te ayudan a tener más confianza** en el comportamiento de tu código
+- [x] **Prácticas comunes de testing**
+- [x] **Ejecutar pruebas en Node.js con Mocha y Chai**
+- [x] **Usar Mocha con SuperTest y Cheerio**
 
 Escribir código confiable puede ser difícil. Incluso el software pequeño puede ser demasiado complejo para una sola persona, lo que puede crear errores. Los desarrolladores han ideado varios trucos para intentar eliminar estos errores. Los compiladores y verificadores de sintaxis escanean automáticamente tu código en busca de posibles bugs; las revisiones de código entre pares permiten que otras personas miren lo escrito para ver si pueden detectar errores; las guías de estilo mantienen a los equipos de desarrolladores en la misma página. Estos son todos trucos útiles que juegas para mantener tu código más confiable y libre de bugs.
 
@@ -81,7 +81,8 @@ Por eso, quieres **probar tanto de tu código como puedas**. Quieres **explorar 
 
 **Nunca puedes estar 100% seguro** —algo podría romperse en algún momento que no pensaste—, pero si has lanzado todo lo que se te ocurre contra tu código, **probablemente esté funcionando**.
 
-> **Cobertura de código** Las **pruebas pueden darte más confianza** en tu código, pero es solo un método. Como discutimos al inicio del capítulo, hay muchos otros métodos como revisiones entre pares y linters de código.<br><br>Una extensión del testing para aumentar aún más tu confianza es la idea de **cobertura de código**. Las herramientas de **cobertura de código** ven **cuánto de tu código está cubierto por tus pruebas**. Podrías imaginar escribir 10 pruebas aprobadas para tu código pero ignorar completamente una de tus funciones, ¡la cual está totalmente rota!<br><br>Estas herramientas te dicen qué partes de tu código **no han sido tocadas por pruebas** y por lo tanto están **sin probar**. En el mundo de Node.js, la herramienta predominante de code coverage parece ser **Istanbul** (https://github.com/gotwarlost/istanbul). No la cubriremos aquí, pero si buscas aún mayor confianza, échale un vistazo a Istanbul.
+!!! info "Cobertura de código"
+    Las **pruebas pueden darte más confianza** en tu código, pero es solo un método. Como discutimos al inicio del capítulo, hay muchos otros métodos como revisiones entre pares y linters de código.<br><br>Una extensión del testing para aumentar aún más tu confianza es la idea de **cobertura de código**. Las herramientas de **cobertura de código** ven **cuánto de tu código está cubierto por tus pruebas**. Podrías imaginar escribir 10 pruebas aprobadas para tu código pero ignorar completamente una de tus funciones, ¡la cual está totalmente rota!<br><br>Estas herramientas te dicen qué partes de tu código **no han sido tocadas por pruebas** y por lo tanto están **sin probar**. En el mundo de Node.js, la herramienta predominante de code coverage parece ser **Istanbul** (https://github.com/gotwarlost/istanbul). No la cubriremos aquí, pero si buscas aún mayor confianza, échale un vistazo a Istanbul.
 
 **El tiempo perdido** es una de las pocas razones para no escribir pruebas. Esto abarca tanto el **tiempo perdido para la computadora** —algunas pruebas pueden ser computacionalmente costosas— como el **tiempo perdido para ti como ser humano** —toma tiempo escribir las pruebas.
 
@@ -108,7 +109,7 @@ Usarás **Mocha** en este capítulo, pero quizás hayas usado **Jasmine** o **QU
 ### Setting up Mocha and the Chai assertion library
 Probemos escribir una **primera versión** de esto. Crea un **nuevo directorio** y crea **un archivo dentro**, `capitalize.js`. Luego pon el código del siguiente listado dentro de él.
 
-```js
+```js linenums="1"
 //  A first version of the capitalize function (in capitalize.js)
 
 function capitalize(str){
@@ -240,7 +241,7 @@ Vuelva a ejecutar sus pruebas con npm test y debería ver todo en verde.
 ```
 Puedes agregar algunas pruebas más para asegurarte de que tu código sea robusto. Agregarás una prueba que no intente capitalizar ninguna letra. También verificarás que capitalice correctamente cadenas de varias palabras. Además, debes asegurarte de que deje una cadena tal como está si ya está correctamente capitalizada. Las nuevas pruebas en la siguiente lista deberían pasar con el código que ya tienes.
 
-```js
+```js linenums="1"
 import { expect } from "chai";
 import capitalize from "../capitalize.js"
 
@@ -550,7 +551,7 @@ Crea **`test/html.js`**, que contendrá las **pruebas para la parte HTML** de tu
 
 Hasta ahora, todo esto debería parecerse mucho al código que tenías en tus test de texto plano. Estás importando la app y SuperTest; estás haciendo algo de configuración de prueba en un bloque `beforeEach`; te aseguras de que recibes HTML de vuelta y también el User Agent correcto. La primera prueba en este archivo también se parece bastante a la primera que escribiste en el otro archivo. Vamos a completarla ahora, como se muestra en el siguiente listado.
 
-```js
+```js linenums="1"
 // Prueba de respuesta HTML (en test/html.js)
 
 it("returns an HTML response", function(done) {
@@ -562,15 +563,15 @@ it("returns an HTML response", function(done) {
 ```
 Esto es muy parecido a lo anterior. Estás comprobando que la respuesta contenga HTML y que el código de estado HTTP sea 200. La siguiente prueba es donde las cosas cambian. Primero, escribirás el código para obtener la respuesta HTML desde el servidor. El siguiente listado debería parecerse bastante a lo que ya has visto antes.
 
-```js
-    it("return your User-Agent",function(done){
-        resquest
-        .expect(function(res){
-            let htmlResponse = res.text;
-            // …
-        })
-        .end(done)
+```js linenums="1"
+it("return your User-Agent",function(done){
+    resquest
+    .expect(function(res){
+        let htmlResponse = res.text;
+        // …
     })
+    .end(done)
+})
 ```
 Ahora es el momento de hacer algo con ese HTML. No solo quieres que la cadena de User Agent aparezca en algún lugar del HTML; quieres que aparezca dentro de una etiqueta HTML específica. Tu respuesta tendrá una apariencia similar a la del siguiente listado.
 
@@ -593,7 +594,7 @@ Si has estado siguiéndome hasta ahora, el código para esto no debería ser nad
 
 Este código no debería ser demasiado complicado si ya has visto vistas antes. Estás configurando EJS como motor de vistas, asignándole una ruta y luego renderizando una vista si el usuario la solicita. Lo último que necesitarás hacer es definir la vista EJS. Crea `views/index.ejs` y coloca el siguiente código dentro.
 
-```js
+```js linenums="1"
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -666,7 +667,7 @@ Listo, vamos a lo técnico pero claro: **las firmas** (la forma exacta en que se
 
 ### 🧩 1. `describe`
 
-```js
+```js linenums="1"
 describe(titulo, funcion)
 ```
 
@@ -677,7 +678,7 @@ describe(titulo, funcion)
 
 ### 🔍 Ejemplo
 
-```js
+```js linenums="1"
 describe("Usuario", () => {
   // tests aquí
 });
@@ -685,7 +686,7 @@ describe("Usuario", () => {
 
 ### 🧩 2. `it`
 
-```js
+```js linenums="1"
 it(titulo, funcion)
 ```
 
@@ -696,7 +697,7 @@ it(titulo, funcion)
 
 ### 🔍 Ejemplo
 
-```js
+```js linenums="1"
 it("debería crear un usuario", () => {
   // lógica de prueba
 });
@@ -705,7 +706,7 @@ it("debería crear un usuario", () => {
 
 ### 🧩 3. (async opcional)
 
-```js
+```js linenums="1"
 it("test async", async () => {
   // await algo
 });
@@ -723,7 +724,7 @@ Chai es diferente: usa **encadenamiento (chain)**.
 
 ### 🧩 1. `expect`
 
-```js
+```js linenums="1"
 expect(valor)
 ```
 
@@ -732,7 +733,7 @@ expect(valor)
 
 ### 🧩 2. `.to.equal`
 
-```js
+```js linenums="1"
 expect(valor).to.equal(esperado)
 ```
 ### ✔️ Parámetro:
@@ -743,7 +744,7 @@ expect(valor).to.equal(esperado)
 
 ### 🔍 Ejemplo
 
-```js
+```js linenums="1"
 expect(2 + 2).to.equal(4);
 ```
 
@@ -751,34 +752,34 @@ expect(2 + 2).to.equal(4);
 
 ### Igualdad estricta
 
-```js
+```js linenums="1"
 expect(valor).to.equal(esperado)
 ```
 
 ### Booleanos
 
-```js
+```js linenums="1"
 expect(valor).to.be.true
 expect(valor).to.be.false
 ```
 
 ### Tipos
-
-```js
+ 
+```js linenums="1"
 expect(valor).to.be.a("string")
 ```
 
 
 ### Includes
 
-```js
+```js linenums="1"
 expect("hola").to.include("ho")
 ```
 
 
 ### 🔥 TODO JUNTO (firma completa en acción)
 
-```js
+```js linenums="1"
 import { expect } from "chai";
 
 describe("Math", () => {              // Mocha
@@ -834,7 +835,7 @@ describe("Math", () => {              // Mocha
 
 #### GET básico
 
-```js
+```js linenums="1"
 import request from "supertest";
 import { expect } from "chai";
 import app from "../app.js";
@@ -854,7 +855,7 @@ describe("GET /", () => {
 
 #### Ver contenido de respuesta (texto)
 
-```js
+```js linenums="1"
 it("debería devolver HTML con Hola", async () => {
   const res = await request(app).get("/");
   expect(res.text).to.include("Hola");
@@ -867,7 +868,7 @@ it("debería devolver HTML con Hola", async () => {
 
 #### POST con datos (login)
 
-```js
+```js linenums="1"
 it("debería logear usuario", async () => {
   const res = await request(app)
     .post("/login")
@@ -886,7 +887,7 @@ it("debería logear usuario", async () => {
 
 #### Enviar JSON
 
-```js
+```js linenums="1"
 it("debería crear usuario", async () => {
   const res = await request(app)
     .post("/users")
@@ -905,7 +906,7 @@ it("debería crear usuario", async () => {
 
 #### Validar headers
 
-```js
+```js linenums="1"
 it("debería devolver JSON", async () => {
   const res = await request(app).get("/api");
 
@@ -917,7 +918,7 @@ it("debería devolver JSON", async () => {
 
 #### Usar `.expect()` (sin Chai)
 
-```js
+```js linenums="1"
 it("debería responder 200", async () => {
   await request(app)
     .get("/")
@@ -931,7 +932,7 @@ it("debería responder 200", async () => {
 
 ### Validar con función
 
-```js
+```js linenums="1"
 it("valida contenido", async () => {
   await request(app)
     .get("/")
@@ -947,7 +948,7 @@ it("valida contenido", async () => {
 
 #### Con Cheerio (HTML real)
 
-```js
+```js linenums="1"
 import cheerio from "cheerio";
 
 it("debería tener un h1", async () => {
@@ -963,7 +964,7 @@ it("debería tener un h1", async () => {
 
 #### Autenticación (headers)
 
-```js
+```js linenums="1"
 it("accede con token", async () => {
   const res = await request(app)
     .get("/profile")
@@ -977,7 +978,7 @@ it("accede con token", async () => {
 
 #### Cadena completa (flujo real)
 
-```js
+```js linenums="1"
 it("flujo login + acceso", async () => {
   const agent = request.agent(app);
 
@@ -1004,7 +1005,7 @@ it("flujo login + acceso", async () => {
 | atributo    | `.attr("x")`         | obtiene un atributo                       |
 | iterar      | `.each(fn)`          | recorre varios elementos                  |
 
-```js
+```js linenums="1"
 const $ = cheerio.load(res.text);
 
 // Verificar texto
@@ -1021,7 +1022,7 @@ expect($("li").length).to.equal(3);
 
 👉 Esos inputs:
 
-```html
+```html linenums="1"
 <input name="username">
 <input name="password">
 ```
@@ -1036,7 +1037,7 @@ expect($("li").length).to.equal(3);
 
 Ejemplo:
 
-```html
+```html linenums="1"
 <form>
   <input name="username">
   <input name="password">
@@ -1046,13 +1047,13 @@ Ejemplo:
 
 #### 2️⃣ Supertest obtiene ese HTML
 
-```js
+```js linenums="1"
 const res = await request(app).get("/login");
 ```
 
 👉 aquí:
 
-```js
+```js linenums="1"
 res.text
 ```
 
@@ -1060,7 +1061,7 @@ contiene TODO ese HTML
 
 #### 3️⃣ Cheerio lo carga
 
-```js
+```js linenums="1"
 const $ = cheerio.load(res.text);
 ```
 
@@ -1069,7 +1070,7 @@ const $ = cheerio.load(res.text);
 
 #### 4️⃣ Validas los inputs
 
-```js
+```js linenums="1"
 expect($("input[name='username']").length).to.equal(1);
 expect($("input[name='password']").length).to.equal(1);
 ```
@@ -1098,9 +1099,8 @@ expect($("input[name='password']").length).to.equal(1);
 
 ### 🔥 Ejemplo completo real
 
-```js
+```js linenums="1"
 const res = await request(app).get("/login");
-
 const $ = cheerio.load(res.text);
 
 expect($("input[name='username']").length).to.equal(1);
@@ -1146,7 +1146,7 @@ Perfecto, vamos a poner músculo a esa tabla. Un ejemplo corto por propiedad, si
 
 ### 🧪 Ejemplo base (servidor en Express.js)
 
-```js
+```js linenums="1"
 app.get("/", (req, res) => {
   res
     .status(200)
@@ -1160,7 +1160,7 @@ app.get("/", (req, res) => {
 
 #### 1. `res.status`
 
-```js
+```js linenums="1"
 .expect(res => {
   if (res.status !== 200) throw new Error("Status incorrecto")
 })
@@ -1168,13 +1168,13 @@ app.get("/", (req, res) => {
 
 #### 2. `res.body` (cuando es JSON)
 
-```js
+```js linenums="1"
 app.get("/json", (req, res) => {
   res.json({ mensaje: "hola" })
 })
 ```
 
-```js
+```js linenums="1"
 .expect(res => {
   if (res.body.mensaje !== "hola") {
     throw new Error("JSON incorrecto")
@@ -1186,7 +1186,7 @@ app.get("/json", (req, res) => {
 
 #### 3. `res.text`
 
-```js
+```js linenums="1"
 .expect(res => {
   if (res.text !== "hola mundo") {
     throw new Error("Texto incorrecto")
@@ -1196,7 +1196,7 @@ app.get("/json", (req, res) => {
 
 #### 4. `res.headers`
 
-```js
+```js linenums="1"
 .expect(res => {
   if (!res.headers["content-type"].includes("text/plain")) {
     throw new Error("Header incorrecto")
@@ -1206,7 +1206,7 @@ app.get("/json", (req, res) => {
 
 #### 5. `res.type`
 
-```js
+```js linenums="1"
 .expect(res => {
   if (res.type !== "text/plain") {
     throw new Error("Tipo incorrecto")
@@ -1217,13 +1217,13 @@ app.get("/json", (req, res) => {
 
 #### 6. `res.error`
 
-```js
+```js linenums="1"
 app.get("/error", (req, res) => {
   res.status(500).send("error")
 })
 ```
 
-```js
+```js linenums="1"
 .expect(res => {
   if (!res.error) {
     throw new Error("Debía haber error")
@@ -1233,13 +1233,13 @@ app.get("/error", (req, res) => {
 
 #### 7. `res.redirect`
 
-```js
+```js linenums="1"
 app.get("/redir", (req, res) => {
   res.redirect("/")
 })
 ```
 
-```js
+```js linenums="1"
 .expect(res => {
   if (!res.redirect) {
     throw new Error("No redirigió")
@@ -1250,7 +1250,7 @@ app.get("/redir", (req, res) => {
 
 #### 8. Cookies (`res.headers["set-cookie"]`)
 
-```js
+```js linenums="1"
 .expect(res => {
   if (!res.headers["set-cookie"]) {
     throw new Error("No hay cookies")
@@ -1294,7 +1294,7 @@ Aquí hay que separar bien los mundos, porque **este `res` no es el mismo de ant
 
 ### 🔥 Ejemplo completo
 
-```js id="s1"
+```js linenums="1"
 app.get("/", (req, res) => {
   res
     .status(200)
@@ -1359,7 +1359,7 @@ Perfecto, aquí está la foto completa sin ruido:
 * Es una **preferencia**
 * No describe datos enviados
 
-```js id="r1"
+```js linenums="1"
 .set("Accept", "application/json")
 ```
 
@@ -1373,7 +1373,7 @@ Perfecto, aquí está la foto completa sin ruido:
 
 Describe el **body que envías**
 
-```js id="r2"
+```js linenums="1"
 .set("Content-Type", "application/json")
 .send({ nombre: "Alex" })
 ```
@@ -1386,7 +1386,7 @@ Describe el **body que envías**
 
 Describe la **respuesta que devuelves**
 
-```js id="r3"
+```js linenums="1"
 res.type("text/html")
 res.send("<h1>Hola</h1>")
 ```
@@ -1397,7 +1397,7 @@ res.send("<h1>Hola</h1>")
 
 ## 🔁 Flujo completo (esto es lo que importa)
 
-```js id="r4"
+```js linenums="1"
 supertest(app)
   .post("/api")
   .set("Accept", "application/json")        // quiero JSON
@@ -1407,7 +1407,7 @@ supertest(app)
 
 Servidor:
 
-```js id="r5"
+```js linenums="1"
 app.post("/api", (req, res) => {
   res.json({ ok: true }) // responde JSON
 })

@@ -1,0 +1,2162 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../cap1/middleware/">
+      
+      
+        <link rel="next" href="../../cap3/buldingApi/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>Routing - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#routing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Routing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap2/ThebasicsofNode.js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap1/middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What is routing?
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is routing?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-routing-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A simple routing example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-features-of-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The features of routing
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The features of routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grabbing-parameters-to-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Grabbing parameters to routes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-regular-expressions-to-match-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using regular expressions to match routes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grabbing-query-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Grabbing query arguments
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-routers-to-split-up-your-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using routers to split up your app
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using routers to split up your app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estos-son-temas-complementatios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Estos son temas complementatios
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#si-ambos-tienen-cuerpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sí, ambos tienen cuerpo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sí, ambos tienen cuerpo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Request
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Response
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serving-static-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Serving static files
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-files-with-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Static files with middleware
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static files with middleware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-paths-for-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CHANGING THE PATHS FOR CLIENTS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-with-multiple-static-file-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ROUTING WITH MULTIPLE STATIC FILE DIRECTORIES
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-to-static-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Routing to static files
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-express-with-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using Express with HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together-a-simple-routing-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Putting it all together: a simple routing demo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting it all together: a simple routing demo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setting up
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-main-app-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The main app code
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-two-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The two views
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-application-in-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The application in action
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap3/buldingApi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap4/ViewAndTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap3/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap4/Deplyment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap5/bestPractices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What is routing?
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is routing?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-routing-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A simple routing example
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-features-of-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The features of routing
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The features of routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grabbing-parameters-to-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Grabbing parameters to routes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-regular-expressions-to-match-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using regular expressions to match routes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grabbing-query-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Grabbing query arguments
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-routers-to-split-up-your-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using routers to split up your app
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using routers to split up your app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estos-son-temas-complementatios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Estos son temas complementatios
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#si-ambos-tienen-cuerpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sí, ambos tienen cuerpo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sí, ambos tienen cuerpo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Request
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Response
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serving-static-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Serving static files
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-files-with-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Static files with middleware
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static files with middleware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-paths-for-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CHANGING THE PATHS FOR CLIENTS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-with-multiple-static-file-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ROUTING WITH MULTIPLE STATIC FILE DIRECTORIES
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-to-static-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Routing to static files
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-express-with-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using Express with HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together-a-simple-routing-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Putting it all together: a simple routing demo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting it all together: a simple routing demo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setting up
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-main-app-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The main app code
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-two-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The two views
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-application-in-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The application in action
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../part1/cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="routing">Routing<a class="headerlink" href="#routing" title="Permanent link">&para;</a></h1>
+<p>Este capitulo cubre:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Enrutamiento simple y basado en coincidencia de patrones</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Uso de middleware con enrutamiento</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Servir archivos estáticos con express.static, el middleware integrado de archivos estáticos de Express</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Uso de Express con el módulo HTTPS integrado de Node.js</strong></li>
+</ul>
+<p>Como ya has visto, el enrutamiento es una de las grandes caracteristicas de Express, te permite mapear diferentes solicitudes para diferentes manejadores de solicitud. En este capitulo produndizaremos mas. Analizaremos el enrutamiento en datalle, veremos como usat Express con HTTP, exploraremos nuevas caractersticas de Express 4 y mas. Tambien construiremos un par de aplicaciones centradas en el enrutamiento, uno de ellos servira como  ejemplo recurrente a lo  largo del resto del libro.</p>
+<p>En este capitulo, te contare todo lo que necesitas saber sobre enrutamiento en Express.</p>
+<h2 id="what-is-routing">What is routing?<a class="headerlink" href="#what-is-routing" title="Permanent link">&para;</a></h2>
+<p>Vamos a imaginar que estas contruyendo una pagina de inicio para Olivia Ejemplo. Ella es una gran chica y es un honor para ti crear su sitio web.</p>
+<p>Si estas usando un navegador para visitar <code>example.com/olivia</code>, así es como podría verse la primera parte de la solicitud HTTP.</p>
+<p><code>GET</code> /olivia http/1.1`</p>
+<p>Esa solicitud HTTP tiene un <strong>verbo (<code>GET</code>)</strong>, una <strong>URI (<code>/olivia</code>)</strong> y la version <strong>HTTP(<code>1.1</code>)</strong>. Cuando haces enrutamiento, tomas la combinacion del verbo + URI y la asocias a un manejador de solicitud. Basicamente dices, "Hey, Express! Cuando veas una solicitud <code>GET</code> a <code>/about_me</code>, ejecuta este codigo. Y cuando veas una solicitud <code>POST</code> a <code>/new_user</code>, ejecuta este otro codigo."</p>
+<p>Eso es básicamente todo: el enrutamiento asigna verbos y URI a código específico. Veamos un ejemplo sencillo.</p>
+<h3 id="a-simple-routing-example">A simple routing example<a class="headerlink" href="#a-simple-routing-example" title="Permanent link">&para;</a></h3>
+<p>Supongamos que quieres escribir una aplicación Express sencilla que responda a la solicitud HTTP anterior (una solicitud HTTP GET a /olivia). Llamarás a los métodos de tu aplicación Express, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../simplexpress.png" /></p>
+<p>La parte central de este ejemplo está en la tercera línea: cuando recibes solicitudes HTTP GET a <code>/olivia</code>, se ejecuta el manejador de solicitudes especificado. Para <strong>hacer énfasis</strong> en esto: lo ignorarás si ves una solicitud GET a algún otro URI, y también lo ignorarás si ves una solicitud que no sea GET a <code>/olivia</code>.</p>
+<p>Cuando digo <strong>“hacer énfasis”</strong> me refiero a subrayar o recalcar la idea principal: que el manejador de solicitudes solo se ejecuta en casos muy específicos. Es decir:</p>
+<ol>
+<li>Solo responde a <strong>GET requests</strong>. Si llega cualquier otro tipo de solicitud (POST, PUT, DELETE, etc.) a <code>/olivia</code>, <strong>no hará nada</strong>.</li>
+<li>Solo responde a la ruta <code>/olivia</code>. Si alguien pide, por ejemplo, <code>/juan</code> o <code>/index</code>, <strong>no hará nada</strong> tampoco.</li>
+</ol>
+<p>En otras palabras, el servidor “ignora” todo lo que no cumpla estas dos condiciones y solo actúa cuando se cumplen ambas. Es una forma de enfatizar que este manejador no es genérico, sino muy específico.</p>
+<p>Este es un ejemplo bastante simple (de ahí el título de esta sección). Echemos un vistazo a características de enrutamiento más complejas.</p>
+<h2 id="the-features-of-routing">The features of routing<a class="headerlink" href="#the-features-of-routing" title="Permanent link">&para;</a></h2>
+<p>Hasta ahora hemos visto un ejemplo sencillo de enrutamiento. Conceptualmente no es nada loco: simplemente mapea una combinación de verbo HTTP y URI a un manejador de solicitud. Esto te permite asociar cosas como <code>GET /about</code> o <code>POST /user/log_in</code> a un fragmento específico de código. ¡Está muy bien! Pero somos ambiciosos. Si Express fuera un recipiente de helado, no nos conformaríamos con una sola bola; queremos más bolas, queremos chispas, queremos salsa de chocolate, queremos más características de enrutamiento.</p>
+<blockquote>
+<p>NOTA: Algunos otros frameworks (como Ruby on Rails, por ejemplo) tienen un archivo de enrutamiento centralizado donde todas las rutas se definen en un solo lugar. Express no funciona así: las rutas pueden definirse en muchos lugares diferentes.</p>
+</blockquote>
+<h3 id="grabbing-parameters-to-routes">Grabbing parameters to routes<a class="headerlink" href="#grabbing-parameters-to-routes" title="Permanent link">&para;</a></h3>
+<p>Las rutas que acabas de ver podrían expresarse en código usando el operador de igualdad estricta (<code>===</code>): ¿está el usuario visitando <code>/olivia</code>? Eso es muy útil, pero no te da todo el poder expresivo que quizá necesitas. Imagina que te encargan hacer un sitio web con perfiles de usuario, y que cada usuario tiene un identificador numérico. Quieres que la URL del usuario número 1 sea <code>/users/1</code>, el usuario número 2 esté en <code>/users/2</code>, y así sucesivamente. En lugar de definir en código una ruta nueva para cada usuario (lo cual sería una locura), puedes definir una sola ruta para todo lo que empiece por <code>/users/</code> y luego tenga un ID.</p>
+<p><strong>THE SIMPLEST WAY</strong></p>
+<p>La forma mas sencilla de capturar un parametro es poniendolo en la ruta con dos puntos delante. Para obtener su valor debes consultar la propiedad <code>params</code> de objeto <code>request</code>.</p>
+<p><img alt="" src="../simpleParameter.png" /></p>
+<p>En este ejemplo se ve cómo capturar parámetros de una ruta más dinámica. El código coincidirá con lo que quieres, como <code>/users/123</code> y <code>/users/8</code>. Pero aunque no coincidirá con una ruta sin parámetro como <code>/users/</code> ni con <code>/users/123/posts</code>, probablemente aún coincida con más cosas de las que deseas. También coincidirá con <code>/users/cake</code> y <code>/users/horse_ebooks</code>. Si quieres ser más específico, tienes varias opciones.</p>
+<p><strong>¿Por qué coincide con /users/cake?</strong>
+La razón es que <code>:userid</code> es simplemente un__ nombre de parámetro__, no una validación de tipo. Express solo dice:</p>
+<blockquote>
+<p><em>"Captura cualquier cosa que venga después de <code>/users/</code>"</em></p>
+</blockquote>
+<p>Entonces <code>:userid</code> <strong>acepta cualquier string</strong>, no solo números enteros. Por eso:</p>
+<table>
+<thead>
+<tr>
+<th>Ruta</th>
+<th>¿Coincide?</th>
+<th>Valor de <code>req.params.userid</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/users/123</code></td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td><code>"123"</code></td>
+</tr>
+<tr>
+<td><code>/users/8</code></td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td><code>"8"</code></td>
+</tr>
+<tr>
+<td><code>/users/cake</code></td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td><code>"cake"</code></td>
+</tr>
+<tr>
+<td><code>/users/horse_ebooks</code></td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td><code>"horse_ebooks"</code></td>
+</tr>
+<tr>
+<td><code>/users/</code></td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/users/123/posts</code></td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>El <code>parseInt()</code> que aparece en el código convierte el valor a número <strong>después</strong> de que la ruta ya coincidió, no antes. Si le pasas <code>"cake"</code>, <code>parseInt("cake", 10)</code> devuelve <code>NaN</code>, pero Express ya aceptó la solicitud.</p>
+<blockquote>
+<p>NOTA: Aunque a menudo querrás ser más específico al definir tus parámetros, puede que esto sea perfectamente válido para tu caso de uso. Quizá quieras permitir tanto <code>/users/123</code> como <code>/users/count_dracula</code>. Incluso si solo quieres permitir parámetros numéricos, quizá prefieras tener la lógica de validación directamente en la ruta. Como verás más adelante, hay otras formas de hacerlo, pero esto podría bastarte perfectamente.</p>
+</blockquote>
+<h3 id="using-regular-expressions-to-match-routes">Using regular expressions to match routes<a class="headerlink" href="#using-regular-expressions-to-match-routes" title="Permanent link">&para;</a></h3>
+<p>Express te permite especificar tus rutas como cadenas y como expresiones regulares. Esto teda mas control sobre las rutas que especificas. Tambien puedes usar expresiones regulares para coincidir parametros, como veras.</p>
+<p>Vamos a imaginar que quieres hacer coincidir cosas como <code>user/123</code> o <code>users/456</code> pero no <code>users/olivia</code>, puedes codificar esto en una expresion regular, y de paso extraer el numero.</p>
+<p><img alt="" src="../expresionumber.png" /></p>
+<p>Esta es una forma de aplicar la restricción de que el ID de usuario debe ser un número entero. Al igual que en el ejemplo anterior, se pasa como una cadena de texto, por lo que hay que convertirlo a un número (y probablemente a un objeto de usuario más adelante). Las expresiones regulares pueden ser algo difíciles de leer, pero permiten definir rutas mucho más complejas. Por ejemplo, se podría definir una ruta que busque rangos; es decir, si se visita /users/100-500, se puede ver una lista de usuarios con IDs del 100 al 500. Las expresiones regulares facilitan bastante la expresión de esto, como se muestra aquí.</p>
+<p><img alt="" src="../complextroutes.png" /></p>
+<h3 id="grabbing-query-arguments">Grabbing query arguments<a class="headerlink" href="#grabbing-query-arguments" title="Permanent link">&para;</a></h3>
+<p>Otra forma habitual de pasar información de forma dinámica en las URLs es usando cadenas de consulta (<em>query strings</em>). Seguramente hayas visto cadenas de consulta cada vez que has hecho una búsqueda en internet. Por ejemplo, si buscas “javascript-themed burrito” en Google, verás una URL parecida a esta:<br />
+<code>https://www.google.com/search?q=javascript-themed%20burrito</code>.<br />
+Esto es pasar una consulta (<em>query</em>). Si Google estuviera escrito en Express (que no lo está), podría manejar una consulta de la forma que se muestra en el siguiente listado.</p>
+<p><img alt="" src="../qurystring.png" /></p>
+<p>Esto es bastante similar a cómo manejas los parámetros, pero te permite usar este estilo de consulta.</p>
+<blockquote>
+<p>NOTA: Desafortunadamente, existe un error de seguridad bastante común con los parámetros de consulta. Si visitas <code>?arg=something</code>, entonces <code>req.query.arg</code> será una cadena. Pero si vas a <code>?arg=something&amp;arg=somethingelse</code>, entonces <code>req.query.arg</code> será un arreglo. En el capítulo 8 veremos con detalle cómo manejar este tipo de problemas. En general, querrás asegurarte de no asumir ciegamente que algo es una cadena o un arreglo.</p>
+</blockquote>
+<h2 id="using-routers-to-split-up-your-app">Using routers to split up your app<a class="headerlink" href="#using-routers-to-split-up-your-app" title="Permanent link">&para;</a></h2>
+<p>Es probable que, a medida que tu aplicación crezca, también lo haga el número de rutas. Tu sitio web colaborativo de montajes fotográficos de gatos podría comenzar con rutas para archivos estáticos e imágenes, pero más adelante podrías añadir cuentas de usuario, chat, foros, etc. El número de rutas puede volverse inmanejable.</p>
+<p>Express 4 incorporó <em>routers</em>, una función que ayuda a aliviar estos problemas de crecimiento. Según la documentación de Express:</p>
+<blockquote>
+<p>Un enrutador es una instancia independiente de middleware y enrutamiento. Los enrutadores pueden considerarse como «mini» aplicaciones capaces únicamente de realizar funciones de middleware y enrutamiento. Toda aplicación Express cuenta con un enrutador de aplicaciones integrado por defecto.</p>
+</blockquote>
+<p>Los enrutadores funcionan como middleware y pueden ser utilizados por la aplicación mediante la función <code>.use()</code> en otros enrutadores. En otras palabras, los enrutadores permiten dividir una aplicación grande en numerosas miniaplicaciones que luego se pueden combinar. Para aplicaciones pequeñas, esto podría ser excesivo, pero en cuanto pienses: «Este archivo <code>app.js</code> se está volviendo demasiado grande», es momento de considerar dividir la aplicación con enrutadores.</p>
+<p>La figura muestra cómo usar enrutadores desde el archivo principal de la aplicación.</p>
+<p><img alt="" src="../mainapp.png" /></p>
+<p>Como puedes ver, el enrutador de la API se utiliza igual que el middleware, ya que los enrutadores son, básicamente, middleware. En este caso, cualquier URL que comience por <code>/api</code> se enviará directamente a tu enrutador. Eso significa que <code>/api/users</code> y <code>/api/message</code> utilizarán el código de tu enrutador, pero algo como <code>/about/celinedion</code> no lo hará.</p>
+<p>Ahora, define tu enrutador de la siguiente manera. Piensa en él como una subaplicación.</p>
+<p><img alt="" src="../saimpleRouteDef.png" /></p>
+<p>Esto se parece mucho a una miniaplicación; admite middleware y rutas. La principal diferencia es que no puede funcionar de forma independiente; debe integrarse en una aplicación principal. Los enrutadores pueden realizar el mismo enrutamiento que las aplicaciones grandes y pueden usar middleware.</p>
+<p>Podrías imaginarte creando un enrutador con muchos subenrutadores. Quizás quieras
+crear un enrutador de API que, a su vez, delegue en un enrutador de usuarios y un enrutador de mensajes, o tal vez algo más.</p>
+<h3 id="estos-son-temas-complementatios">Estos son temas complementatios<a class="headerlink" href="#estos-son-temas-complementatios" title="Permanent link">&para;</a></h3>
+<p><div class="language-js highlight"><span class="filename">La propiedad Router</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">stack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="p">.</span><span class="nx">handler</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="nx">next</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">next</span><span class="p">();</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span><span class="p">;</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">();</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">};</span>
+</span></code></pre></div>
+Cuando llega la request, Ahí es donde nace <code>next</code>. Mira esto:
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">handle</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">stack</span><span class="p">[</span><span class="nx">i</span><span class="o">++</span><span class="p">];</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">layer</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">();</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">layer</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">();</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nx">layer</span><span class="p">.</span><span class="nx">handler</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span><span class="w"> </span><span class="c1">// 💥 AQUÍ aparece next</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="nx">next</span><span class="p">();</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">}</span>
+</span></code></pre></div>
+Esta podria ser otra vision implementando el manejador <code>middleware de error</code>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">stack</span><span class="p">[</span><span class="nx">i</span><span class="o">++</span><span class="p">];</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">layer</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="c1">// ⬅ Aquí simplemente pasamos el err como viene, sin modificarlo</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">layer</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">handler</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nx">layer</span><span class="p">.</span><span class="nx">handler</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span><span class="w"> </span><span class="c1">// ✅ Aquí sí pasas err</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span><span class="w"> </span><span class="c1">// ⬅ Sigue buscando un handler de error</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">handler</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="nx">layer</span><span class="p">.</span><span class="nx">handler</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">);</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="nx">next</span><span class="p">();</span><span class="w"> </span><span class="c1">// Sin error, salta handlers de error</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="p">}</span>
+</span></code></pre></div>
+La clave está en que err viaja a través de todos los next(err) hasta encontrar un handler con 4 argumentos que lo atrape. Es como una cadena donde el error se va pasando de layer en layer hasta que alguien lo maneja.</p>
+<p>Un protocolo es como un reglamento completo de comunicación:
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Protocolo
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span>├──<span class="w"> </span>Acciones<span class="w"> </span>disponibles
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span>├──<span class="w"> </span>Formato<span class="w"> </span>de<span class="w"> </span>mensajes
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span>├──<span class="w"> </span>Cómo<span class="w"> </span>conectarse
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span>├──<span class="w"> </span>Cómo<span class="w"> </span>manejar<span class="w"> </span>errores
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span>├──<span class="w"> </span>Seguridad
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span>└──<span class="w"> </span>Cómo<span class="w"> </span>desconectarse
+</span></code></pre></div>
+Es como las reglas de un idioma: no solo son las palabras (acciones), sino también la gramática, puntuación, y normas de conversación.</p>
+<p>Un ejmplo con HTTP:</p>
+<ol>
+<li>Cómo establecer la conexión (Handshake)
+Antes de enviar cualquier cosa, cliente y servidor se saluda
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Cliente<span class="w">  </span>→<span class="w">  </span><span class="s2">&quot;Quiero conectarme&quot;</span><span class="w">          </span><span class="o">(</span>SYN<span class="o">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Servidor<span class="w"> </span>→<span class="w">  </span><span class="s2">&quot;Acepto, estás conectado&quot;</span><span class="w">    </span><span class="o">(</span>SYN-ACK<span class="o">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Cliente<span class="w">  </span>→<span class="w">  </span><span class="s2">&quot;Perfecto, empecemos&quot;</span><span class="w">        </span><span class="o">(</span>ACK<span class="o">)</span>
+</span></code></pre></div></li>
+<li>Acción + Formato del mensaje (Request)
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>GET<span class="w"> </span>/users/123<span class="w"> </span>HTTP/1.1<span class="w">        </span>←<span class="w"> </span>Acción<span class="w"> </span>+<span class="w"> </span>Ruta<span class="w"> </span>+<span class="w"> </span>Versión
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Host:<span class="w"> </span>www.ejemplo.com<span class="w">          </span>←<span class="w"> </span>Headers
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Accept:<span class="w"> </span>application/json<span class="w">       </span>←<span class="w"> </span>Headers
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">                               </span>←<span class="w"> </span>Línea<span class="w"> </span>en<span class="w"> </span>blanco<span class="w"> </span>obligatoria
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">(</span>sin<span class="w"> </span>body<span class="o">)</span><span class="w">                     </span>←<span class="w"> </span>Body<span class="w"> </span>vacío
+</span></code></pre></div></li>
+<li>Respuesta del servidor (Response)
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>HTTP/1.1<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK<span class="w">                </span>←<span class="w"> </span>Versión<span class="w"> </span>+<span class="w"> </span>Código<span class="w"> </span>+<span class="w"> </span>Texto
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>←<span class="w"> </span>Headers
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Content-Length:<span class="w"> </span><span class="m">27</span><span class="w">             </span>←<span class="w"> </span>Headers
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">                               </span>←<span class="w"> </span>Línea<span class="w"> </span>en<span class="w"> </span>blanco<span class="w"> </span>obligatoria
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="w"> </span><span class="m">123</span>,<span class="w"> </span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;Juan&quot;</span><span class="o">}</span><span class="w">    </span>←<span class="w"> </span>Body<span class="w"> </span>con<span class="w"> </span>los<span class="w"> </span>datos
+</span></code></pre></div></li>
+<li>Manejo de errores
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>HTTP/1.1<span class="w"> </span><span class="m">404</span><span class="w"> </span>Not<span class="w"> </span>Found<span class="w">         </span>←<span class="w"> </span>El<span class="w"> </span>recurso<span class="w"> </span>no<span class="w"> </span>existe
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>HTTP/1.1<span class="w"> </span><span class="m">500</span><span class="w"> </span>Internal<span class="w"> </span>Error<span class="w">    </span>←<span class="w"> </span>Algo<span class="w"> </span>falló<span class="w"> </span>en<span class="w"> </span>el<span class="w"> </span>servidor
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>HTTP/1.1<span class="w"> </span><span class="m">401</span><span class="w"> </span>Unauthorized<span class="w">      </span>←<span class="w"> </span>No<span class="w"> </span>tienes<span class="w"> </span>permiso
+</span></code></pre></div></li>
+<li>Seguridad (HTTPS)
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Cliente<span class="w">  </span>→<span class="w">  </span><span class="s2">&quot;Quiero conexión segura&quot;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Servidor<span class="w"> </span>→<span class="w">  </span><span class="s2">&quot;Aquí está mi certificado&quot;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Cliente<span class="w">  </span>→<span class="w">  </span><span class="s2">&quot;Verificado, encriptemos&quot;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">           </span>🔒<span class="w"> </span>Todo<span class="w"> </span>lo<span class="w"> </span>de<span class="w"> </span>arriba<span class="w"> </span>ahora<span class="w"> </span>viaja<span class="w"> </span>encriptado
+</span></code></pre></div></li>
+<li>Cerrar la conexión
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Cliente<span class="w">  </span>→<span class="w">  </span><span class="s2">&quot;Ya terminé&quot;</span><span class="w">         </span><span class="o">(</span>FIN<span class="o">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Servidor<span class="w"> </span>→<span class="w">  </span><span class="s2">&quot;Entendido&quot;</span><span class="w">          </span><span class="o">(</span>ACK<span class="o">)</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Servidor<span class="w"> </span>→<span class="w">  </span><span class="s2">&quot;Yo también terminé&quot;</span><span class="w"> </span><span class="o">(</span>FIN<span class="o">)</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Cliente<span class="w">  </span>→<span class="w">  </span><span class="s2">&quot;Hasta luego&quot;</span><span class="w">        </span><span class="o">(</span>ACK<span class="o">)</span>
+</span></code></pre></div>
+Todo el flujo junto:
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="m">1</span>.<span class="w"> </span>Handshake<span class="w">     </span>→<span class="w"> </span>Se<span class="w"> </span>conectan
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="m">2</span>.<span class="w"> </span>Request<span class="w">       </span>→<span class="w"> </span>Cliente<span class="w"> </span>pide<span class="w"> </span>GET<span class="w"> </span>/users/123
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="m">3</span>.<span class="w"> </span>Response<span class="w">      </span>→<span class="w"> </span>Servidor<span class="w"> </span>responde<span class="w"> </span>con<span class="w"> </span>los<span class="w"> </span>datos
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="m">4</span>.<span class="w"> </span>Error<span class="w"> </span><span class="o">(</span>si<span class="w"> </span>hay<span class="o">)</span>→<span class="w"> </span>Servidor<span class="w"> </span>responde<span class="w"> </span><span class="m">404</span>,<span class="w"> </span><span class="m">500</span>...
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="m">5</span>.<span class="w"> </span>Seguridad<span class="w">     </span>→<span class="w"> </span>Todo<span class="w"> </span>encriptado<span class="w"> </span>si<span class="w"> </span>es<span class="w"> </span>HTTPS
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="m">6</span>.<span class="w"> </span>Desconexión<span class="w">   </span>→<span class="w"> </span>Se<span class="w"> </span>despiden<span class="w"> </span>y<span class="w"> </span>cierran<span class="w"> </span>la<span class="w"> </span>conexión
+</span></code></pre></div></li>
+</ol>
+<h2 id="si-ambos-tienen-cuerpo">Sí, ambos tienen cuerpo<a class="headerlink" href="#si-ambos-tienen-cuerpo" title="Permanent link">&para;</a></h2>
+<p>Pero con una diferencia importante:</p>
+<hr />
+<h3 id="request">Request<a class="headerlink" href="#request" title="Permanent link">&para;</a></h3>
+<p>El body <strong>no siempre se usa</strong>, depende del verbo:</p>
+<table>
+<thead>
+<tr>
+<th>Verbo</th>
+<th>¿Tiene body?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>✅ Sí</td>
+</tr>
+</tbody>
+</table>
+<p>Porque <code>GET</code> y <code>DELETE</code> solo dicen <strong>"dame esto"</strong> o <strong>"borra esto"</strong>, no necesitan enviar datos extra.</p>
+<hr />
+<h3 id="response">Response<a class="headerlink" href="#response" title="Permanent link">&para;</a></h3>
+<p>El body <strong>casi siempre tiene algo</strong>, pero tampoco siempre:</p>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>¿Tiene body?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>✅ Sí, los datos pedidos</td>
+</tr>
+<tr>
+<td><code>201 Created</code></td>
+<td>✅ Sí, el recurso creado</td>
+</tr>
+<tr>
+<td><code>404 Not Found</code></td>
+<td>✅ Sí, mensaje de error</td>
+</tr>
+<tr>
+<td><code>204 No Content</code></td>
+<td>❌ No, intencionalmente vacío</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Entonces la estructura completa de ambos sería:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Request  = Línea de inicio + Headers + Línea en blanco + Body (opcional)
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Response = Línea de inicio + Headers + Línea en blanco + Body (casi siempre)
+</span></code></pre></div>
+<h2 id="serving-static-files">Serving static files<a class="headerlink" href="#serving-static-files" title="Permanent link">&para;</a></h2>
+<p>A menos que estés creando un servidor web que sea 100% API (y me refiero al 100%), probablemente enviarás uno o dos archivos estáticos.</p>
+<p>Quizás tengas que enviar archivos CSS, quizás tengas una aplicación de una sola página que necesite enviar archivos estáticos, o quizás seas un entusiasta de las donas y tengas gigabytes de fotos de donas para deleitar a tus hambrientos espectadores.</p>
+<p>Ya has visto cómo enviar archivos estáticos, pero vamos a explorarlo con más detalle.</p>
+<h2 id="static-files-with-middleware">Static files with middleware<a class="headerlink" href="#static-files-with-middleware" title="Permanent link">&para;</a></h2>
+<p>Ya hemos enviado archivos estáticos con middleware antes, pero no se preocupen, vamos a profundizar un poco más. Ya lo vimos en el capítulo 2, así que no voy a extenderme sobre las ventajas de esto. El siguiente listado es un resumen del ejemplo de código que usamos en el capítulo 2.</p>
+<p><img alt="" src="../expressstatic.png" /></p>
+<p>Recuerda que <code>path.resolve</code> ayuda a mantener la resolución de rutas multiplataforma (las cosas son diferentes en Windows, Mac y Linux). Recuerda también que esto es mucho mejor que hacerlo todo manualmente. Si algo no te queda claro, consulta el capítulo 2.</p>
+<p>Ahora profundicemos.</p>
+<h3 id="changing-the-paths-for-clients">CHANGING THE PATHS FOR CLIENTS<a class="headerlink" href="#changing-the-paths-for-clients" title="Permanent link">&para;</a></h3>
+<p>Es común que quieras servir archivos en la raíz de tu sitio. Por ejemplo, si tu URL es <a href="http://jokes.edu">http://jokes.edu</a> y sirves jokes.txt, la ruta será <a href="http://jokes.edu/jokes.txt">http://jokes.edu/jokes.txt</a>. Pero quizas tambien quieras alojar archivos estáticos en una URL diferente para los clientes. Por ejemplo, podrías querer que una carpeta llena de fotos ofensivo-pero-divertidísimo parezca estar en una carpeta llamada "offensive", de modo que un usuario pueda visitar <a href="http://jokes.edu/offensive/photo123.jpg">http://jokes.edu/offensive/photo123.jpg</a>. </p>
+<p>¿Cómo podrías hacer esto?</p>
+<p>Al grano, con sentido técnico claro:</p>
+<blockquote>
+<p><strong>¡Express al rescate!</strong> El middleware puede montarse en un prefijo determinado. En otras palabras, puedes hacer que un middleware responda solo si la ruta comienza con <code>/offensive</code>. El siguiente ejemplo muestra cómo se hace.</p>
+</blockquote>
+<p><img alt="" src="../mointigstatic.png" title="Middleware de montaje de archivos estáticos" /></p>
+<p>Ahora los navegadores web y otros clientes pueden acceder a tus fotos ofensivas desde una ruta distinta a la raíz. Ten en cuenta que esto se puede hacer con cualquier middleware, no solo con el de archivos estáticos. Quizás el ejemplo más claro sea el que acabas de ver: montar los enrutadores de Express en un prefijo.</p>
+<h3 id="routing-with-multiple-static-file-directories">ROUTING WITH MULTIPLE STATIC FILE DIRECTORIES<a class="headerlink" href="#routing-with-multiple-static-file-directories" title="Permanent link">&para;</a></h3>
+<p>Con frecuencia me encuentro con archivos estáticos en varios directorios. Por ejemplo, a veces tengo archivos estáticos en una carpeta llamada "public" y otros en una carpeta llamada "user_uploads". ¿Cómo puedo hacer esto con Express?</p>
+<p>Express resuelve este problema con su función de middleware integrada, y como <code>express.static</code> es un middleware, puedes aplicarlo varias veces. Aquí te mostramos cómo podrías hacerlo.</p>
+<p><img alt="" src="../multiplesdirectories.png" title="Servir archivos estáticos desde múltiples directorios" /></p>
+<p>Ahora, imaginemos cuatro escenarios y veamos cómo los maneja este código:</p>
+<ul>
+<li><em>El usuario solicita un recurso que no se encuentra en la carpeta pública ni en la carpeta user-uploads</em>. Ambas funciones de middleware estático continuarán con las siguientes rutas y middleware.</li>
+<li><em>El usuario solicita un recurso que se encuentra en la carpeta pública</em>. El primer middleware enviará el archivo y no se llamará a ninguna ruta ni función de middleware posterior.</li>
+<li><em>El usuario solicita un recurso que se encuentra en la carpeta user-uploads, pero no en la carpeta pública.</em> El primer middleware continuará su ejecución (el recurso no está en la carpeta pública), por lo que el segundo middleware lo procesará.
+Después de esto, no se ejecutará ningún otro middleware ni ruta.</li>
+<li><em>El usuario solicita un recurso que se encuentra tanto en la carpeta pública como en la carpeta user-uploads</em>. Dado que el middleware que sirve el recurso público tiene prioridad, los usuarios obtendrán el archivo en la carpeta pública y nunca podrán acceder al archivo correspondiente en la carpeta user_uploads.</li>
+</ul>
+<p>Como siempre, puedes montar el middleware en diferentes rutas para evitar el problema que se plantea en la cuarta opción. El siguiente fragmento de código muestra cómo puedes hacerlo</p>
+<p><img alt="" src="../filesstaticwithoutconflict.png" title="Servir archivos estáticos desde múltiples directorios sin conflicto" /></p>
+<p>Ahora bien, si image.jpg se encuentra en ambas carpetas, podrá obtenerla tanto de la carpeta pública en <code>/public/image.jpg</code> como de la carpeta user_uploads en <code>/uploads/image.jpg.</code></p>
+<h3 id="routing-to-static-files">Routing to static files<a class="headerlink" href="#routing-to-static-files" title="Permanent link">&para;</a></h3>
+<p>Es posible que desee enviar archivos estáticos con una ruta. Por ejemplo, podría querer enviar la foto de perfil de un usuario si visita /users/123/profile_photo. El middleware estático no tiene forma de saber esto, pero Express ofrece una manera práctica de hacerlo, que utiliza muchos de los mismos mecanismos internos que el middleware estático.</p>
+<p>Supongamos que desea enviar fotos de perfil cuando alguien visita /users/:userid/profile_photo. Supongamos también que tiene una función mágica llamada getProfilePhotoPath que recibe un ID de usuario y devuelve la ruta a su foto de perfil. El siguiente código muestra cómo hacerlo.</p>
+<p><img alt="" src="../sendPicture.png" title="Enviar fotos de perfil" /></p>
+<p>En el capítulo 2, viste que esto sería un gran problema sin Express. Tendrías que abrir el archivo, averiguar su tipo de contenido (HTML, texto plano, imagen, etc.), su tamaño, etc. La función sendFile de Express hace todo esto por ti y te permite enviar archivos fácilmente. Puedes usarla para enviar cualquier archivo que quieras.</p>
+<h2 id="using-express-with-https">Using Express with HTTPS<a class="headerlink" href="#using-express-with-https" title="Permanent link">&para;</a></h2>
+<p>Como lo dicutimos en el capitulo anterior, HTTPS agrega una capa de seguridad a HTTP (Aunque nada es invulnerable). Esta capa de seguridad se llama TLS (Trasnport Layer Segurity) o SSL (Secure Sockets Layer). Los nombres se usan indistantamente,  pero TLS es tecnicamente el sucessor de SSL.</p>
+<p>No entrare en los complejos calculos matematicos, pero TLS utiliza criptografia de clave publica, que funciona asi: cada participante tiene una clave publica que comparte con todos y una clave privada que no comparte con nadie. Si quiero enviarte algo, encripta el mensaje con <strong>mi clave privada</strong> <em>(probablemente en algun lugar en mi ordenador)</em> <strong>y tu clave publica</strong> <em>(disponible para cualquiera)</em>. De esta forma, puedo enviarte mensajes que, para cualquier intruso, parecera ilegibles, y tu los descifras con tu clave privada y mi clave publica. Gracias a una lógica matemática asombrosa, podemos mantener una conversación segura incluso si todos nos escuchan, sin necesidad de acordar previamente ningún código secreto.</p>
+<p>Si esto resulta un poco confuso, recuerde que ambos interlocutores tiene una clave publica y una clave provada. En TSL, la clave publica tambien tiene una propiedad especial llamada certiicado. Si estoy hablando con usted, me mostrara su certificado (tambien conocido como su clave publica)y yo me asegurare de que sea usted verificando que una autoridad de certificacion confirme su autoridad. Su navegador tiene una lista de autoridades de certificacionde  confianza; empresas como VeriSing y Google gestionan estas autoridades de ceritificacion, conocidas como CA.</p>
+<p>Me imagino a las autoridades de certificacion como un guardaespaldas. Cuando hablo con alguien, miro a mi guardaespaldas y le pregunto: «Oye, ¿esta persona es quien dice ser?». Mi guardaespaldas me mira y asiente levemente o niega con la cabeza.</p>
+<blockquote>
+<p>NOTA: Algunos proveedores de alojamiento como Heroku se encargan de todo lo relacionado con HTTPS, así que no tienes que preocuparte por ello. Esta sección solo es útil si tienes que configurar HTTPS tú mismo.</p>
+</blockquote>
+<p>Primero, deberá generar sus claves pública y privada con OpenSSL. Si usa Windows, descargue el binario desde <a href="https://www.openssl.org/related/binaries.html">https://www.openssl.org/related/binaries.html</a>. Debería venir preinstalado en Mac OS X. Si usa Linux con un gestor de paquetes (como Arch, Gentoo, Ubuntu o Debian) y si no está instalado, instálelo con el gestor de paquetes de su sistema operativo. Puede comprobar si OpenSSL está instalado escribiendo <code>openssl version</code> en la línea de comandos. A continuación, ejecute los siguientes dos comandos:</p>
+<p><div class="language-sh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>openssl<span class="w"> </span>genrsa<span class="w"> </span>-out<span class="w"> </span>privatekey.pem<span class="w"> </span><span class="m">1024</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>openssl<span class="w"> </span>req<span class="w"> </span>-new<span class="w"> </span>-key<span class="w"> </span>privatekey.pem<span class="w"> </span>-out<span class="w"> </span>request.pem
+</span></code></pre></div>
+El primer comando genera tu clave privada en privatekey.pem; cualquiera puede hacerlo.</p>
+<p>El siguiente comando genera una solicitud de firma de certificado. Te pedirá diversa información y luego generará un archivo llamado request.pem. A partir de aquí, debes solicitar un certificado a una CA (Autoridad de Certificación). Varios grupos en internet trabajan en Let's Encrypt, una CA gratuita y automatizada. Puedes consultar el servicio en <a href="https://letsencrypt.org/">https://letsencrypt.org/</a>. Si prefieres otra autoridad de certificación, puedes buscar en línea.</p>
+<p>Una vez que tengas un certificado, puedes usar el módulo HTTPS integrado de Node con Express, como se muestra en el siguiente listado. Es muy similar al módulo HTTP, pero tendrás que proporcionar tu certificado y tu clave privada.</p>
+<p><img alt="" src="../htppsexpress.png" title="Uso de HTTPS con una aplicación Express" /></p>
+<p>Aparte de que debes pasar la clave privada y el certificado como argumentos,
+esto es muy similar a http.createServer que ya has visto. Si quieres ejecutar tanto un servidor HTTP como un servidor HTTPS, inicia ambos, como se muestra a continuación.</p>
+<p><img alt="" src="../httpyhtps.png" title="Uso de HTTP y HTTPS con Express" /></p>
+<p>Lo único que tienes que hacer es ejecutar ambos servidores en puertos diferentes, y listo. Eso es HTTPS.</p>
+<h2 id="putting-it-all-together-a-simple-routing-demo">Putting it all together: a simple routing demo<a class="headerlink" href="#putting-it-all-together-a-simple-routing-demo" title="Permanent link">&para;</a></h2>
+<p>Let’s take what you’ve learned and build a simple web application that returns the
+temperature by your United States ZIP Code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Soy estadounidense, así que este ejemplo utilizará el código postal de EE. UU.,
+llamado código ZIP. Los códigos ZIP tienen cinco dígitos y pueden darte una ubicación aproximada bastante buena. Hay 42 522 códigos ZIP, y Estados Unidos abarca 3,7 millones de millas cuadradas, por lo que cada código ZIP cubre aproximadamente 87 millas cuadradas en promedio. Dado que vamos a usar códigos ZIP, este ejemplo solo funcionará en Estados Unidos. No debería ser muy difícil crear una aplicación similar que funcione en otros lugares (si te inspiras, puedes probar con la API de geolocalización HTML5).</p>
+</div>
+<p>Esta aplicación constará de dos partes: una página de inicio que solicita al usuario su código postal y una ruta que envía la temperatura en formato JSON.
+¡Comencemos!</p>
+<h3 id="setting-up">Setting up<a class="headerlink" href="#setting-up" title="Permanent link">&para;</a></h3>
+<p>Para esta aplicación, usarás cuatro paquetes de Node: Express (obviamente), ForecastIO (para obtener datos meteorológicos de la API gratuita Forecast.io), Zippity-do-dah (para convertir códigos postales en coordenadas de latitud y longitud) y EJS (para renderizar vistas HTML).</p>
+<p>(¡Qué buenos nombres, ¿verdad? Especialmente Zippity-do-dah!).
+Crea una nueva aplicación Express. Asegúrate de que el archivo package.json se vea similar al siguiente listado cuando llegue el momento de empezar.</p>
+<p>Asegúrate de tener todas estas dependencias instaladas ejecutando <code>npm install</code> en
+el directorio de tu aplicación.</p>
+<p>En el cliente, necesitarás jQuery y un framework CSS minimalista llamado Pure
+(<a href="http://purecss.io/">http://purecss.io/</a>). Probablemente ya conozcas jQuery, pero Pure es un poco menos conocido. Pure te ofrece un poco de estilo para texto y formularios, similar a Bootstrap de Twitter. La diferencia con Pure es que es mucho más ligero, lo que se adapta mejor a este tipo de aplicación.</p>
+<p>Crea dos directorios: uno llamado <code>public</code> y otro llamado <code>views</code>. A continuación, obtén una clave API de Forecast.io en <a href="https://developer.forecast.io">https://developer.forecast.io</a>. Regístrate para obtener una cuenta. En la parte inferior de la página del panel de control encontrarás tu clave API, que es una cadena de 32 caracteres. Tendrás que copiar esta clave API en tu código en breve, así que
+asegúrate de tenerla a mano. Ya puedes empezar.</p>
+<h3 id="the-main-app-code">The main app code<a class="headerlink" href="#the-main-app-code" title="Permanent link">&para;</a></h3>
+<p>Ahora que ya tienes todo listo, es hora de programar. Empecemos con la aplicación principal. JavaScript. Si seguiste el ejemplo del final del capítulo 2, esto te resultará familiar. Crea el archivo app.js e inserta el código del siguiente listado.</p>
+<p><div class="language-js highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;express&quot;</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">dirname</span><span class="p">,</span><span class="nx">join</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;node:path&quot;</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;node:stream/consumers&quot;</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">fileURLToPath</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;node:url&quot;</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">__filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fileURLToPath</span><span class="p">(</span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="kd">const</span><span class="w"> </span><span class="nx">__dirname</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nx">dirname</span><span class="p">(</span><span class="nx">__filename</span><span class="p">)</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="k">static</span><span class="p">(</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="s2">&quot;public&quot;</span><span class="p">)))</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;views&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="s2">&quot;views&quot;</span><span class="p">))</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;view engine&quot;</span><span class="p">,</span><span class="s2">&quot;ejs&quot;</span><span class="p">)</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="nx">response</span><span class="p">){</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">    </span><span class="nx">response</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="p">})</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/clima/:cuidad&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="nx">response</span><span class="p">){</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ciudad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">request</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">cuidad</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">apiKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;f52f0a90a7874705e925e5e2ab7de4ca&quot;</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`https://api.openweathermap.org/data/2.5/weather?q=</span><span class="si">${</span><span class="nx">ciudad</span><span class="si">}</span><span class="sb">&amp;appid=</span><span class="si">${</span><span class="nx">apiKey</span><span class="si">}</span><span class="sb">&amp;units=metric`</span><span class="p">;</span>
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>
+</span><span id="__span-14-26"><a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">respuesta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w">  </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span><span id="__span-14-27"><a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">respuesta</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+</span><span id="__span-14-28"><a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="w">        </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+</span><span id="__span-14-29"><a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+</span><span id="__span-14-30"><a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>
+</span><span id="__span-14-31"><a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="w">    </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span id="__span-14-32"><a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a><span class="w">        </span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;Error al obtener el clima.&quot;</span><span class="p">)</span>
+</span><span id="__span-14-33"><a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-14-34"><a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>
+</span><span id="__span-14-35"><a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="p">})</span>
+</span><span id="__span-14-36"><a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>
+</span><span id="__span-14-37"><a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="nx">response</span><span class="p">){</span>
+</span><span id="__span-14-38"><a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a><span class="w">    </span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">404</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;404&quot;</span><span class="p">)</span>
+</span><span id="__span-14-39"><a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a><span class="p">})</span>
+</span><span id="__span-14-40"><a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>
+</span><span id="__span-14-41"><a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mf">3000</span><span class="p">,</span><span class="s2">&quot;localhost&quot;</span><span class="p">,()=&gt;{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;servidor activado...&quot;</span><span class="p">)})</span>
+</span></code></pre></div>
+Ahora debes completar el cliente. Esto significa crear algunas vistas con EJS y, como verás, añadirás un poco de CSS y algo de JavaScript del lado del cliente.</p>
+<h3 id="the-two-views">The two views<a class="headerlink" href="#the-two-views" title="Permanent link">&para;</a></h3>
+<p>Esta aplicación tiene dos vistas: la página de error 404 y la página de inicio.
+Para que tu sitio web tenga un aspecto uniforme en todas las páginas, crea una plantilla. Necesitarás un encabezado y un pie de página.</p>
+<p>Comencemos con el encabezado. Guarda el siguiente código en un archivo llamado <code>header.ejs.</code></p>
+<p><div class="language-html highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/main.css&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></code></pre></div>
+A continuación, cierra la página en <code>footer.ejs</code>, como se muestra en el siguiente listado.</p>
+<p><div class="language-html highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></code></pre></div>
+Ahora que ya tienes tu plantilla, puedes completar la página de error 404 (como 404.ejs), tal como se muestra en el siguiente listado. Guárdala como <code>404.ejs</code></p>
+<p><div class="language-js highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="o">&lt;%-</span><span class="w"> </span><span class="nx">include</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span><span class="o">%&gt;</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w"> </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="mf">404</span><span class="w"> </span><span class="nx">error</span><span class="o">!</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">found</span><span class="p">.</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="o">&lt;%-</span><span class="w"> </span><span class="nx">include</span><span class="p">(</span><span class="s2">&quot;footer&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;</span>
+</span></code></pre></div>
+La página de inicio tampoco es demasiado compleja. Guárdala como <code>index.ejs</code>.
+<div class="language-js highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="o">&lt;%-</span><span class="w"> </span><span class="nx">include</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="kd">class</span><span class="o">=</span><span class="s2">&quot;contenedor&quot;</span><span class="o">&gt;</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">What</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">your</span><span class="w"> </span><span class="nx">cyte</span><span class="o">?&lt;</span><span class="err">/h1&gt;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="o">&lt;</span><span class="nx">form</span><span class="w"> </span><span class="kd">class</span><span class="o">=</span><span class="s2">&quot;pure-form pure-form-stacked&quot;</span><span class="w"> </span><span class="nx">action</span><span class="o">=</span><span class="s2">&quot;/clima&quot;</span><span class="w"> </span><span class="nx">method</span><span class="o">=</span><span class="s2">&quot;GET&quot;</span><span class="o">&gt;</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">fieldset</span><span class="o">&gt;</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">      </span><span class="o">&lt;</span><span class="nx">legend</span><span class="o">&gt;</span><span class="nx">Consulta</span><span class="w"> </span><span class="nx">el</span><span class="w"> </span><span class="nx">clima</span><span class="o">&lt;</span><span class="err">/legend&gt;</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">      </span><span class="o">&lt;</span><span class="nx">input</span><span class="w"> </span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">        </span><span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="w"> </span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">        </span><span class="nx">name</span><span class="o">=</span><span class="s2">&quot;ciudad&quot;</span><span class="w"> </span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">        </span><span class="nx">placeholder</span><span class="o">=</span><span class="s2">&quot;Ej: Cuenca&quot;</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">        </span><span class="nx">required</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">      </span><span class="o">&gt;</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">      </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="kd">class</span><span class="o">=</span><span class="s2">&quot;pure-button pure-button-primary&quot;</span><span class="o">&gt;</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="w">        </span><span class="nx">Buscar</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="w">      </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="w">    </span><span class="o">&lt;</span><span class="err">/fieldset&gt;</span>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="w">  </span><span class="o">&lt;</span><span class="err">/form&gt;</span>
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="o">&lt;%-</span><span class="w"> </span><span class="nx">include</span><span class="p">(</span><span class="s2">&quot;footer&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;</span>
+</span></code></pre></div>
+La página de clima tampoco es demasiado compleja. Guárdala como <code>clima.ejs</code>.
+<div class="language-js highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="o">&lt;%-</span><span class="w"> </span><span class="nx">include</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="o">&lt;%</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">%&gt;</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="ne">Error</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;%=</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="o">%&gt;&lt;</span><span class="err">/p&gt;</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">  </span><span class="o">&lt;%</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">%&gt;</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="kd">class</span><span class="o">=</span><span class="s2">&quot;contenedor&quot;</span><span class="o">&gt;</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Clima</span><span class="w"> </span><span class="nx">en</span><span class="w"> </span><span class="o">&lt;%=</span><span class="w"> </span><span class="nx">ciudad</span><span class="w"> </span><span class="o">%&gt;&lt;</span><span class="err">/h1&gt; </span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Temperatura</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;%=</span><span class="w"> </span><span class="nx">temperatura</span><span class="w"> </span><span class="o">%&gt;</span><span class="w"> </span><span class="err">°</span><span class="nx">C</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Descripción</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;%=</span><span class="w"> </span><span class="nx">descripcion</span><span class="w"> </span><span class="o">%&gt;&lt;</span><span class="err">/p&gt;</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">  </span><span class="o">&lt;%</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">%&gt;</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">  </span><span class="o">&lt;</span><span class="nx">a</span><span class="w"> </span><span class="nx">href</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="o">&gt;</span><span class="nx">Volver</span><span class="o">&lt;</span><span class="err">/a&gt;</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="o">&lt;%-</span><span class="w"> </span><span class="nx">include</span><span class="p">(</span><span class="s2">&quot;footer&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;</span>
+</span></code></pre></div>
+En el código del índice hay un par de referencias al framework Pure CSS; simplemente aplican estilos para que la página se vea mejor. Hablando de estilos, tendrás que completar el archivo main.css que especificaste en la plantilla. Guarda el código del siguiente listado en <code>public/main.css</code>.</p>
+<p><div class="language-css highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="w">  </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">  </span><span class="p">.</span><span class="nc">contenedor</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">  </span><span class="p">}</span>
+</span></code></pre></div>
+Este CSS centra eficazmente el contenido de la página, tanto horizontal como verticalmente. Esto no es un libro de CSS, así que no te preocupes si no entiendes exactamente lo que está pasando.
+Ahora tienes todo excepto el JavaScript del lado del cliente. Puedes intentar ejecutar la aplicación con npm. Deberías poder ver la página de inicio en <a href="http://localhost:3000">http://localhost:3000</a> y la página de error 404 en <a href="http://localhost:3000/alguna/url/basura">http://localhost:3000/alguna/url/basura</a>.</p>
+<h3 id="the-application-in-action">The application in action<a class="headerlink" href="#the-application-in-action" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="../app.png" title="Temperatura por nombre de cuidad" /></p>
+<p>Esta es tu aplicación sencilla. Aprovecha las útiles funciones de enrutamiento de Express y sirve vistas HTML, JSON y archivos estáticos.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>El enrutamiento es una asociación entre un verbo HTTP (como GET o POST) y una URI (por ejemplo, /users/123). </li>
+<li>El enrutamiento puede asociarse a una cadena simple. También puede hacer coincidir patrones o expresiones regulares.</li>
+<li>Express tiene la capacidad de analizar cadenas de consulta. </li>
+<li>Como una comodidad, Express tiene un middleware integrado para servir archivos estáticos. </li>
+<li>Los enrutadores pueden utilizarse para dividir su aplicación en muchas aplicaciones más pequeñas, lo cual es útil para la organización del código. </li>
+<li>Puede utilizar Express con HTTPS iniciando el servidor con sus certificados.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cap1/middleware/" class="md-footer__link md-footer__link--prev" aria-label="Previous: MIDDLEWARE">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                MIDDLEWARE
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../cap3/buldingApi/" class="md-footer__link md-footer__link--next" aria-label="Next: BUILDING APIS">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                BUILDING APIS
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

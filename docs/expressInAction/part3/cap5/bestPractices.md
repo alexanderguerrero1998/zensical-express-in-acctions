@@ -1,10 +1,10 @@
 # Best practices
 This chapter covers:
 
-- **Beneficios de la simplicidad en tu código**
-- **Estructurar los archivos de tu aplicación**
-- **Usar el comando `npm shrinkwrap` para fijar versiones de dependencias** por confiabilidad (y los beneficios de hacerlo)
-- **Evitar instalar módulos globalmente**
+- [x] **Beneficios de la simplicidad en tu código**
+- [x] **Estructurar los archivos de tu aplicación**
+- [x] **Usar el comando `npm shrinkwrap` para fijar versiones de dependencias** por confiabilidad (y los beneficios de hacerlo)
+- [x] **Evitar instalar módulos globalmente**
 
 Es hora de cerrar este libro. Si fuera una tragedia, probablemente terminaríamos con una muerte dramática. Si fuera una comedia, tal vez tendríamos una boda romántica. Desafortunadamente, este es un libro sobre Express, un tema no conocido por su drama y romance. 
 

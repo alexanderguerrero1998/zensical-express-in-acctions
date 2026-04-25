@@ -1,0 +1,1461 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../../part1/cap3/FoundationsofExpress/">
+      
+      
+        <link rel="next" href="../../cap2/Routing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>Middleware - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#middleware" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Middleware
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap2/ThebasicsofNode.js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#middleware-and-the-middleware-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Middleware and the middleware stack
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-app-a-static-file-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example app: a static file server
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example app: a static file server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-set-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Getting set up
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-your-first-middleware-function-the-logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Writing your first middleware function: the logger
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-static-file-server-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The static file server middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-handler-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        404 handler middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switching-your-logger-to-an-open-source-one-morgan" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Switching your logger to an open source one: Morgan
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Error-handling middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-useful-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Other useful middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap2/Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap3/buldingApi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap4/ViewAndTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap3/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap4/Deplyment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap5/bestPractices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#middleware-and-the-middleware-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Middleware and the middleware stack
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-app-a-static-file-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example app: a static file server
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example app: a static file server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-set-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Getting set up
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-your-first-middleware-function-the-logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Writing your first middleware function: the logger
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-static-file-server-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The static file server middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-handler-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        404 handler middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switching-your-logger-to-an-open-source-one-morgan" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Switching your logger to an open source one: Morgan
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Error-handling middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-useful-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Other useful middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../part1/cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="middleware">Middleware<a class="headerlink" href="#middleware" title="Permanent link">&para;</a></h1>
+<p>Este capítulo cubre:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Escribir funciones de middleware: una función con tres argumentos.</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Escribir y usar middleware para manejo de errores: una función con cuatro argumentos.</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Usar middleware de código abierto, como Morgan para registrar solicitudes y <code>express.static</code> para servir archivos estáticos.</strong></li>
+</ul>
+<p>Sin ningún framework como Express, Node te ofrece una API bastante simple. Creas una función que maneje las solicitudes, la pasas a <code>http.createServer</code> y listo. Aunque esta API es sencilla, tu función manejadora de solicitudes puede volverse difícil de manejar a medida que tu aplicación crece. </p>
+<p>Express ayuda a mitigar algunos de estos problemas. Una de las formas en que lo hace es mediante el uso de algo llamado middleware. Node sin framework te obliga a escribir una sola función grande para manejar solicitudes en toda tu aplicación. El middleware te permite dividir esta funcion manejadora de solicitudes en partes más pequeñas. Estas funciones más pequeñas suelen encargarse de una sola cosa a la vez. Una podría registrar todas las solicitudes que llegan a tu servidor; otra podría analizar valores especiales de las solicitudes entrantes; otra podría autenticar usuarios.</p>
+<p>Conceptualmente, el middleware es la parte más importante de Express. La mayor parte del código de Express que escribes es middleware de una forma u otra. Con suerte, después de este capítulo, verás por qué.</p>
+<h2 id="middleware-and-the-middleware-stack">Middleware and the middleware stack<a class="headerlink" href="#middleware-and-the-middleware-stack" title="Permanent link">&para;</a></h2>
+<p>Al final del día, los servidores web escuchan solicitudes, analizan esas solicitudes y envían respuestas. El runtime de Node recibe primero esas solicitudes y las convierte de bytes en bruto en dos objetos de JavaScript que puedes manejar: un objeto para la solicitud <code>(req)</code> y otro para la respuesta <code>(res)</code>. Cuando trabajas solo con Node.js, el flujo se ve como en la figura.</p>
+<p><img alt="" src="../flownode.png" /></p>
+<p>Estos dos objetos se enviarán a una función de JavaScript que tú escribirás. Analizarás <code>req</code> para ver qué quiere el usuario y manipularás <code>res</code> para preparar tu respuesta. Después de un rato, habrás terminado de escribir la respuesta. Cuando eso ocurra, llamarás a <code>res.end</code>. Esto le indica a Node que la respuesta ya está completa y lista para enviarse por la red. El runtime de Node verá lo que hiciste con el objeto de respuesta, lo convertirá en otro paquete de bytes y lo enviará por internet a quien lo haya solicitado.</p>
+<p>En Node, estos dos objetos pasan por una sola función. Pero en Express, estos objetos pasan por un arreglo de funciones llamado la <em>pila de middleware</em>. Express comienza en la primera función de la pila y continúa en orden hacia abajo, como se muestra en la figura. </p>
+<p>Cada función de esta pila toma tres argumentos. Los dos primeros son <code>req</code> y <code>res</code> de antes. Node te los entrega, aunque Express los complementa con algunas funciones de conveniencia que comentamos en el capítulo anterior.</p>
+<p><img alt="" src="../expressMiddleware.png" /></p>
+<p>Cuando trabajas con Express, la única función manejadora de solicitudes se reemplaza por una pila de funciones de middleware.</p>
+<p>El tercer argumento de cada una de estas funciones es, a su vez, otra función, llamada convencionalmente <code>next</code>. Cuando se llama a <code>next</code>, Express pasa a la siguiente función de la pila. La figura 4.3 muestra la firma de una función de middleware.</p>
+<p><img alt="" src="../middlewarefunction.png" /></p>
+<p>Eventualmente, una de estas funciones en la pila debe llamar a <code>res.end</code>, lo que terminara la slicitud. (En Express, tambien puedes llamar a otros metodos como <code>res.send</code> o <code>res.sendFile</code>, que llaman internamente a <code>res,end</code>). Puedes llamar a <code>res.end</code> en cualquiera de las funciones de la pila del middleware, pero debes hacerlo solo una vez o tendras un error. Esto puede parecer un poco abstracto y confuso. Veamos un ejemplo de como funciona esto construyendo un servidor de archivos estaticos.</p>
+<h2 id="example-app-a-static-file-server">Example app: a static file server<a class="headerlink" href="#example-app-a-static-file-server" title="Permanent link">&para;</a></h2>
+<p>Vamos a construri una pequeña aplicacion que sirva archivos desde una carpeta. Puedes poner cualquier cosa en esta carpeta y servira: Archivos HTML, imagenes o un MP3  de ti cantando “My Heart Will Go On” de Celine Dion.</p>
+<p>Esta carpeta la llamaremos <code>static</code> y vivira en el directorio de tu proyecto. Si hay un archivo llamado celine.mp3 y un usuario visita <code>/celine.mp3</code>, tu servidor debe enviar el MP3 a travez de internet. Si el usuario solicita <code>/burrito.html</code>, dicho archivo no existe en la carpeta, entonces el servidor deberia enviar un 404 erorr.</p>
+<p>Otro requerimiento es que el servidor debe registar cada solicitud, si tiene exito o no. Debe registrar la URL que el usuario solicito con la hora que se realizo la solicitud.</p>
+<p>Esta aplicación de Express estará compuesta por tres funciones en la pila de middleware:</p>
+<ul>
+<li><em>The logger:</em> mostrara en la consola la URL solicitada y la hora en que se solicito. Siempre continuara hacia el siguiente middleware. (En terminos de codigo, siempre llamara a <code>next</code>)</li>
+<li><em>The static file sender</em>: Comprobara si el archivo existe en la carpeta. Si existe, enviara el archivo por internet, Si no existe, continuara hacia el middleware final (de nuevo, llamando a <code>next</code>)</li>
+<li><em>The 404 handler</em> :si este middleware se ejecuta, significa que el anterior no encontro ningun archivo, y debes devolver un mensaje 404 y terminal la solicitud.</li>
+</ul>
+<p>Podrías visualizar esta pila de middleware como la que se muestra en la figura.</p>
+<p><img alt="" src="../middlewarestack.png" /></p>
+<p>Enough talking. Let’s build this thing</p>
+<h3 id="getting-set-up">Getting set up<a class="headerlink" href="#getting-set-up" title="Permanent link">&para;</a></h3>
+<p>Comienza creando un nuevo directorio. Puedes llemarlo como quieras, vamos a elegir <code>static-file-fun</code>. Dentro de este directorio, crea un archivo llamado <code>pakage.json</code>. Este archivo esta presente en todos los proyectos de Node.js y describe metadatos sobre tu paquete, desde su titulo hasta dependencia de terceros.</p>
+<p><img alt="" src="../pakagejson.png" /></p>
+<p>Una vez guardaste el <code>pakage.json</code>, querras instalar las ultimas versiones de Express. Desde dentro de este directorio, corre <code>npm install express</code>. Esto instalará Express en un directorio llamado <code>node_modules</code>. También añadirá Express como dependencia en package.json. Ahora <code>package.json</code>.</p>
+<p><img alt="" src="../updatapakage.png" /></p>
+<p>Ahora crea una carpeta llamada <em>static</em> dentro del nuevo proeycto. Pon algunos archivos dentro: quiza un archivo HTML una imagen o dos, realmente no importa lo que pongas ahi.</p>
+<p>Como último paso, crea <code>app.js</code> en la raíz de tu proyecto, que contendrá todo el código de tu aplicación. La estructura de tu carpeta se verá algo así como en la figura 4.5. Cuando quieras ejecutar esta aplicación, usarás <code>npm start</code>. Este comando revisará tu archivo <code>package.json</code>, verá que agregaste un script llamado <code>start</code> y ejecutará ese comando. En este caso, ejecutará <code>node app.js</code>. Ejecutar <code>npm start</code> aún no hará nada: todavía no has escrito tu aplicación, pero lo usarás cada vez que quieras correrla. Bien. ¡Vamos a escribir la aplicación!</p>
+<p><img alt="" src="../structureproyect.png" /></p>
+<blockquote>
+<p>¿Por qué usar npm start?</p>
+</blockquote>
+<p>¿Por qué usar npm start en absoluto? ¿Por qué no ejecutar simplemente node app.js? Hay tres razones por las que podrías hacerlo.</p>
+<p>Es una convención. La mayoría de los servidores web en Node pueden iniciarse con <code>npm start</code>, sin importar la estructura del proyecto. Si en lugar de <code>app.js</code> alguien hubiera elegido <code>application.js</code>, tendrías que saber sobre ese cambio. La comunidad de Node parece haberse establecido en una convención común aquí.</p>
+<p>Te permite ejecutar un comando más complejo (o un conjunto de comandos) con uno relativamente simple. Tu aplicación es bastante simple ahora, pero iniciarla podría ser más complejo en el futuro. Quizás necesites iniciar un servidor de base de datos o limpiar un archivo de logs enorme. Mantener esta complejidad bajo un comando simple ayuda a que todo sea más consistente y agradable.</p>
+<p>La tercera razón es un poco más matizada. npm te permite instalar paquetes globalmente, de modo que puedas ejecutarlos como cualquier otro comando en la terminal. Bower es uno común, permitiéndote instalar dependencias de front-end desde la línea de comandos con el comando <code>bower</code>. Instalabas cosas como Bower globalmente en tu sistema. Los scripts de npm te permiten agregar nuevos comandos a tu proyecto sin instalarlos globalmente, de modo que puedas mantener todas tus dependencias dentro de tu proyecto, permitiéndote tener versiones únicas por proyecto. Esto resulta útil para cosas como pruebas y scripts de construcción, como verás más adelante.</p>
+<p>Al final del día, podrías ejecutar <code>node app.js</code> y nunca escribir <code>npm start</code>, pero encuentro que las razones mencionadas son lo suficientemente convincentes como para hacerlo.</p>
+<h3 id="writing-your-first-middleware-function-the-logger">Writing your first middleware function: the logger<a class="headerlink" href="#writing-your-first-middleware-function-the-logger" title="Permanent link">&para;</a></h3>
+<p>Para empezar, configura tu aplicación para que registre las solicitudes.</p>
+<p><img alt="" src="../appjs.png" /></p>
+<p>Por ahora, solo tienes una aplicación que registra cada solicitud que llega al servidor. Una vez hayas configurado tu aplicación (las primeras líneas), llamamos a <code>app.use</code> para agregar una función a la pila del middleware de tu aplicación. Cuando solicitud llegue a la aplicación, esta funcion sera llamada.</p>
+<p>Lamentablemente, incluso esta sencilla aplicación tiene un error crítico. </p>
+<p>Ejecuta <code>npm start</code> y visita <code>localhost:3000</code> en tu navegador para comprobarlo.</p>
+<p>Verás que la solicitud se registra en la consola, lo cual es una buena noticia. Pero
+tu navegador se bloqueará: el indicador de carga girará sin parar hasta que
+la solicitud finalmente caduque y aparezca un error en tu navegador. ¡Esto no es bueno!</p>
+<p>Esto sucede porque no has llamado a <code>next</code>. Cuando tu función de middleware
+termina, <strong>debe hacer una de las dos cosas:</strong></p>
+<ul>
+<li><strong>Debe  finalizar la respuesta a la solicitud</strong> (con <code>res.end</code> o algunos de los metodos de conveniencia de Express, como <code>res.send</code> o <code>res.sendFile</code>)</li>
+<li><strong>Debe llamar a</strong> <code>next</code> para continuar con la siguiente funcion en la <strong>pila de middleware.</strong></li>
+</ul>
+<p>Si haces <strong>cualquiera</strong> de esas dos cosas, tu aplicación funcionará perfectamente. Si no haces ninguna, las solicitudes entrantes nunca recibirán respuesta; el indicador  de carga nunca dejara de girar (esto es lo que sucedía antes). </p>
+<p>Si haces ambas en el mismo flujo (es decir, <strong>responder</strong> al cliente y luego llamas a <code>next()</code>), la primera función que envía la respuesta al cliente es la única que llega, porque en ese momento la respuesta ya se cierra y cualquier intento posterior de responder no tendrá efecto o generará un error. ¡lo cual es casi seguro que no es intencional!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Respondes o continúas, pero no ambas; si respondes, no deberías continuar (es una mala pratica y puede romper el codigo), y si continúas, es porque aún no has respondido.</p>
+<p>Estos errores suelen ser bastante fáciles de capturar una vez que sabes cómo identificarlos. Si no respondes a la solicitud y no llamas a <code>next</code>, parecerá que tu servidor es extremadamente lento. Puedes corregir tu middleware llamando a <code>next</code>, como se muestra en el siguiente listado.</p>
+</div>
+<p><img alt="" src="../nextmiddleware.png" /></p>
+<p>Ahora, si detienes la aplicacion y vuelves a aejecutarla, deberas ver que el servidor registra todas las solicitudes e imediatamente falla con un mesaje de error (algo como "Cannot GET/"). Como nunca respondes a la solicitud, Express le mostrará un error al usuario, y esto sucederá de inmediato.</p>
+<p>Ahora que ya has escrito tu registrador <em>(logger)</em>, vamos a escribir la siguiente parte: el middleware del servidor de archivos estáticos.</p>
+<div class="admonition tip">
+<p class="admonition-title">¿Cansado de reiniciar tu servidor?</p>
+<p>Hasta ahora, cada vez que modificas el código, tienes que detener el servidor y volver a iniciarlo. ¡Esto puede volverse repetitivo! </p>
+<p>Para solucionar este problema, puedes instalar una herramienta llamada Node.js.mon, que monitoriza todos tus archivos en busca de cambios y reinicia el servidor si detecta alguno.</p>
+<p>Puedes instalar nodemon ejecutando <code>npm install nodemon --global</code>.
+Una vez instalado, puedes iniciar un archivo en modo de vigilancia reemplazando <code>node</code> por <code>nodemon</code> en tu comando. Si antes escribiste <code>node app.js</code>, simplemente cámbialo a <code>nodemon app.js</code>, y tu aplicación se recargará continuamente cuando cambie.</p>
+</div>
+<h3 id="the-static-file-server-middleware">The static file server middleware<a class="headerlink" href="#the-static-file-server-middleware" title="Permanent link">&para;</a></h3>
+<p>A grandes rasgos, esto es lo que debería hacer el middleware del servidor de archivos estáticos:</p>
+<ul>
+<li>Revisar si los archivos solicitados existen en el directorio estatico</li>
+<li>Si existe, respondemos con el archivo y listo. En terminos de codigo, es llamar a <code>res.sendFile</code></li>
+<li>Si el archivo no existe, continuamos al siguiente middleware en la pila, En terminos de codigo, es llamar a <code>next</code></li>
+</ul>
+<p>Vamos a convertir ese requerimiento en codigo. Empezaras construyento tu propio conocimiento de como trabaja, y luego lo simplificaras con algunnos codigos utiles de terceros.</p>
+<p>Utilizarás el módulo «path» integrado en Node, que te permitirá determinar la ruta que solicita el usuario. Para comprobar si el archivo existe, utilizarás otro módulo integrado en Node: el módulo «fs».</p>
+<p><img alt="" src="../addmiddlestack.png" /></p>
+<p>Lo primero que debes hacer en esta función es usar <code>path.join</code> para determinar la ruta del archivo. Si el usuario visita <code>/celine.mp3</code>, <code>req.url</code> será la cadena "/celine.mp3". Por lo tanto, <code>filePath</code> será algo como "/ruta/a/tu/proyecto/estático/celine.mp3". La ruta variará considerablemente según dónde hayas almacenado tu proyecto y tu sistema operativo, pero será la ruta al archivo solicitado.</p>
+<p>A continuación, llamas a <code>fs.exists</code>, que recibe dos argumentos. El primero es la ruta a comprobar (la ruta del archivo que acabas de calcular) y el segundo es una función. Cuando Node haya obtenido información sobre el archivo, llamará a esta función de devolución de llamada con dos argumentos. El primer argumento es un error, por si algo sale mal. El segundo argumento es un objeto con métodos para el archivo, como <code>isDirectory()</code> o <code>isFile()</code>. Usamos el método <code>isFile()</code> para determinar si el archivo existe.</p>
+<p>Las aplicaciones Express presentan este tipo de comportamiento asíncrono constantemente. Por eso,
+¡debemos usar <code>next</code> desde el principio! Si todo fuera síncrono, Express
+sabría exactamente dónde termina cada middleware: cuando finaliza la función (ya sea
+llamando a <code>return</code> o al llegar al final). No sería necesario usar <code>next</code> en ningún momento. Pero, como todo es asíncrono, es necesario indicarle manualmente a Express cuándo continuar con el siguiente middleware en la pila.</p>
+<p>Una vez que la función de devolución de llamada haya finalizado, se ejecuta una condición simple. Si el archivo existe, se envía. De lo contrario, se continúa con el siguiente middleware. Ahora, al ejecutar la aplicación con <code>npm start</code>, intente acceder a los recursos que ha colocado en el directorio de archivos estáticos. Si tiene un archivo llamado <code>secret_plans.txt</code> en la carpeta de archivos estáticos, visite <code>localhost:3000/secret_plans.txt</code> para verlo. También debería seguir viendo el registro, igual que antes.</p>
+<p>Si visitas una URL que no tiene un archivo correspondiente, seguirás viendo el mismo mensaje de error. Esto se debe a que estás llamando a <code>next</code> y ya no hay más middleware en la pila. Añadamos el último: el manejador de errores 404.</p>
+<h3 id="404-handler-middleware">404 handler middleware<a class="headerlink" href="#404-handler-middleware" title="Permanent link">&para;</a></h3>
+<p>El manejador de errores 404 que se muestra en el siguiente listado es la última función de tu pila de middleware. Siempre enviará un error 404, sin importar qué. Agrégalo después del middleware anterior.</p>
+<p><img alt="" src="../errorMidleware.png" /></p>
+<p>Esta es la última pieza del rompecabezas. Ahora, al iniciar el servidor, verás todo en funcionamiento. Si accedes a un archivo de la carpeta, aparecerá. De lo contrario, verás el error 404. Además, verás los registros en la consola.</p>
+<p>Ahora, intenta mover el manejador de errores 404. Colócalo como el primer middleware en la pila, en lugar del último. Si vuelves a ejecutar la aplicación, verás que siempre obtienes un error 404, sin importar qué. La aplicación llega al primer middleware y no continúa. El orden de la pila de middleware es importante: asegúrate de que las solicitudes fluyan en el orden correcto.
+Así es como debería verse la aplicación.</p>
+<h3 id="switching-your-logger-to-an-open-source-one-morgan">Switching your logger to an open source one: Morgan<a class="headerlink" href="#switching-your-logger-to-an-open-source-one-morgan" title="Permanent link">&para;</a></h3>
+<p>Un consejo habitual en el desarrollo de software es «no reinventes la rueda». Si alguien ya ha resuelto tu problema, suele ser una buena idea aprovechar su solución y pasar a cosas más importantes.</p>
+<p>Eso es lo que harás con tu middleware de registro. Eliminarás el trabajo arduo que realizaste (las cinco líneas) y usarás un middleware llamado Morgan (<a href="https://github.com/expressjs/morgan">https://github.com/expressjs/morgan</a>). No está integrado en el núcleo de Express, pero el equipo de Express se encarga de su mantenimiento.</p>
+<p>Morgan se describe a sí mismo como un "middleware de registro de solicitudes", que es justo lo que necesitas. Ejecuta <code>npm install morgan --save</code> para instalar la última versión del paquete Morgan.
+Lo encontrarás en una nueva carpeta dentro de <code>node_modules</code> y también aparecerá en <code>package.json</code>.</p>
+<p>Ahora, modifiquemos <code>app.js</code> para usar Morgan en lugar de tu middleware de registro.</p>
+<p><img alt="" src="../morganlooger.png" /></p>
+<p>Ahora, al ejecutar esta aplicación, verá una salida similar a la que se muestra en la figura 4.6, con la dirección IP y otra información útil.</p>
+<p><img alt="" src="../usefulinformation.png" /></p>
+<p>¿Qué está pasando aquí? <code>morgan</code> es una función que devuelve una <strong>función de middleware</strong>. Cuando la llamas, devuelve una función similar a la que escribiste anteriormente; recibe tres argumentos y ejecuta <code>console.log</code>.</p>
+<p>La mayoria del middleware de terceros se funciona asi: se llama una funcion que devuelve el middleware, el cual luego se utiliza, Podrias haber escrito lo anterior de la siguiente manera</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">morganMiddleware</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">morgan</span><span class="p">(</span><span class="s2">&quot;short&quot;</span><span class="p">);</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">morganMiddleware</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Observa que estás llamando a Morgan con un argumento: una cadena de texto, <strong>"short"</strong>. Esta es una opción de configuración específica de Morgan que determina el formato de la salida.</p>
+<p>Existen otras cadenas de formato con más o menos información: <strong>"combined"</strong> proporciona mucha información; <strong>"tiny"</strong> proporciona una salida mínima. Al llamar a Morgan con diferentes opciones de configuración, en realidad estás haciendo que devuelva una función de middleware diferente.</p>
+<p>Morgan es el primer ejemplo de middleware de código abierto que usarás, pero lo usarás mucho a lo largo de este libro. Usarás otro para reemplazar tu segunda función de middleware: el servidor de archivos estáticos.</p>
+<p>Hay una pieza de middleware que viene a compañada con Express, y remplaza tu segundo middleware.</p>
+<p>Se llama <code>express.static</code>. Funciona de forma muy parecida al middleware que escribimos, pero tiene muchas otras características. Realiza varios trucos complejos para lograr una mayor seguridad y rendimiento, como la adición de un mecanismo de almacenamiento en caché.</p>
+<p>Si te interesa conocer más sobre sus beneficios, puedes leer mi entrada de blog en <a href="http://evanhahn.com/express-dot-static-deep-dive/">http://evanhahn.com/express-dot-static-deep-dive/</a>.</p>
+<p>Al igual que Morgan, <code>express.static</code> es una función que devuelve una función de middleware. Recibe un argumento: la ruta a la carpeta que usarás para los archivos estáticos. Para obtener esta ruta, usarás <code>path.join</code>, como antes. Luego, la pasarás al middleware estático.</p>
+<p><img alt="" src="../replacestatic.png" /></p>
+<p>Esto es un poco más complicado porque tiene más funciones, pero <code>express.static</code> funciona de manera bastante similar a lo que tenía antes. Si el archivo existe en la ruta, lo enviará. De lo contrario, llamará a <code>next</code> y continuará con el siguiente middleware de la pila.</p>
+<p>Si reinicia su aplicación, no notará mucha diferencia en la funcionalidad, pero su código será mucho más corto. Debido a que está utilizando middleware probado en batalla en lugar del suyo propio, también obtendrá un conjunto de funciones mucho más confiable.</p>
+<p><img alt="" src="../serverstatic.png" /></p>
+<p>Creo que puede considerar que su servidor de archivos estáticos con tecnología Express está completo por ahora. Bien hecho, héroe.</p>
+<h2 id="error-handling-middleware">Error-handling middleware<a class="headerlink" href="#error-handling-middleware" title="Permanent link">&para;</a></h2>
+<p>¿Recuerda cuando dije que la siguiente llamada continuaría con el siguiente middleware? Mentí. Era mayoritariamente cierto, pero no quería confundirte. 
+Hay dos tipos de middleware. Hasta ahora ha estado lidiando con el primer tipo: funciones de middleware regulares que toman tres argumentos (a veces dos cuando se descarta <code>next</code>). La mayor parte del tiempo, su aplicación está en modo normal, que solo analiza estas funciones de middleware y omite las demás.</p>
+<p>Hay un segundo tipo que se usa mucho menos: el <strong>middleware de manejo de errores</strong>. Cuando su aplicación está en <strong>modo de error</strong>, se ignoran todos los middlewares normalres y Express ejecutará solo funciones del <strong>middleware de manejo de errores</strong>.</p>
+<p>Para ingresar al modo de error, simplemente llame a <code>next</code> con un argumento. Es una convencion llamarlo con un objeto de error <code>next(new Error ("Something bad happened!"))</code>. </p>
+<p>Estas funciones de <em>middleware de manejo de errores</em> toman cuatro argumetos. El primero es el error (el argumento pasado dentro de <code>next</code>), y restos son los tres mismos de antes: <code>request</code>, <code>response</code> y <code>next</code>. Puedes hacer cualquier cosa en este middleware.</p>
+<p>Cuando hayas terminado, es exactamente como cualquier otro middleware: puedes llamar a <code>response.end</code> o <code>next</code>. Llamar al <code>next</code> sin argumentos saldra del modo error y pasara al siguiente middleware normal; llamarlo con un argumento continuara con <strong>siguiente middleware de manejo de errores</strong>, si existe.</p>
+<p>Vamos a decir que tienes cuatro funciones de middleware seguidas. Las dos primeras son normales, la tercera maneja errores y la cuarta es normal. Si no hay errores, el flujo se mostrara como la siguiente figura.</p>
+<p><img alt="" src="../flowfuntionnormalerror.png" /></p>
+<p>Si no ocurren errores, sera como si el <em>middleware de manejo de erroes</em> nunca hubiera existido. Para ser mas preciso, «sin errores» significa que «nunca se llamó a <code>next</code> con ningún argumento». Si <em>sucede</em> un error, entonces Express omitira todos los otros middlewares hasta llegar al primer middleware manejador de errores en la pila. Esto podria verse como en la siguiente figura.</p>
+<p><img alt="" src="../otherflowerror.png" /></p>
+<p>Auque no es obligatorio, el middleware de manejo de errores, se coloca convencionalmente al final de tu pila de middleware, despues de que se haya agregado todo el middleware normal. Esto de debe a que quiere copturar cualquier error que venga en cascada desde los middlewares anteriores. Este ultimo es asi, porque, Express funciona como una cadena: <code>→ → → → →</code>. No retrocede, nuca hace esto: <code>← ← ←</code></p>
+<blockquote>
+<p>Aquí no se capturan errores.
+El middleware de manejo de errores de Express no maneja errores que se lanzan con la palabra clave <em>throw</em>, solo cuando llamas a <code>next</code> con un argumento.</p>
+</blockquote>
+<p>Express tiene algunas protecciones para este tipo de excepciones.La aplicación devolverá un error 500 y esa petición fallará, pero la aplicación seguirá funcionando. Sin embargo, algunos errores como los errores de sintaxis harán que tu servidor se caiga.</p>
+<p>Vamos decir que estas escribiendo una apicacion simple en Express, que envia un imagen al usuario, no importa que. Usaremos <code>response.sendFile</code> igual que antes.</p>
+<p><img alt="" src="../alwaysendfile.png" /></p>
+<p>Este codigo deberia verse como una version simplicada de un servidor estatico de archivos que construites anteriormente. Enviara incondicionamente celine.jpg.</p>
+<p>Pero que pasa si el archivo no existe en tu computadora ? Que pasaria si se presenta un error al leer el archivo ?. Necesitaras una forma de manejar ese error. Middleware manejador de errores al rescate!.</p>
+<p>Para entrar en modo de error, usarás una característica útil de <code>res.sendFile</code>: puede recibir un argumento adicional, que es una <strong>callback</strong>. Esta callback se ejecuta cuando el proceso de envío del archivo termina, ya sea porque se completó correctamente o porque ocurrió un error durante el envío.
+Si ocurre un error, este se pasa como argumento a la callback; si no ocurre ninguno, el argumento será <code>null</code> o <code>undefined</code>.</p>
+<p><img alt="" src="../fileSuccess.png" title="Mostrar si un archivo se ha enviado correctamente" /></p>
+<p>En lugar de imprimir la historia de éxito en la consola, puedes entrar en modo de error llamando a next con un argumento si hay un error. Puedes hacer algo como lo que se muestra en el siguiente listado.</p>
+<p><img alt="" src="../modeERrro.png" title="Se entrará en modo de error si no se logra enviar un archivo" /></p>
+<p>Ahora que estas en el modo error, puedes manejarlo.</p>
+<p>Es comun tener un registro de todos los errores que suceden en tu aplicacion, pero usualmente esto no le muestras a los usuarios. Un rastreo de pila de JavaScript extenso puede resultar bastante confuso para un usuario no técnico. Esto tambien podria exponer tu codigo a hakers — Si un hacker logra ver cómo funciona tu sitio, podrá encontrar vulnerabilidades que explotar.</p>
+<p>Vamos a escribir un middleware simple que registre los errores, pero que no responda al error. Se verá muy parecido al middleware que escribiste antes, pero en lugar de registrar información de la petición, registrará el error. Puedes añadir lo siguiente a tu archivo después de todo el middleware normal.</p>
+<p><img alt="" src="../midlewarelosgerror.png" title="Middleware que registra todos los errores" /></p>
+<p>Ahora cuando se produzca un error,lo registraras en la consola y podras investigarlo mas tarde. Pero hay mas cosas que deben hacerse para manejar este error. Esto es similar a lo anterior: el logger hizo algo, pero no respondió a la solicitud. Vamos a escribir esa parte. Puedes agregar este código después del middleware anterior. Esto simplemente responderá al error con un código de estado 500.</p>
+<p><img alt="" src="../respondingError.png" title="Respondiendo el error" /></p>
+<p>Ten en cuenta que, independientemente de dónde se coloque este middleware en tu pila, no se ejecutará a menos que estés en modo de error —en el código, esto significa llamar a <code>next</code> con un argumento. </p>
+<p>Puede que notes que este middleware de manejo de errores tiene cuatro argumentos, pero no los usamos todos. Express usa el numero de argumentos de una funcion para determinar cuales son los middlewares menjadores de errores y cuales no.</p>
+<p>Para aplicaciones simples, no hay montones y montones de lugares donde las cosas puedan salir mal. Pero a medida que tus aplicaciones crecen, querrás recordar probar el comportamiento erróneo. Si una petición falla y esta no debería, asegúrate de manejarlo de forma elegante en vez de que la app se cuelgue. Si una acción debería ejecutarse correctamente pero falla, asegúrese de que su servidor no colapse. El middleware de manejo de errores puede ayudar a prevenir esto.</p>
+<h2 id="other-useful-middleware">Other useful middleware<a class="headerlink" href="#other-useful-middleware" title="Permanent link">&para;</a></h2>
+<p>Dos aplicaciones Express diferentes pueden tener pilas de middleware bastante distintas. La pila de la aplicación de ejemplo es solo una entre muchas configuraciones posibles, y hay muchas otras que puedes usar. Hay solo una pieza de middleware que viene incluida por defecto con Express: <code>express.static</code>. A lo largo de este libro vas a instalar y usar muchos otros middlewares. Aunque estos módulos no vienen empaquetados con Express, el equipo de Express mantiene varios de ellos, por ejemplo:</p>
+<ul>
+<li><code>body-parser</code>, para analizar el cuerpo de las solicitudes (por ejemplo, cuando un usuario envía un formulario).  </li>
+<li><code>cookie-parser</code>, para analizar las cookies de los usuarios; suele usarse junto con un middleware como <code>express-session</code> para mantener sesiones y gestionar cuentas de usuario.  </li>
+<li><code>compression</code>, para comprimir las respuestas y ahorrar bytes en la transferencia.</li>
+</ul>
+<p>Además hay una gran cantidad de módulos de terceros, como:</p>
+<ul>
+<li><code>helmet</code>, que ayuda a hacer más seguras tus aplicaciones (protegiendo de muchos tipos de ataques comunes).  </li>
+<li><code>connect-assets</code>, que compila y minifica tus archivos CSS y JavaScript, y también funciona con preprocesadores como SASS, SCSS, LESS o Stylus.</li>
+</ul>
+<p>Esta lista no es exhaustiva; en el apéndice A se recomiendan otros módulos útiles si quieres más herramientas de ayuda.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Las aplicaciones Express tienen una pila de middleware. Cuando una solicitud entra en tu aplicación, va pasando por esa pila de middleware de arriba hacia abajo, a menos que se interrumpa al enviar una respuesta o al producirse un error. </li>
+<li>El middleware se escribe usando funciones manejo de la solicitud, que reciben al menos dos argumentos: primero, un objeto que representa la petición entrante, y segundo, un objeto que representa la respuesta saliente. Muchas veces también reciben una función adicional que les indica cómo continuar con el siguiente middleware en la pila.</li>
+<li>Existe una gran cantidad de middleware de terceros que puedes usar, y muchos de ellos están mantenidos por los desarrolladores de Express.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../../part1/cap3/FoundationsofExpress/" class="md-footer__link md-footer__link--prev" aria-label="Previous: FOUNDATIONS OF EXPRESS">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                FOUNDATIONS OF EXPRESS
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../cap2/Routing/" class="md-footer__link md-footer__link--next" aria-label="Next: ROUTING">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                ROUTING
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

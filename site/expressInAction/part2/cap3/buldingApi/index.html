@@ -1,0 +1,1740 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../cap2/Routing/">
+      
+      
+        <link rel="next" href="../../cap4/ViewAndTemplates/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>Building APIs - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-apis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Building APIs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap2/ThebasicsofNode.js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap1/middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap2/Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-basic-json-api-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A basic JSON API example
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-express-powered-json-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A simple Express-powered JSON API
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-read-update-delete-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Create, read, update, delete APIs
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create, read, update, delete APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-verbs-also-known-as-http-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        HTTP verbs (also known as HTTP methods)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crud-applications-with-http-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CRUD applications with HTTP methods
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API versioning
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setting HTTP status codes
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting HTTP status codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-http-status-codes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setting HTTP status codes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-100-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 100 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-200-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 200 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-300-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 300 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-400-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 400 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-500-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 500 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap4/ViewAndTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap3/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap4/Deplyment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part3/cap5/bestPractices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-basic-json-api-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A basic JSON API example
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-express-powered-json-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A simple Express-powered JSON API
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-read-update-delete-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Create, read, update, delete APIs
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create, read, update, delete APIs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-verbs-also-known-as-http-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        HTTP verbs (also known as HTTP methods)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crud-applications-with-http-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CRUD applications with HTTP methods
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API versioning
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setting HTTP status codes
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting HTTP status codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-http-status-codes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setting HTTP status codes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-100-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 100 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-200-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 200 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-300-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 300 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-400-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 400 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-500-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The 500 range
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../part1/cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="building-apis">Building APIs<a class="headerlink" href="#building-apis" title="Permanent link">&para;</a></h1>
+<p><strong>Este capítulo abarca:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Cómo usar Express para crear una API</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Métodos HTTP y cómo responden a las operaciones CRUD comunes</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Control de versiones de la API con los enrutadores de Express</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Comprensión de los códigos de estado HTTP</strong></li>
+</ul>
+<p>Amigos, acérquense. Este capítulo marca un nuevo comienzo. Hoy dejamos atrás el
+núcleo abstracto pero fundamental de Express y entramos en el mundo real. Durante el resto de este libro, construiremos sistemas mucho más reales sobre Express. Comenzaremos con las API.</p>
+<p>API es un término bastante amplio. Significa interfaz de programación de aplicaciones, lo cual no aclara mucho el concepto. Si dependiera de mí (obviamente no es el caso), lo renombraría como interfaz de software. Una interfaz de usuario (UI) está diseñada para ser utilizada por usuarios humanos, mientras que una interfaz de software está diseñada para ser utilizada por código. En cierto modo, todas las interfaces de usuario se basan en interfaces de software, es decir, en API.</p>
+<p>En términos generales, las API son formas en que un fragmento de código se comunica con otro. Esto puede significar que una computadora se comunique consigo misma o que se comunique con otra computadora a través de una red. Por ejemplo, un videojuego podría consumir una API que le permita al código dibujar gráficos en la pantalla. Ya has visto algunos métodos disponibles en la API de Express, como <code>app.use</code> o <code>app.get</code>. Estas son interfaces que tú, como programador, puedes usar para comunicarte con otro código.</p>
+<p>También existen API de comunicación entre ordenadores. Estas se realizan a través de una red y, generalmente, por internet. Estos ordenadores pueden ejecutar diferentes lenguajes de programación y/o sistemas operativos, por lo que se han desarrollado métodos comunes para que se comuniquen. Algunos envían texto plano, otros optan por JSON o XML. Pueden enviar datos mediante HTTP o mediante otro protocolo como FTP. En cualquier caso, ambas partes deben acordar cómo enviarán los datos. En este capítulo, las API que crees utilizarán JSON.</p>
+<p>Hablaremos de las API interactivas que puedes crear con Express. Estas API
+recibirán solicitudes HTTP y responderán con datos JSON.</p>
+<p>Al final de este capítulo, otros programadores podrán crear aplicaciones
+que utilicen tus API JSON. También hablaremos sobre cómo diseñar buenas API. El principio fundamental de un buen diseño de API es satisfacer las expectativas de los desarrolladores que la consumen. Puedes cumplir con la mayoría de estas expectativas siguiendo la especificación HTTP. En lugar de pedirte que leas un documento de especificación largo y tedioso (pero muy interesante), te explicaré lo que necesitas saber para escribir una buena API.</p>
+<p>Al igual que con los conceptos abstractos de código bueno y código malo, aquí no hay límites claros. Gran parte de esto queda a tu interpretación. Podrías encontrar muchos ejemplos en los que te convendría desviarte de estas buenas prácticas establecidas, pero recuerda: el objetivo es hacer lo que otros desarrolladores esperan. Empecemos.</p>
+<h2 id="a-basic-json-api-example">A basic JSON API example<a class="headerlink" href="#a-basic-json-api-example" title="Permanent link">&para;</a></h2>
+<p>Hablemos de una API JSON sencilla y cómo se podría usar para que veas un ejemplo concreto del tipo de aplicación que vas a crear.
+Imagina una API sencilla que reciba una cadena de texto con una zona horaria, como "America/Los_Angeles" o "Europe/London", y devuelva una cadena que represente la hora actual en esa zona horaria (por ejemplo, "2015-04-07T20:09:58-07:00"). Ten en cuenta que estas cadenas no son algo que una persona escribiría o leería fácilmente; están diseñadas para que un ordenador las entienda.
+Tu API podría aceptar una solicitud HTTP a esta URL: <code>/timezone?tz=America+Los_Angeles</code></p>
+<p>and your API server might respond with JSON, like this:</p>
+<p><div class="language-json highlight"><span class="filename">Estructura JSON</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w"> </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015-06-09T16:20:00+01:00&quot;</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w"> </span><span class="nt">&quot;zone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America/Los_Angeles&quot;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</span></code></pre></div>
+Podrías imaginarte escribiendo aplicaciones sencillas que usaran esta API. Estas aplicaciones podrían ejecutarse en diversas plataformas y, siempre que se comunicaran con esta API y pudieran analizar JSON (algo que la mayoría de las plataformas pueden hacer), podrían crear lo que quisieran.</p>
+<p>Podrías crear una página web sencilla que consuma
+esta API, como se muestra en la figura 6.1. Podría enviar solicitudes AJAX
+a tu servidor, analizar el JSON y mostrarlo
+en HTML.</p>
+<p>También podrías crear una aplicación móvil, como se muestra
+en la figura 6.2. Esta realizaría una solicitud a tu servidor API,
+analizaría el JSON y mostraría los resultados en la
+pantalla.</p>
+<p>Incluso podrías crear una herramienta de línea de comandos que se ejecute
+en la terminal, como en la figura 6.3. De nuevo,realizaría una solicitud al servidor API, analizaría el JSON ymostraría los resultados para los usuarios en la terminal.</p>
+<p>La clave es esta: si creas una API que recibe solicitudes de ordenadores y genera respuestas para ordenadores (no para humanos), puedes crear interfaces de usuario sobre esa API. Ya lo hiciste en el capítulo anterior con la aplicación del tiempo: utilizaba una API para obtener datos meteorológicos y mostrarlos al usuario.</p>
+<h2 id="a-simple-express-powered-json-api">A simple Express-powered JSON API<a class="headerlink" href="#a-simple-express-powered-json-api" title="Permanent link">&para;</a></h2>
+<p>Ahora que ya sabes qué es una API, vamos a crear una sencilla con Express. Los fundamentos de una API de Express son bastante simples: recibe una solicitud, la analiza y responde con un objeto JSON y un código de estado HTTP. Usarás middleware y enrutamiento para recibir y analizar las solicitudes, y aprovecharás las funcionalidades de Express para responder a ellas.</p>
+<blockquote>
+<p><strong>NOTA:</strong> Técnicamente, las API no tienen por qué usar JSON; pueden usar otros formatos de intercambio de datos como XML o texto plano. JSON ofrece la mejor integración con Express, funciona bien con JavaScript en el navegador y es una de las opciones más populares para las API, por lo que lo usaremos aquí. Si lo desea, puede usar otros formatos.</p>
+</blockquote>
+<p>Vamos a crear una API sencilla que genere números enteros aleatorios. Puede parecer un ejemplo un tanto rebuscado, pero es posible que necesites un generador de números aleatorios consistente en múltiples plataformas (iOS, Android, web, etc.) y no quieras escribir el mismo código. La API tendrá estas características:</p>
+<ul>
+<li>Quien solicite la API deberá enviar un valor mínimo y un valor máximo.
+-Tu servicio analizará esos valores, calculará el número aleatorio y lo enviará de vuelta en formato JSON.</li>
+</ul>
+<p>Quizás pienses que JSON es excesivo para esta situación —¿por qué no usar texto plano?—, pero enviar JSON es una habilidad que necesitaremos y queremos facilitar la ampliación de la funcionalidad en el futuro.
+Para crear este proyecto, sigue estos pasos:</p>
+<ol>
+<li>Crea un archivo package.json para describir los metadatos de tu aplicación.</li>
+<li>Crea un archivo llamado app.js, que contendrá todo tu código.</li>
+<li>Crea una aplicación Express en app.js y añade una ruta que genere un número aleatorio.</li>
+</ol>
+<p>Comencemos. Como siempre, para iniciar un proyecto, crea una nueva carpeta y un archivo <code>package.json</code>. Puedes crearlo ejecutando <code>npm init</code> o escribiendo el contenido manualmente. En cualquier caso, deberás crearlo e instalar Express. </p>
+<p>A continuación, deberás crear el archivo app.js. Créalo en la raíz de tu proyecto e inserta el siguiente código.</p>
+<p><img alt="" src="../randomNumber.png" title="Tu aplicación de números aleatorios" /></p>
+<p>Si inicias esta aplicación y visitas <a href="http://localhost:3000/random/10/100">http://localhost:3000/random/10/100</a>, verás una respuesta JSON con un número aleatorio entre 10 y 100. Tendrá un aspecto similar a la figura 6.4.</p>
+<p><img alt="" src="../startingRandomNumber.png" title="Prueba tu API en tu navegador. Intenta actualizar la página y verás números diferentes." /></p>
+<p>Analicemos este código paso a paso. Las dos primeras líneas requieren Express y crean una nueva aplicación Express, como ya has visto.</p>
+<p>A continuación, creas un manejador de rutas para las solicitudes GET. Este manejará solicitudes como <code>/random/10/100</code> o <code>/random/50/52</code>, pero también solicitudes como /<code>random/foo/bar</code>. Debes asegurarte de que ambos campos sean números, y lo harás pronto.</p>
+<p>Luego, analizas los números usando la función integrada <code>parseInt</code> de JavaScript.
+Esta función devuelve un número o NaN. Si alguno de los valores es NaN, se muestra un error.
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">if</span><span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">min</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="nx">error</span><span class="o">:</span><span class="s2">&quot;Bad Reponse&quot;</span><span class="p">})</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">return</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</span></code></pre></div>
+La primera línea comprueba si alguno de los números es <code>NaN</code>, lo que significa que tiene un formato incorrecto. Si es así, se realizan tres acciones:</p>
+<ol>
+<li><em>Se establece el código de estado HTTP en 400</em>. Si alguna vez ha visto un error 404, este es solo una variante: indica que algo en la solicitud del usuario fue incorrecto. Hablaremos más sobre esto más adelante en este capítulo.</li>
+<li><em>Se envía un objeto</em> JSON. En este caso, se envía un objeto que contiene el error.</li>
+<li><em>Return</em>. Si no se devuelve un valor, se continúa con el resto de la función y <strong>se envía la solicitud dos veces, lo que provoca que Express genere errores graves.</strong></li>
+</ol>
+<p>Como paso final, calculas el resultado y lo envías en formato JSON.</p>
+<p>Esta es una API bastante básica, pero muestra los fundamentos para crear una API con Express: <strong>parsea solicitudes, establecer códigos de estado HTTP y enviar JSON.</strong>
+Ahora que conoces los fundamentos, puedes empezar a aprender más sobre cómo crear API más complejas y sofisticadas.</p>
+<h2 id="create-read-update-delete-apis">Create, read, update, delete APIs<a class="headerlink" href="#create-read-update-delete-apis" title="Permanent link">&para;</a></h2>
+<p>Hay un patrón de aplicación muy común: crear, leer, actualizar y eliminar. Se abrevia como CRUD, que es una palabra divertida.</p>
+<p>Muchas aplicaciones utilizan CRUD. Por ejemplo, imagina una aplicación para compartir fotos que no tenga cuentas de usuario; cualquiera puede subir fotos. Así es como podrías planteártelo siguiendo el modelo CRUD:</p>
+<ul>
+<li>Los usuarios pueden subir fotos; este es el paso de <em>creación</em>.</li>
+<li>Los usuarios pueden ver fotos; esta es la parte de <em>lectura</em>.</li>
+<li>Los usuarios pueden modificar las fotos, por ejemplo, aplicándoles diferentes filtros o cambiando los pies de foto; esto sería una <em>actualización</em>.</li>
+<li>Los usuarios pueden eliminar fotos del sitio web. Esto sería, bueno, una <em>eliminación</em></li>
+</ul>
+<p>Podrías imaginarte muchas de tus aplicaciones favoritas encajando en este modelo, desde compartir fotos en redes sociales y almacenamiento de archivos.</p>
+<p>Antes de hablar de cómo las operaciones CRUD se integran en las API, necesitamos hablar de algo llamado métodos HTTP, también conocidos como <strong>verbos HTTP</strong>.</p>
+<h3 id="http-verbs-also-known-as-http-methods">HTTP verbs (also known as HTTP methods)<a class="headerlink" href="#http-verbs-also-known-as-http-methods" title="Permanent link">&para;</a></h3>
+<p>La especificación HTTP define los métodos de la siguiente manera:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El token «Method» indica el método que se aplicará al recurso identificado por la URI de la solicitud. El método distingue entre mayúsculas y minúsculas.</p>
+</div>
+<p>Uf, eso es difícil de leer.</p>
+<p>Un humano podría entenderlo así: un cliente envía una solicitud HTTP al
+servidor con un método. El cliente puede elegir el método que quiera, pero hay
+unos pocos que se utilizan. El servidor ve ese método y responde en consecuencia.
+No hay nada en HTTP que impida definir cualquier método que se desee,
+pero las aplicaciones web suelen usar los siguientes cuatro:</p>
+<ul>
+<li>
+<p><em>GET</em>: El método HTTP más común. Como su nombre indica, obtiene recursos. Cuando cargas la página de inicio de alguien, usas GET. Cuando cargas una imagen, usas GET. Los métodos GET no deben modificar el estado de tu aplicación;
+para eso están los demás métodos.</p>
+<p>La idempotencia es importante en las solicitudes GET. «Idempotente» es un término técnico que significa que hacerlo una vez no debería suponer ninguna diferencia con respecto a hacerlo muchas veces. Si solicitas una imagen una vez y actualizas la página 500 veces, la imagen nunca debería cambiar. La respuesta puede cambiar —una página podría cambiar en función de la evolución del precio de las acciones o de la hora del día—, pero las solicitudes GET no deberían provocar ese cambio. Eso es lo que significa «idempotente».</p>
+</li>
+<li>
+<p><em>POST</em>: Generalmente se usa para solicitar un cambio en el estado del servidor. Se usa POST para publicar una entrada de blog, una foto en la red social favorita o cuando se crea una cuenta en un sitio web. POST se usa para crear registros en los servidores, no para modificar los existentes.</p>
+<p>POST también se utiliza para acciones como «comprar este artículo». A diferencia de GET, POST no es idempotente. Esto significa que el estado cambiará la primera vez que se envíe un POST, y la segunda vez, y la tercera vez, y así sucesivamente.</p>
+<details class="note">
+<summary>Note</summary>
+<p>El autor está explicando <strong>qué significa que el método POST se usa para “cambios de estado” en un servidor</strong>. Aquí te lo aclaro en pasos sencillos:</p>
+<div class="admonition note">
+<p class="admonition-title">¿Qué es un “cambio de estado”?</p>
+<p>Un <strong>cambio de estado</strong> es cuando algo en el servidor cambia: se crea una nueva cuenta, se publica una entrada, se sube una foto, etc.<br />
+Antes no había esa entrada/foto/cuenta; <strong>después sí existe</strong>, es decir, el estado del servidor ha cambiado. <a href="https://es.wikipedia.org/wiki/Cambio_de_estado">es.wikipedia</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Qué hace exactamente POST</p>
+<p><strong>POST = crear algo nuevo → cambia el estado del servidor.</strong><br />
+No se usa para editar lo que ya existe; para eso normalmente se usa <strong>PUT</strong> o <strong>PATCH</strong>. <a href="https://es.wikipedia.org/wiki/Cambio_de_estado">es.wikipedia</a></p>
+<p>Cuando se dice que POST cambia el estado del servidor, no se refiere solo al servidor como máquina (CPU, memoria), sino al estado lógico del sistema: qué datos existen, qué usuarios hay, qué entradas de blog, etc. </p>
+<p>La base de datos forma parte del servidor (o del sistema del servidor), así que cuando creas un usuario ahí, estás cambiando el estado del sistema/servidor, no solo de un archivo aislado. </p>
+<p>Por qué se dice que es “cambio de estado” 
+Antes del POST: no hay ese usuario en la base de datos → el estado del sistema es “sin ese usuario”. 
+Después del POST: el usuario existe → el estado del sistema es “con ese usuario
+Ese cambio (de “no existe” a “existe”) es el cambio de estado al que se refiere la frase. </p>
+<p>Diferencia con métodos que no cambian estado  Un GET normalmente solo lee el estado, no lo modifica. 
+Un POST (para crear) modifica el estado porque añade algo nuevo. </p>
+<ul>
+<li>POST se usa para crear cosas nuevas** en el servidor, no para cambiar algo que ya existe.  </li>
+<li>Publicar una entrada de blog → se crea una entrada nueva.  </li>
+<li>Subir una foto a una red social → se crea un registro de esa foto.  </li>
+<li>Crear una cuenta en un sitio web → se crea un nuevo usuario en la base de datos.  </li>
+<li>El verbo clave es <strong>“crear”</strong>, no “modificar”. <a href="https://es.wikipedia.org/wiki/Cambio_de_estado">es.wikipedia</a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Por qué se dice que es para “cambios de estado”</p>
+<p>Cada vez que haces un POST, el servidor <strong>pasa de un estado sin ese recurso</strong> a <strong>un estado con ese recurso</strong>. Por ejemplo, antes de POST /users, no existía tu cuenta; después de POST /users, ya existe → el estado del sistema ha cambiado.  </p>
+</div>
+</details>
+<details class="success">
+<summary>En resumen</summary>
+<p>Sí, estás cambiando el estado en la base de datos, pero esa base de datos es parte del estado del servidor/sistema, así que decir que POST cambia el estado del servidor es correcto y coherente.</p>
+</details>
+</li>
+<li>
+<p><em>PUT</em>: Un nombre más apropiado podría ser actualizar o cambiar. Si he publicado (POST) un perfil de trabajo en línea y luego quiero actualizarlo, usaría PUT para esos cambios. Podría usar PUT para modificar un documento, una entrada de blog o cualquier otra cosa. (Sin embargo, no se usa PUT para eliminar entradas; para eso está DELETE, como verás).</p>
+<p>El método PUT tiene otra particularidad interesante: si intentas modificar un registro que no existe, el servidor puede (pero no está obligado a) crearlo. Probablemente no querrías actualizar un perfil inexistente, pero sí podrías querer actualizar una página de un sitio web personal, exista o no.</p>
+<p>PUT es idempotente. Digamos que soy “Evan Hahn” en un sitio web, pero quiero cambiarlo a Max Fightmaster. No hago PUT “cambiar nombre de Evan Hahn a Max Fightmaster”; hago PUT “cambiar mi nombre a Max Fightmaster”; no me importa qué era antes. Esto lo hace idempotente. Podría hacerlo una vez o 500 veces, y mi nombre seguiría siendo Max Fightmaster. Es idempotente de esta manera.</p>
+<p>Vamos a dejarlo muy claro, paso a paso, usando solo PUT y el ejemplo que ya viste.</p>
+<details class="note">
+<summary>¿Qué significa idempotente?</summary>
+<p>Una operación es <strong>idempotente</strong> si la haces <strong>1 vez o 100 veces</strong>, el resultado final es el <strong>mismo</strong>.<br />
+No importa cuántas veces la repitas, después de la primera vez el estado <strong>no cambia más</strong>. <a href="https://www.richardpalacios.dev/posts/2022/10/idempotencia-en-verbos-http/">richardpalacios</a></p>
+<p>PUT es de “reemplazar”, no de “sumar”. <br></p>
+<p>Imagina estos escenarios:</p>
+<table>
+<thead>
+<tr>
+<th>Paso</th>
+<th>Lo que haces</th>
+<th>Estado del nombre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>El nombre era “Evan Hahn”</td>
+<td><code>Evan Hahn</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>PUT /user/1</code> → <code>Max Fightmaster</code></td>
+<td><code>Max Fightmaster</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>PUT /user/1</code> → <code>Max Fightmaster otra vez</code></td>
+<td>sigue <code>Max Fightmaster</code></td>
+</tr>
+<tr>
+<td>500</td>
+<td>repetir <code>PUT</code> con el mismo valor</td>
+<td>sigue <code>Max Fightmaster</code></td>
+</tr>
+</tbody>
+</table>
+<p>Después de la <strong>primera vez</strong>, el nombre ya es <code>Max Fightmaster</code>, y cualquier PUT adicional con el mismo valor <strong>no lo cambia más</strong>. Eso es idempotencia.</p>
+<ul>
+<li>
+<p>En contraste con algo no idempotente <br>
+Un ejemplo de <strong>no idempotente</strong> sería: <strong>Añadir un ítem a la cesta</strong>:<br />
+Cada vez que haces POST a <code>/cart/items</code>, se <strong>añade uno más</strong>.<br />
+5 veces = 5 elementos nuevos (el estado cambia cada vez).  <br><br></p>
+</li>
+<li>
+<p>Con PUT no pasa eso:<br />
+Pones algo en un sitio y ya está; lo repites, y sigue siendo lo mismo.</p>
+</li>
+<li>
+<p>¿Cómo lo aplicas en tu mente? <br>
+Cuando pienses en PUT, piensa en:</p>
+</li>
+</ul>
+<p><strong>Sobrescribir todo el contenido de este recurso con este valor</strong>.<br />
+No es:<br />
+- “añade 1”<br />
+- “cambia de X a Y dependiendo de X”<br />
+- sino: “este recurso ahora es este valor”.</p>
+</details>
+</li>
+<li>
+<p><em>DELETE</em>: Probablemente sea la más fácil de describir porque su nombre es obvio. Al igual que con PUT, básicamente especificas ELIMINAR registro 123. Puedes ELIMINAR una entrada de blog, o ELIMINAR una foto, o ELIMINAR un comentario.
+ELIMINAR es idempotente de la misma manera que PUT. Digamos que accidentalmente
+publiqué (PUBLIQUÉ) una foto vergonzosa mía con una pantalla de lámpara en la cabeza. Si no quiero que esté ahí, puedo ELIMINARLA. ¡Ahora ya no está!
+Da igual que pida que la elimine una vez o 500 veces; desaparecerá. (¡Uf!)</p>
+</li>
+</ul>
+<p>No existe ninguna norma que imponga estrictamente estas restricciones; teóricamente, se podrían usar solicitudes GET para realizar las funciones que deberían tener las solicitudes POST, pero es una mala práctica y va en contra de la especificación HTTP. No es lo que la gente espera. Muchos navegadores también se comportan de forma diferente según el tipo de solicitud HTTP, por lo que siempre conviene usar las correctas. HTTP especifica otros verbos, pero nunca he tenido la necesidad de alejarme mucho de esos cuatro.</p>
+<blockquote>
+<p><strong>¿VERBOS O MÉTODOS?</strong> <br>
+La especificación HTTP 1.0 y 1.1 utiliza la palabra «método» para describir este concepto, así que supongo que técnicamente es correcto.
+También se usa «verbo». Para nuestros propósitos, los llamaré verbos principalmente porque así lo indica la documentación de Express. Ten en cuenta que puedes usar ambos términos (y que los más puristas deberían llamarlos métodos).</p>
+</blockquote>
+<p><img alt="" src="../differentsVerbsHttp.png" title="Manejo de diferentes verbos HTTP" /></p>
+<p>Todo esto debería ser un repaso de los capítulos anteriores: puedes manejar diferentes métodos HTTP con diferentes manejadores.</p>
+<h3 id="crud-applications-with-http-methods">CRUD applications with HTTP methods<a class="headerlink" href="#crud-applications-with-http-methods" title="Permanent link">&para;</a></h3>
+<p>Recordando nuestra aplicación para compartir fotos, así es como podrías visualizarla al estilo CRUD:</p>
+<ul>
+<li>Los usuarios pueden subir fotos; este es el paso de creación.</li>
+<li>Los usuarios pueden explorar las fotos; este es el paso de lectura.</li>
+<li>Los usuarios pueden actualizar las fotos, por ejemplo, aplicándoles diferentes filtros o cambiando los pies de foto; esto es una actualización.</li>
+<li>Los usuarios pueden eliminar fotos del sitio web; este es el paso de eliminación.</li>
+</ul>
+<p>Si eres como yo, no viste de inmediato la conexión entre CRUD y los
+cuatro verbos HTTP principales que mencioné anteriormente. Pero si GET es para leer recursos y POST es para crear recursos... ¡vaya! Te das cuenta de lo siguiente:</p>
+<ul>
+<li>Crear corresponde a POST</li>
+<li>Leer corresponde a GET</li>
+<li>Actualizar corresponde a PUT</li>
+<li>Eliminar corresponde a DELETE</li>
+</ul>
+<p>Los cuatro métodos HTTP principales se adaptan bastante bien a las aplicaciones de estilo CRUD,
+que son muy comunes en la web.</p>
+<div class="admonition note">
+<p class="admonition-title">POST vs. PUT</p>
+<p>Existe cierto debate sobre qué verbos HTTP corresponden a qué operaciones CRUD. La mayoría coincide en que <code>read</code> corresponde a <code>GET</code> y <code>delete</code> a <code>DELETE</code>, pero la correspondencia entre <code>create</code> y <code>update</code> es más compleja.</p>
+<p>Dado que <code>PUT</code> puede crear registros al igual que <code>POST</code>, se podría decir que <code>PUT</code> se corresponde mejor con <code>create</code>. <code>PUT</code> puede crear y actualizar registros, así que ¿por qué no incluirlo en ambas funciones?</p>
+<p>De forma similar, el método <code>PATCH</code> (que aún no hemos mencionado) a veces cumple la función de actualizar. Según la especificación, «el método <code>PUT</code> ya está definido para sobrescribir un recurso con un cuerpo completamente nuevo y no puede reutilizarse para realizar cambios parciales». <code>PATCH</code> permite sobrescribir parcialmente un recurso. <code>PATCH</code> se definió formalmente en 2010, por lo que es relativamente nuevo en el entorno HTTP, razón por la cual se utiliza menos.</p>
+<p>En cualquier caso, algunos opinan que <code>PATCH</code> es más adecuado para actualizar que <code>PUT</code>. Dado que HTTP no especifica estos aspectos con demasiada rigidez, depende de ti decidir qué quieres hacer. En este libro, utilizaremos la convención mostrada anteriormente, pero ten en cuenta que las expectativas son un tanto ambiguas en este caso.</p>
+</div>
+<h2 id="api-versioning">API versioning<a class="headerlink" href="#api-versioning" title="Permanent link">&para;</a></h2>
+<p>Permítanme explicarles un escenario. Diseñan una API pública para su aplicación de zonas horarias y se convierte en un gran éxito. Personas de todo el mundo la usan para encontrar la hora en todo el planeta. Funciona de maravilla.</p>
+<p>Pero, después de unos años, quieren actualizar su API. Quieren cambiar algo,
+pero hay un problema: si hacen cambios, todos los usuarios de su API tendrán que
+actualizar su código. ¿Qué hacen? ¿Realizan los cambios que desean,
+y dejan inoperativos a los usuarios antiguos, o su API se estanca y nunca se actualiza?</p>
+<p>Hay una solución para todo esto: versionar su API. Solo tienen que agregar información de versión a su API. Así, una solicitud que llegue a esta URL podría ser para la versión 1 de su API.</p>
+<p><div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/v1/timezone
+</span></code></pre></div>
+y una solicitud que llegue a la versión 2 de su API podría visitar esta URL.</p>
+<p><div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/v2/timezone
+</span></code></pre></div>
+Esto te permite modificar tu API simplemente creando una nueva versión. Ahora, si alguien quiere actualizar a la versión 2, lo hará modificando conscientemente su código, sin que se le imponga una nueva versión sin previo aviso.</p>
+<p>Express facilita este tipo de separación mediante el uso de enrutadores <em>(Routers)</em>, que ya vimos en el capítulo anterior. Para crear la versión 1 de tu API, puedes crear un enrutador que gestione exclusivamente esa versión. El archivo podría llamarse api1.js y tener un aspecto similar al del siguiente listado.</p>
+<p><img alt="" src="../v1Router.png" title="Versión 1 de su API, en api1.js" /></p>
+<p>Observa que v1 no aparece en ninguna parte de las rutas. Para usar este enrutador en tu aplicación, deberás crear una aplicación completa y usar el enrutador desde el código principal de tu aplicación. Podría verse como en el siguiente listado.</p>
+<p><img alt="" src="../mainAppCode.png" title="El código principal de la aplicación se encuentra en app.js." /></p>
+<p>Mucho tiempo después, decides implementar la versión 2 de tu API. Podría estar en
+api2.js. También sería un enrutador, al igual que api1.js, y podría tener el siguiente aspecto:</p>
+<p><img alt="" src="../v2Router.png" title="Versión 2 de su API, en api2.js'" /></p>
+<p>Now, to add version 2 of your API to the app, simply require and use it just like version 1, as shown in this listing.</p>
+<p><img alt="" src="../updatecodeApi.png" /></p>
+<p>Puedes probar a visitar estas nuevas URL en tu navegador para asegurarte de que la API versionada funciona correctamente.</p>
+<p>Como viste en el capítulo anterior, los enrutadores permiten segmentar diferentes rutas en archivos distintos. Las API versionadas son un excelente ejemplo de la utilidad de los enrutadores.</p>
+<h2 id="setting-http-status-codes">Setting HTTP status codes<a class="headerlink" href="#setting-http-status-codes" title="Permanent link">&para;</a></h2>
+<p>Cada respuesta HTTP incluye un código de estado HTTP. El más conocido es el 404, que significa "recurso no encontrado". Probablemente hayas visto errores 404 al visitar una URL que el servidor no puede encontrar; tal vez hiciste clic en un enlace caducado o escribiste la URL incorrectamente.</p>
+<p>Aunque el error 404 es el más conocido, el 200, que significa "OK", es quizás el más común. A diferencia del 404, normalmente no se ve el texto "200" en la página web al navegar. Cada vez que se carga correctamente una página web, una imagen o una respuesta JSON, probablemente se recibe un código de estado 200.</p>
+<p>Existen muchos más códigos de estado HTTP que el 404 y el 200, cada uno con un significado diferente. Hay algunos códigos que comienzan con 100 (como el 100 y el 101) y varios en las series 200, 300, 400 y 500. Los rangos no están completos; es decir, los primeros cuatro códigos son 100, 101 y 102, saltando hasta llegar al 200.</p>
+<p>Cada rango tiene una temática específica. Steve Losh publicó un excelente tuit que los resume (que tuve que parafrasear un poco), desde la perspectiva del servidor:
+Rangos de estado HTTP en pocas palabras:</p>
+<ul>
+<li><code>1xx</code>: espera</li>
+<li><code>2xx</code>: aquí tienes</li>
+<li><code>3xx</code>: vete</li>
+<li><code>4xx</code>: te equivocaste</li>
+<li><code>5xx</code>: me equivoqué</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">¿Y HTTP 2?</p>
+<p>La mayoría de las solicitudes HTTP son HTTP 1.1, aunque algunas todavía usan la versión 1.0. HTTP 2, la siguiente versión del estándar, se está implementando y extendiendo gradualmente por toda la web. Por suerte, la mayoría de los cambios ocurren a bajo nivel y no tendrás que lidiar con ellos. HTTP 2 define un nuevo código de estado —el 421—, pero esto no debería afectarte demasiado.</p>
+</div>
+<p>Pero antes, ¿cómo se configuran los códigos de estado HTTP en Express?</p>
+<h3 id="setting-http-status-codes_1">Setting HTTP status codes<a class="headerlink" href="#setting-http-status-codes_1" title="Permanent link">&para;</a></h3>
+<p>En Express, el código de estado predeterminado es 200. Si un usuario visita una URL donde no se encuentra ningún recurso y su servidor no tiene un controlador de solicitud para ello, Express enviará un error 404. Si hay algún otro error en su servidor, Express enviará un error 500.</p>
+<p>Pero usted desea tener control sobre el código de estado que recibe, así que Express se lo proporciona.</p>
+<p>Express agrega un método llamado <code>status</code> al objeto de respuesta HTTP. Solo tiene que llamarlo con el número de su código de estado y listo.
+Este método se puede llamar dentro de un controlador de solicitud, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../statuscode.png" title="Configurar el código de estado HTTP en Express" /></p>
+<p>Este método es encadenable, por lo que puedes combinarlo con elementos como el JSON para establecer el código de estado y enviar JSON en una sola línea, como se muestra en el siguiente listado.</p>
+<p><img alt="" src="../Htppjson.png" title="Establecer el código de estado HTTP y enviar algún JSON" /></p>
+<p>La API no es demasiado complicada.</p>
+<p>Express extiende el objeto de respuesta HTTP sin procesar que proporciona Node. Si bien es recomendable seguir la forma de trabajar de Express, es posible que te encuentres con código que establece el código de estado, como se muestra en el siguiente ejemplo.</p>
+<p><img alt="" src="../rawstatus.png" title="Establecer el código de estado de forma cruda." /></p>
+<p>A veces se ve este código al revisar el middleware o cuando alguien usa las API de Node directamente en lugar de las de Express.</p>
+<h3 id="the-100-range">The 100 range<a class="headerlink" href="#the-100-range" title="Permanent link">&para;</a></h3>
+<p>Solo existen dos códigos de estado oficiales en el rango 100: 100 (Continuar) y 101 (Cambio de protocolos). Probablemente nunca los necesites. Si te encuentras con alguno, consulta la especificación o la lista en Wikipedia.</p>
+<p>¡Mira! Ya has visto una quinta parte de los códigos de estado.</p>
+<h3 id="the-200-range">The 200 range<a class="headerlink" href="#the-200-range" title="Permanent link">&para;</a></h3>
+<p>Steve Losh resumió el rango 200 como "aquí lo tienes". La especificación HTTP define varios códigos de estado en el rango 200, pero cuatro de ellos son, con diferencia, los más comunes.</p>
+<p><strong>200: OK</strong><br>
+El código 200 es, con diferencia, el código de estado HTTP más común en la web. Las llamadas HTTP devuelven el código de estado 200 OK, y eso es básicamente lo que significa: todo lo relacionado con esta solicitud y respuesta se ha procesado correctamente. Generalmente, si la respuesta completa se envía correctamente y no hay errores ni redirecciones (que verás en la sección de códigos 300), enviarás un código 200.</p>
+<p><strong>201: CREADO</strong> <br>
+El código 201 es muy similar al 200, pero se utiliza en un caso ligeramente diferente. Es común que una solicitud cree un recurso (generalmente mediante una solicitud POST o PUT). Esto podría ser crear una entrada de blog, enviar un mensaje o subir una foto. Si la creación se realiza correctamente, se debe enviar un código 201. Si bien tiene algunos matices, suele ser el código de estado correcto para esta situación.</p>
+<p><strong>202: ACEPTADO</strong> <br>
+Al igual que el 201 es una variante del 200, el 202 es una variante del 201.
+Espero que a estas alturas ya te haya quedado claro: la asincronía es una parte fundamental de Node y Express. A veces pondrás en cola de forma asíncrona un recurso para su creación, pero aún no se habrá creado.</p>
+<p>Si estás bastante seguro de que la solicitud quiere crear un recurso válido (quizás
+hayas comprobado que los datos son válidos) pero aún no lo has creado, puedes enviar un código de estado 202. En esencia, le dice al cliente: «Oye, todo está bien, pero aún no he creado el recurso».</p>
+<p>A veces querrás enviar códigos 201 y otras veces querrás enviar 202;
+depende de la situación.</p>
+<p><strong>204: SIN CONTENIDO</strong> <br>
+El código 204 es la versión de eliminación del código 201. Al crear un recurso, normalmente se envía un mensaje 201 o un 202. Al eliminar algo, a menudo no hay nada más que responder que «Sí, se eliminó». En esos casos, normalmente se envía un código 204.</p>
+<p>Hay otras ocasiones en las que no es necesario enviar ningún tipo de respuesta, pero la eliminación es el caso de uso más común.</p>
+<h3 id="the-300-range">The 300 range<a class="headerlink" href="#the-300-range" title="Permanent link">&para;</a></h3>
+<p>Existen varios códigos de estado en el rango 300, pero en realidad solo configurarás tres de ellos, y todos implican redirecciones.</p>
+<p><strong>301: REUBICADO PERMANENTEMENTE</strong> <br></p>
+<p>El código de estado HTTP 301 significa: «No visites más esta URL; consulta otra URL». Las respuestas 301 vienen acompañadas de un encabezado HTTP llamado «Location», para que sepas a dónde debes dirigirte a continuación.</p>
+<p>Probablemente hayas estado navegando por la web y te hayan redirigido; esto seguramente se debió a un código 301. Esto suele ocurrir porque la página se ha trasladado.</p>
+<p><strong>303: VER OTRO</strong> <br>
+El código de estado HTTP 303 también es una redirección, pero es un poco diferente. Al igual que el código 200 es para solicitudes normales y el 201 para solicitudes donde se crea un recurso, el 301 es para solicitudes normales y el 303 es para solicitudes donde se crea un recurso y se desea redirigir a una nueva página.</p>
+<p><strong>307: REDIRECCIÓN TEMPORAL</strong><br>
+Existe un último código de estado de redirección: el 307. Al igual que con el código 301, probablemente hayas estado navegando por internet y te hayan redirigido debido a un código 307. Son similares, pero tienen una diferencia importante. El código 301 indica: No vuelvas a visitar esta URL; consulta otra.</p>
+<p>El código 307 indica: Consulta otra URL temporalmente. Esto puede usarse para realizar tareas de mantenimiento en una URL.</p>
+<h3 id="the-400-range">The 400 range<a class="headerlink" href="#the-400-range" title="Permanent link">&para;</a></h3>
+<p>El rango 400 es el más amplio y generalmente significa que hubo algún problema con la solicitud. En otras palabras, el cliente cometió un error y no es culpa del servidor. Aquí hay muchos tipos de errores diferentes.</p>
+<p><strong>401 Y 403: ERRORES DE ACCESO NO AUTORIZADO Y PROHIBIDO</strong><br>
+Existen dos errores diferentes para la autenticación de cliente fallida: 401 (Acceso no autorizado) y 403 (Acceso prohibido). Los términos <em>"acceso no autorizado"</em> y <em>"acceso prohibido"</em> suenan bastante parecidos, ¿cuál es la diferencia?</p>
+<p>En resumen, un error 401 ocurre cuando el usuario no ha iniciado sesión. Un error 403 ocurre cuando el usuario ha iniciado sesión como usuario válido, pero no tiene permisos para realizar la acción que intenta realizar.</p>
+<p>Imagina un sitio web al que no puedes acceder a menos que inicies sesión. Este sitio web también tiene un panel de administración, pero no todos los usuarios pueden administrarlo. Hasta que iniciese sesión, verá errores 401. Una vez que inicie sesión, dejará de ver errores 401. Si intenta acceder al panel de administración como un usuario sin privilegios de administrador, verá errores 403.</p>
+<p>Envía estos códigos de respuesta cuando el usuario no esté autorizado para realizar la acción que está llevando a cabo.</p>
+<p><strong>404: NO ENCONTRADO</strong><br>
+Creo que no hace falta explicarte mucho sobre el error 404; probablemente te lo hayas encontrado al navegar por internet. Algo que me sorprendió un poco de los errores 404 es que puedes visitar una ruta válida y aun así recibir un error 404.</p>
+<p>Por ejemplo, supongamos que quieres visitar la página de un usuario. La página de inicio del usuario n.° 123 está en /users/123. Pero si te equivocas al escribir y visitas /users/1234 y no existe ningún usuario con el ID 1234, recibirás un error 404.</p>
+<p><strong>OTROS ERRORES</strong> <br></p>
+<p>Existen muchos otros errores del cliente que puede encontrar; demasiados para enumerarlos aquí. Consulte la lista de códigos de estado en <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a> para encontrar el código de estado adecuado.</p>
+<p>Si tiene dudas sobre qué código de error del cliente usar, envíe un error 400 Bad Request. Es una respuesta genérica a cualquier tipo de solicitud incorrecta. Normalmente, significa que la solicitud tiene una entrada mal formada, por ejemplo, un parámetro faltante. Aunque podría haber un código de estado que describa mejor el error del cliente, el 400 servirá.</p>
+<h3 id="the-500-range">The 500 range<a class="headerlink" href="#the-500-range" title="Permanent link">&para;</a></h3>
+<p>El último rango en la especificación HTTP es el rango 500, y aunque existen varios errores en este rango, el más importante es el 500: Error Interno del Servidor. A diferencia de los errores 400, que son culpa del cliente, los errores 500 son culpa del servidor. Pueden deberse a diversas razones, desde una excepción hasta una conexión interrumpida o un error de base de datos. Lo ideal es que nunca se pueda provocar un error 500 desde el cliente, ya que esto implicaría que el cliente podría causar errores en el servidor.</p>
+<p>Si detectas un error y realmente parece ser tu culpa, puedes responder con un error 500. A diferencia de los demás códigos de estado, donde conviene ser lo más descriptivo posible, a menudo es mejor ser vago y decir "Error interno del servidor"; de esta forma, los hackers no podrán saber dónde se encuentran las vulnerabilidades de tu sistema. Hablaremos mucho más sobre esto en el capítulo 10, cuando abordemos la seguridad.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>En el contexto de Express, una API es un servicio web que acepta solicitudes y
+devuelve datos estructurados (JSON en muchos casos).</li>
+<li>Los fundamentos para crear una API con Express implican el uso intensivo de sus funciones de JSON y enrutamiento.</li>
+<li>Métodos HTTP y su relación con las acciones comunes de una aplicación. GET generalmente corresponde a la lectura, POST a la creación, PUT a la modificación y DELETE a la eliminación.</li>
+<li>El versionado de la API es útil para la compatibilidad. La función de enrutamiento de Express permite crear diferentes versiones de la API.</li>
+<li>Existen muchos códigos de estado HTTP (el código 404 es quizás el más conocido). Una buena API utiliza estos códigos de estado correctamente.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cap2/Routing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ROUTING">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                ROUTING
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../cap4/ViewAndTemplates/" class="md-footer__link md-footer__link--next" aria-label="Next: VIEWS AND TEMPLATES">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                VIEWS AND TEMPLATES
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,9 +1,9 @@
 # Persisting your data with MongoDB
 Este capítulo trata de:  
 
-- __Usar **Mongoose**, una librería oficial de MongoDB para controlar la base de datos con Node.__  
-- __Crear cuentas de usuario de forma **segura** usando **bcrypt**.__  
-- __Usar **Passport** para la autenticación de usuarios.__
+- [x] __Usar **Mongoose**, una librería oficial de MongoDB para controlar la base de datos con Node.__  
+- [x] __Crear cuentas de usuario de forma **segura** usando **bcrypt**.__  
+- [x] __Usar **Passport** para la autenticación de usuarios.__
 
 Tengo tres capítulos favoritos en este libro.
 
@@ -46,13 +46,9 @@ También elegí MongoDB para este capítulo porque creo que es más fácil de ap
 
 No creo que Mongo sea la opción adecuada para todas las aplicaciones Express. Las bases de datos relacionales son sumamente importantes y se pueden utilizar perfectamente con Express, y otras bases de datos NoSQL, como CouchDB, también son muy potentes. Sin embargo, Mongo encaja bien en el ecosistema de Express y es relativamente fácil de aprender (en comparación con SQL), por lo que lo he elegido para este capítulo.
 
-> __NOTA__: Si eres como yo, conoces SQL y quieres usarlo para tus proyectos de Express.
-Este capítulo se centrará en MongoDB, pero si buscas una herramienta SQL útil,
-echa un vistazo a Sequelize en http://sequelizejs.com/. Se integra con
-muchas bases de datos SQL y cuenta con varias funciones útiles. En este capítulo,
-trabajaremos intensamente con un módulo llamado Mongoose; para que lo tengas en cuenta mientras lees,
-Mongoose es a MongoDB lo que Sequelize es a SQL. ¡Recuerda esto si
-quieres usar SQL!
+!!! note
+
+    Si eres como yo, conoces SQL y quieres usarlo para tus proyectos de Express. Este capítulo se centrará en MongoDB, pero si buscas una herramienta SQL útil, echa un vistazo a Sequelize en http://sequelizejs.com/. Se integra con muchas bases de datos SQL y cuenta con varias funciones útiles. En este capítulo, trabajaremos intensamente con un módulo llamado Mongoose; para que lo tengas en cuenta mientras lees, Mongoose es a MongoDB lo que Sequelize es a SQL. ¡Recuerda esto si quieres usar SQL!
 
 ### How Mongo works
 Antes de empezar, hablaremos de como funcion a Mongo DB, Lamayoria de las aplicaciones tiene una base de datos, como MongoDB, estas bases de datos estan alojan en servidores. Un servidor de MongoDb puede tener varias bases de datos dentro, pero generalmente hay una base de datos por aplicacion. Si solo estas desarollando una aplicacion en tu ordenador solo tendras una base de datos MongoDb. (Estas bases de datos pueden ser replicadas en varios servidores, y tratarlas como si fueran una sola). 
@@ -97,7 +93,9 @@ A lo largo de este libro, daremos por hecho que tu base de datos Mongo está en 
 ## Talking to Mongo from Node with Mongoose
 Necesitarás una librería que te permita comunicarte con Mongo desde Node, y por tanto desde Express. Existen varios módulos de bajo nivel, pero tú quieres algo fácil de usar y con muchas funcionalidades. ¿Qué deberías usar? No busques más: **Mongoose** (`http://mongoosejs.com/`), una librería oficialmente soportada para comunicarse con Mongo desde Node. Para citar su documentación:
 
-> Mongoose proporciona una solución sencilla basada en esquemas para modelar los datos de tu aplicación, e incluye, listas de fábrica, conversión de tipos, validación, construcción de consultas, ganchos de lógica de negocio y más.
+!!! note
+
+    Mongoose proporciona una solución sencilla basada en esquemas para modelar los datos de tu aplicación, e incluye, listas de fábrica, conversión de tipos, validación, construcción de consultas, ganchos de lógica de negocio y más.
 
 En otras palabras, Mongoose te ofrece mucho más que simplemente comunicarte con la base de datos. Aprenderás cómo funciona creando un sitio web sencillo con cuentas de usuario.
 
@@ -255,7 +253,7 @@ export {User}
 ```
 Así es como defines un modelo de usuario. El siguiente listado muestra cómo se verá el archivo completo cuando termines.
 
-```js
+```js linenums='1'
 import mongoose from "mongoose"
 import bcrypt from "bcrypt"
 
@@ -305,7 +303,7 @@ Querrás hacer cosas como listar usuarios, editar perfiles y registrar nuevas cu
 
 Para empezar a usarlo, primero crea un archivo `app.js` sencillo en la raíz de tu proyecto que configurará tu aplicación. Este archivo estará incompleto y más adelante volverás a él para completarlo, pero por ahora el siguiente listado muestra lo que harás. 
 
-```js
+```js linenums="1"
 // app.js, to start
 
 //------- Requires everything you need, including Mongoose
@@ -350,9 +348,10 @@ app.listen(app.get("port"), function() {
 En el codigo anterior, especificaste que vas a usar un archivo de rutas externo. También necesitas definirlo. Crea routes.js en la raíz de tu proyecto, como se muestra en la siguiente lista.
 
 
-```js
+```js linenums="1" hl_lines="7 8 9 18"
 import {Router} from "express"
 import {User} from "./models/user.js"
+
 //------ Establece variables útiles para tus plantillas. 
 const router = Router()
 router.use(function(req,res,next){
@@ -362,7 +361,9 @@ router.use(function(req,res,next){
     next()
 })
  
-// ---------- Realiza consultas a la colección de usuarios, devolviendo los usuarios más nuevos primero.
+// ---------- Realiza consultas a la colección de usuarios, 
+// devolviendo los usuarios más nuevos primero.
+
 router.get("/", async function(req, res, next){
     try {
         const users =  await User.find().sort({createdAt:-1})
@@ -382,14 +383,15 @@ Como verás, también puedes especificar un callback en `find()` para evitar usa
 
 Vamos a crear la vista de la página principal. Crea el directorio `views`, donde pondrás tres archivos dentro. El primero será `_header.ejs`, que es el HTML que aparecerá al principio de cada página, como se muestra en la siguiente lista. 
 
-```html
+```html linenums="1"
 <!--views/_header.ejs-->
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>Learn About Me</title>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/
+  css/bootstrap.min.css">
 </head>
 <body>
 
@@ -399,7 +401,9 @@ Vamos a crear la vista de la página principal. Crea el directorio `views`, dond
       <a class="navbar-brand" href="/">Learn About Me</a>
     </div>
 
-<!--Cambia la barra de navegación si el usuario está logueado. Todavía no tienes este código, por lo que el usuario siempre parecerá estar deslogueado.-->
+<!--Cambia la barra de navegación si el usuario está logueado. 
+Todavía no tienes este código, por lo que el usuario siempre parecerá 
+estar deslogueado.-->
 
     <ul class="nav navbar-nav navbar-right">
       <% if (currentUser) { %>
@@ -437,7 +441,7 @@ Vamos a crear la vista de la página principal. Crea el directorio `views`, dond
 ```
 Puede que notes que este archivo comienza con un guion bajo. No es `header.ejs`; es `_header.ejs`. Esta es una convención común: las vistas que no se renderizan directamente comienzan con guiones bajos. Nunca renderizarías el header directamente—otra vista incluiría el header. A continuación, crearás el footer en `_footer.ejs`, como se muestra aquí.
 
-```html
+```html linenums="1"
 <!--views/_footer.ejs-->
 </div>
 </body>
@@ -445,7 +449,7 @@ Puede que notes que este archivo comienza con un guion bajo. No es `header.ejs`;
 ```
 Finalmente, crea `index.ejs`, que es la página principal real, como se muestra en la siguiente lista. Esta usará la variable `users` que le pasas cuando renderizas esta vista.
 
-```html
+```html linenums="1"
 <!--views/index.ejs-->
 <%- include("_header") %>
 
@@ -484,7 +488,7 @@ Si guardas todo, inicias tu servidor Mongo, ejecutas `npm start` y visitas `loca
 
 Ahora agrega dos rutas más a tu página: una para la página de registro y otra para realizar el registro real. 
 
-```js
+```js linenums="1" hl_lines="3 7"
 // Adding sign-up routes (in routes.js)
 
 router.get("/signup",function(req,res){
@@ -527,7 +531,7 @@ export default router
 ```
 El código anterior guarda efectivamente nuevos usuarios en tu base de datos. A continuación, agrega una interfaz de usuario para esto creando `views/signup.ejs`, como se muestra en la siguiente lista.
 
-```html
+```html linenums="1"
 <!-- views/signup.ejs-->
 
 <%- include("_header") %>
@@ -569,7 +573,7 @@ El último detalle antes de que tengas que codificar el inicio de sesión y cier
 
 ![](singup.png 'La página de registro de Aprende sobre mí (LAM)')
 
-```js
+```js linenums="1"
 // The profiles route (in routes.js)
 router.get("/users/:username", async function(req,res,next) {
     try{
@@ -591,7 +595,7 @@ router.get("/users/:username", async function(req,res,next) {
 ```
 Una vez más, usarás `findOne`, pero en este caso pasarás el usuario que encuentres a la vista. Hablando de eso, `profile.ejs` se verá algo así en la siguiente lista.
 
-```js
+```js linenums="1"
 //Hace referencia a `currentUser`, una variable que aparecerá una vez que agregues login y logout. Por ahora, esto siempre evaluará a `false`.
 
 <%- include("_header") %>
@@ -661,9 +665,12 @@ __SERIALIZING AND DESERIALIZING USERS__
 Passport necesita saber cómo serializar y deserializar usuarios. En otras palabras, deberás traducir la sesión de un usuario a un objeto de usuario real y viceversa. La
 documentación de Passport lo explica mejor que yo:
 
-    En una aplicación web típica, las credenciales utilizadas para autenticar a un usuario solo se transmiten durante la solicitud de inicio de sesión. Si la autenticación es exitosa, se establece y mantiene una sesión mediante una cookie almacenada en el navegador del usuario.
+    En una aplicación web típica, las credenciales utilizadas para autenticar a
+    un usuario solo se transmiten durante la solicitud de inicio de sesión. Si la autenticación es exitosa, 
+    se establece y mantiene una sesión mediante una cookie almacenada en el navegador del usuario.
     
-    Cada solicitud posterior no contendrá credenciales, sino la cookie única que identifica la sesión. Para admitir las sesiones de inicio de sesión, Passport serializa y deserializa las instancias de usuario desde y hacia
+    Cada solicitud posterior no contendrá credenciales, sino la cookie única que identifica la sesión. 
+    Para admitir las sesiones de inicio de sesión, Passport serializa y deserializa las instancias de usuario desde y hacia
     la sesión.
 
 Para mantener tu código separado, definirás un nuevo archivo llamado setuppassport.js. Este archivo exportará una única función que, como su nombre indica, configurará Passport.
@@ -713,7 +720,7 @@ Finalmente, necesitas configurar el resto de las vistas. Todavía necesitas esta
 
 Empecemos con **iniciar sesión**. La ruta GET será realmente sencilla; solo renderiza la vista, como sigue.
 
-```js
+```js linenums="1"
 // GET /login (in routes.js)
 
 router.get("/login", function(req, res) {
@@ -722,7 +729,7 @@ router.get("/login", function(req, res) {
 ```
 Y así se verá la vista, en `login.ejs`. Será solo un formulario simple que acepta un nombre de usuario y contraseña y luego envía una solicitud POST a `/login`, como se muestra en la siguiente lista.
 
-```js
+```js linenums="1"
 //views/login.ejs
 
 <%- include('_header') %>
@@ -779,7 +786,7 @@ Cuando hagas GET a la página de editar, solo renderizarás la vista, pero neces
 Como puedes ver, todo es como lo has visto antes, excepto que colocas tu middleware justo antes del manejador de solicitudes.
 
 Vamos a definir ahora la vista de edición. Esta se ubicará en edit.ejs y será un formulario sencillo que permitirá a los usuarios cambiar su nombre de usuario y biografía.
-```js
+```js linenums="1"
 <%- include('_header') %>
 
 <h1>Edit your profile</h1>
@@ -859,7 +866,7 @@ No hay SID                             No hay datos de usuarios
 
 ### Paso 1: Primera petición del usuario
 
-```javascript
+```javascript linenums="1"
 // El usuario escribe: http://localhost:3000/perfil
 // El navegador hace:
 GET /perfil
@@ -871,7 +878,7 @@ Headers: {
 
 **El servidor recibe la petición:**
 
-```javascript
+```javascript linenums="1"
 const express = require('express');
 const app = express();
 
@@ -892,7 +899,7 @@ app.get('/perfil', (req, res) => {
 
 ### Paso 2: Agregamos cookie-parser (para poder leer cookies)
 
-```javascript
+```javascript linenums="1"
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
@@ -907,7 +914,7 @@ app.get('/perfil', (req, res) => {
 
 ### Paso 3: Agregamos express-session (para manejar sesiones)
 
-```javascript
+```javascript linenums="1"
 const session = require('express-session');
 
 // Creamos el store (almacenamiento de sesiones en memoria)
@@ -945,7 +952,7 @@ app.get('/perfil', (req, res) => {
 
 ### Paso 4: El servidor responde con la cookie
 
-```javascript
+```sh 
 // El servidor responde:
 HTTP/1.1 200 OK
 Content-Type: text/html
@@ -956,7 +963,7 @@ Set-Cookie: connect.sid=abc123xyz789; Path=/; HttpOnly  // ← NUEVA COOKIE
 
 ### Paso 5: El navegador recibe y guarda la cookie
 
-```javascript
+```javascript linenums="1"
 // El navegador ahora guarda:
 Cookies = {
   "connect.sid": "abc123xyz789"
@@ -977,7 +984,7 @@ sessionStore = {
 
 ### Paso 6: Segunda petición (el navegador ENVÍA la cookie)
 
-```javascript
+```javascript linenums="1"
 // El usuario navega a: http://localhost:3000/login
 GET /login
 Headers: {
@@ -1020,7 +1027,7 @@ sessionStore = {
 
 ### Paso 7: Tercera petición (accediendo a los datos guardados)
 
-```javascript
+```javascript linenums="1"
 // El usuario navega a: http://localhost:3000/perfil
 GET /perfil
 Headers: {
@@ -1063,7 +1070,7 @@ Primero que contiene el `objeto passport`
 
 ### Flujo de datos interno:
 
-```javascript
+```javascript linenums="1"
 // Estado inicial
 passport._serializers = []  // Vacío
 passport._deserializers = []  // Vacío
@@ -1086,7 +1093,7 @@ passport.deserializeUser(fn2)
 
 ### Orden de ejecución:
 
-```javascript
+```bash
 1. passport.use(strategy)     → Registra estrategia
 2. passport.serializeUser()   → Llena _serializers[]
 3. passport.deserializeUser() → Llena _deserializers[]
@@ -1098,7 +1105,7 @@ Segundo como funciona el `passport.serializeUser`
 
 ### 📝 Registro de la función de serialización
 
-```javascript
+```javascript linenums="1"
 passport.serializeUser((user, done) => {
     done(null, user.id)
 })
@@ -1108,7 +1115,7 @@ passport.serializeUser((user, done) => {
 
 `serializeUser` es un método que **registra** funciones en un array interno `_serializers`. No ejecuta la función, solo la guarda.
 
-```javascript
+```javascript linenums="1"
 // Implementación interna de serializeUser
 passport.serializeUser = function(fn) {
     this._serializers.push(fn)  // Guarda la función para usarla después
@@ -1116,7 +1123,8 @@ passport.serializeUser = function(fn) {
 ```
 
 **Resultado:**
-```javascript
+
+```javascript linenums="1"
 passport._serializers = [
     (user, done) => { done(null, user.id) }
 ]
@@ -1126,7 +1134,7 @@ passport._serializers = [
 
 Cuando llamas a `req.login()`, Passport **ejecuta todas las funciones** que guardó en `_serializers`:
 
-```javascript
+```javascript linenums="1"
 req.login = function(user, done) {
     // Ejecuta la PRIMERA función registrada en _serializers
     passport._serializers[0](user, (err, id) => {
@@ -1149,7 +1157,7 @@ Tercero como funciona  `passport.deserializeUser`
 
 ### 📝 Registro de la función de deserialización
 
-```javascript
+```javascript linenums="1"
 passport.deserializeUser((id, done) => {
     Usuario.findById(id, (err, user) => {
         done(err, user)
@@ -1161,7 +1169,7 @@ passport.deserializeUser((id, done) => {
 
 `deserializeUser` es un método que registra funciones en un array interno `_deserializers`. No ejecuta la función, solo la guarda.
 
-```javascript
+```javascript linenums="1"
 // Implementación interna de deserializeUser
 passport.deserializeUser = function(fn) {
     this._deserializers.push(fn)  // Guarda la función para usarla después
@@ -1169,7 +1177,7 @@ passport.deserializeUser = function(fn) {
 ```
 
 **Resultado:**
-```javascript
+```javascript linenums="1"
 passport._deserializers = [
     (id, done) => { 
         Usuario.findById(id, (err, user) => {
@@ -1184,7 +1192,7 @@ passport._deserializers = [
 
 En **cada solicitud HTTP**, Passport ejecuta la función que guardaste en `_deserializers`:
 
-```javascript
+```javascript linenums="1"
 // Implementación interna de passport.session()
 passport.session = function() {
     return function(req, res, next) {
@@ -1229,7 +1237,7 @@ passport.session = function() {
 
 Si **no usas** `passport.session()` como middleware, `deserializeUser` **nunca se ejecuta** y `req.user` siempre será `undefined`:
 
-```javascript
+```javascript linenums="1"
 // ❌ MAL - No funciona
 app.use(passport.initialize())
 // Falta passport.session() → deserializeUser nunca se llama

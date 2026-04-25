@@ -1,11 +1,11 @@
-## The basics of Node.js
+# The basics of Node.js
 Este capítulo abarca:
 
-- __Instalación de Node.js y uso de su sistema de módulos__
-- __Uso de package.json para describir los metadatos de tu proyecto__
-- __Uso de npm para instalar paquetes con npm install__
-- __Realizar dos tareas simultáneamente con Node__
-- __Uso del módulo http integrado de Node para crear un servidor web sencillo__
+- [x] __Instalación de Node.js y uso de su sistema de módulos__
+- [x] __Uso de package.json para describir los metadatos de tu proyecto__
+- [x] __Uso de npm para instalar paquetes con npm install__
+- [x] __Realizar dos tareas simultáneamente con Node__
+- [x] __Uso del módulo http integrado de Node para crear un servidor web sencillo__
 
 En el capítulo 1, se presenta Node.js, destacando que es JavaScript, funciona de manera asíncrona y cuenta con un amplio conjunto de módulos de terceros. El objetivo es ofrecer una introducción breve y clara a Node, especialmente para quienes no lo entendieron del todo al comenzar.
 
@@ -55,7 +55,9 @@ Node incluye varios módulos integrados, pero generalmente no son suficientes pa
 
 Para instalar dependencias se utiliza npm (Node Package Manager), que se instala junto con Node. npm gestiona la descarga y organización de módulos dentro de la carpeta node_modules, y con la opción `--save` actualiza automáticamente el package.json con las dependencias instaladas. Esto permite que otros desarrolladores puedan instalar fácilmente todas las dependencias de un proyecto con solo ejecutar `npm install.`
 
-> 💡 Nota: en npm 5 y posteriores, __--save__ ya no es estrictamente necesario, porque npm guarda las dependencias automáticamente en package.json cuando instalas un módulo. Pero todavía se usa en ejemplos por claridad histórica.
+!!! note
+
+    En npm 5 y posteriores, __--save__ ya no es estrictamente necesario, porque npm guarda las dependencias automáticamente en package.json cuando instalas un módulo. Pero todavía se usa en ejemplos por claridad histórica.
 
 Por ejemplo, si queremos usar el módulo Mustache para plantillas, se ejecuta `npm install mustache --save` desde la raíz del proyecto. Esto crea la carpeta node_modules con la ultima version de Mustache dentro y agrega la dependencia en package.json. Luego, en el código podemos usarlo como cualquier módulo interno, mediante `require("mustache")`, y aprovechar sus funciones, como convertir plantillas en cadenas de texto dinámicas.
 
@@ -78,7 +80,9 @@ Puedes ejecutar este código como cualquier otro, ejecutando `node print-three-r
 Si intentas ejecutar `node random-integer.js`, notarás que no
 parece hacer nada. Exporta un módulo, pero definir una función no significa que la función se ejecutará e imprimirá algo en la pantalla.
 
-> 💡 Nota: esto cubre solo módulos locales dentro de un proyecto. Para publicar paquetes abiertos en npm, hay guías específicas en línea.
+!!! note
+
+    Esto cubre solo módulos locales dentro de un proyecto. Para publicar paquetes abiertos en npm, hay guías específicas en línea.
 
 ## Node: an asynchronous world
 
@@ -111,7 +115,7 @@ El resto del código apunta el servidor HTTP incorporado de Node hacia la funci�
 
 Si quisieras diferenciar respuestas según la URL, podrías analizar req.url en tu función manejadora de solicitudes. Por ejemplo:
 
-```js
+```js title="Function Handler" linenums="1"
 function requestHandler(req, res) {
   if (req.url === "/") {
     res.end("Welcome to the homepage!");

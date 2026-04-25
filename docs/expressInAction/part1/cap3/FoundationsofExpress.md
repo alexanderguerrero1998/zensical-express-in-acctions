@@ -3,10 +3,10 @@ Este capítulo abarca:
 
 __Las cuatro características principales de Express:__ 
 
-  - __Middleware para permitir que una solicitud fluya a través de múltiples encabezados__
-  - __Enrutamiento para gestionar una solicitud en un punto específico__
-  - __Métodos y propiedades de conveniencia__ 
-  - __Vistas para la representación dinámica de HTML__
+  - [x] __Middleware para permitir que una solicitud fluya a través de múltiples encabezados__
+  - [x] __Enrutamiento para gestionar una solicitud en un punto específico__
+  - [x] __Métodos y propiedades de conveniencia__ 
+  - [x] __Vistas para la representación dinámica de HTML__
 
 Aunque puedes crear servidores web completos solo con el módulo http integrado de Node, quizás no te convenga. Como comentamos en el capítulo 1 y como viste en el capítulo 2, la API que expone el módulo http es bastante básica y no te facilita mucho el trabajo.
 Aquí es donde entra Express: es un útil módulo de terceros (es decir, no viene incluido con Node). En esencia, Express es una capa de abstracción sobre el servidor HTTP integrado de Node. En teoría, podrías escribir todo con Node puro y sin usar Express. Pero como verás, Express simplifica mucho las partes difíciles y dice: «No te preocupes; no tienes que lidiar con esta parte complicada. ¡Yo me encargo!». En otras palabras, ¡es magia!
@@ -210,7 +210,7 @@ Esto es util porque te permite dividir la aplicacion en partes mas pequeñas, en
 
 ### Vision Conceptual (mini express) 
 Este codigo muestra lo que sucede en la superficie de express cuando estamos creando una aplicacion normal
-```js
+```js title=" App normal con express"
 import express from "express";
 
 const app = express(); // creas la app (función + objeto)
@@ -245,7 +245,7 @@ app.listen(3000, () => {
 });
 ```
 Este codigo de aqui muestra lo que sucede internamente en express
-```js
+```js title="Internamente la funcion express"
 function express() {
   const middlewares = []; // Regitra todos los middlewares
   const routes = []; // Registra todas la rutas
@@ -767,9 +767,9 @@ __🔹Comparación resumida__
 
 | Forma                                  | Código | Headers       | Envía respuesta | Nivel                   |
 | -------------------------------------- | ------ | ------------- | --------------- | ----------------------- |
-| `writeHead()` + `end()`                | ✔️     | ✔️            | ✔️              | Node.js puro            |
-| `statusCode` + `setHeader()` + `end()` | ✔️     | ✔️            | ✔️              | Node/Express intermedio |
-| `status()` + `send()`                  | ✔️     | ✔️ automático | ✔️              | Express friendly        |
+| `writeHead()` + `end()`                | :lucide-check:     | :lucide-check:           | :lucide-check:              | Node.js puro            |
+| `statusCode` + `setHeader()` + `end()` | :lucide-check:     | :lucide-check:            | :lucide-check:              | Node/Express intermedio |
+| `status()` + `send()`                  | :lucide-check:     |  automático | :lucide-check:              | Express friendly        |
 
 ## Summary
 - Express se sitúa sobre la funcionalidad HTTP de Node. Abstrae muchos de sus bordes ásperos. 

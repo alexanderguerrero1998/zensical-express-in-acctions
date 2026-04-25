@@ -2,10 +2,10 @@
 
 Este capítulo cubre 
 
-- __LESS para mejorar tu CSS__ 
-- __Browserify para empaquetar JavaScript, permitiéndote compartir código entre   cliente y servidor__ 
-- __connect-assets como alternativa a Grunt para compilar y servir CSS y JavaScript__ 
-- __Desplegar tus aplicaciones en Heroku para el internet real.__
+- [x] __LESS para mejorar tu CSS__ 
+- [x] __Browserify para empaquetar JavaScript, permitiéndote compartir código entre   cliente y servidor__ 
+- [x] __connect-assets como alternativa a Grunt para compilar y servir CSS y JavaScript__ 
+- [x] __Desplegar tus aplicaciones en Heroku para el internet real.__
 
 Es hora de llevar tus aplicaciones al mundo real. La primera parte de este capítulo discutirá los assets. Si estás construyendo cualquier tipo de sitio web, es muy probable que sirvas tanto CSS como JavaScript. Es común concatenar y minificar estos assets por rendimiento. También es común codificar en lenguajes que compilan a CSS (como SASS y LESS), al igual que es común codificar en lenguajes que se transpilan a JavaScript (como CoffeeScript o TypeScript), o concatenar y minificar JavaScript. Los debates se convierten rápidamente en guerras de llamas cuando se habla de cosas como estas; ¿deberías usar LESS o SASS? ¿Es CoffeeScript algo bueno? Whichever elijas, te mostraré cómo usar algunas de estas herramientas para empaquetar tus assets para la web.
 
@@ -107,7 +107,7 @@ En **LESS**, en lugar de definir `border-radius` y luego hacer varias copias con
 
 Ahora bien, si ejecutas ese código LESS a través de un compilador, se generará el CSS que aparece en el siguiente listado.
 
-```css
+```css linenums="1"
 .my-element {
  -webkit-border-radius: 5px;
  -moz-border-radius: 5px;
@@ -127,7 +127,7 @@ Como puedes ver, el mixin se expande en las tediosas declaraciones con prefijo d
 
 En HTML, tus elementos están anidados. Todo va dentro de la etiqueta `<html>`, y luego tu contenido va en la etiqueta `<body>`. Dentro del body, podrías tener un `<header>` con un `<nav>` para navegación. Tu CSS no refleja exactamente esto; si quisieras estilizar tu header y la navegación dentro de tu header, podrías escribir CSS como este próximo listado.
 
-```css
+```css linenums="1"
 // Listing 11.7 CSS example with no nesting
 
 header {
@@ -226,7 +226,7 @@ Crea una nueva carpeta para construir esto. Harás un `package.json` que se vea 
 Ejecuta `npm install` y luego crea un archivo llamado `main.js`. Pon lo siguiente dentro:
 
 **Listado 11.11** `main.js` para tu ejemplo simple de Browserify
-```javascript
+```javascript linenums="1"
 var randomColor = require("random-color");
 document.body.style.background = randomColor();
 ```
@@ -235,7 +235,7 @@ Nota que este archivo usa la declaración `require`, pero está hecho para el na
 
 Finalmente, define un archivo HTML simple en el mismo directorio con el siguiente contenido:
 
-```html
+```html linenums="1"
 <!DOCTYPE html>
 <html>
 <head>
@@ -251,7 +251,7 @@ Ahora, si guardas todo eso y ejecutas `npm run build-my-js`, **Browserify compil
 
 Puedes abrir `compiled.js` para ver que tu código está ahí, junto con el módulo `random-color`. El código será feo, pero se verá así:
 
-```javascript
+```javascript linenums="1"
 (function e(t,n,r){function s(o,u){if(!n[o]){/* código compilado... */}}
 ```
 
@@ -312,7 +312,7 @@ Luego, ejecuta `npm install grunt --save-dev` y `npm install grunt-cli --save-de
 Entonces, querrás crear algo llamado **Gruntfile**, que Grunt examina para saber qué hacer. El **Gruntfile vive en la raíz de tu proyecto** (misma carpeta que `package.json`) y se llama `Gruntfile.js`.
 
 **Listado 11.15** Un esqueleto Gruntfile "Hello World"
-```javascript
+```javascript linenums="1"
 module.exports = function(grunt) {
   grunt.registerTask("default", "Say Hello World.", function() {
     grunt.log.write("Hello world!");
@@ -343,7 +343,7 @@ Hagamos que **Grunt lo haga**.
 Empieza escribiendo un archivo LESS simple:
 
 **article.less**
-```less
+```less linenums="1"
 article {
   display: block;
   
@@ -360,7 +360,7 @@ article {
 
 Esto debería traducirse al CSS:
 
-```css
+```css linenums="1"
 article {
   display: block;
 }
@@ -377,14 +377,14 @@ article p {
 
 Y si lo minificas, debería verse así:
 
-```css
+```css linenums="1"
 article{display:block}article h1{font-size:16pt;color:#900}article p{line-height:1.5em}
 ```
 
 Puedes usar una tarea LESS de terceros para Grunt para lograrlo. Comienza instalando esta tarea LESS de Grunt con `npm install grunt-contrib-less --save-dev`. Luego, agrega lo siguiente a tu Gruntfile.
 
 **Listado 11.19** Un Gruntfile con LESS
-```javascript
+```javascript linenums="1"
 module.exports = function(grunt) {
   grunt.initConfig({
     less: {
@@ -413,7 +413,7 @@ __SIRVIENDO ESTOS ASSETS COMPILADOS__
 Ahora que has compilado algo, ¡necesitas servirlo a tus visitantes! Usarás el **middleware estático de Express** para eso. Agrega `tmp/build` como parte de tu stack de middleware:
 
 **Listado 11.20** Middleware estático con archivos compilados
-```javascript
+```javascript linenums="1"
 var express = require("express");
 var path = require("path");
 var app = express();
@@ -431,7 +431,7 @@ Ahora puedes servir archivos desde `public` y **archivos compilados desde `tmp/b
 **NOTA** Probablemente no quieras hacer commit de archivos compilados en tu repositorio, así que guárdalos en un directorio que ignorarás con control de versiones. Si usas Git, agrega `tmp` a tu `.gitignore` para asegurarte de que tus assets compilados no entren en control de versiones. Algunas personas sí hacen commit de estos, así que haz lo que te parezca correcto para ti.
 
 **Listado 11.21** Un Gruntfile con Browserify
-```javascript
+```javascript linenums="1"
 module.exports = function(grunt) {
   grunt.initConfig({
     less: {
@@ -460,7 +460,7 @@ Desafortunadamente, Browserify no minifica tu JavaScript, su único defecto. Deb
 Instala la tarea con `npm install grunt-contrib-uglify --save-dev`. Luego agrega este código a tu Gruntfile:
 
 **Listado 11.23** Un Gruntfile con Browserify, LESS y Uglify
-```javascript
+```javascript linenums="1"
 module.exports = function(grunt) {
   grunt.initConfig({
     less: { /* … */ },
@@ -492,7 +492,7 @@ Mientras desarrollas, no quieres ejecutar `npm run grunt` cada vez que editas un
 Instálala con `npm install grunt-contrib-watch --save-dev` y agrega esto a tu Gruntfile:
 
 **Listado 11.24** Un Gruntfile con watch agregado
-```javascript
+```javascript linenums="1"
 watch: {
   scripts: {
     files: ["**/*.js"],
@@ -571,7 +571,7 @@ El middleware tiene opciones de inicio rápido que facilitan comenzar, pero reco
 
 El siguiente listado muestra cómo podría verse una configuración simple:
 
-```js
+```js linenums="1"
 var express = require("express");
 var assets = require("connect-assets");
 var app = express();
@@ -705,7 +705,7 @@ La parte de Express de esta aplicación “Hello World” debería ser bastante 
 
 Primero, define tu `package.json`, como en el siguiente listado:
 
-```json id="p8k3x1"
+```json 
 {
  "private": true,
  "scripts": {
@@ -725,7 +725,7 @@ Esto no tiene muchas cosas nuevas, excepto la definición de qué versión de No
 
 ### app.js (tu Hello World)
 
-```js id="k2m9q0"
+```js linenums="1"
 var express = require("express");
 var app = express();
 

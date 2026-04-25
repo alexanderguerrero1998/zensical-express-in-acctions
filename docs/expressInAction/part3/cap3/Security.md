@@ -1,10 +1,10 @@
 # Security
 Este capítulo cubre:  
 
-- __Mantener tu código Express libre de errores, usando herramientas y pruebas.__  
-- __Lidiar con ataques; entender cómo funcionan y cómo evitarlos.__  
-- __Manejar el inevitable fallo del servidor.__  
-- __Auditar el código de terceros que usas en tu aplicación.__
+- [x] __Mantener tu código Express libre de errores, usando herramientas y pruebas.__  
+- [x] __Lidiar con ataques; entender cómo funcionan y cómo evitarlos.__  
+- [x] __Manejar el inevitable fallo del servidor.__  
+- [x] __Auditar el código de terceros que usas en tu aplicación.__
 
 
 En el capítulo 8 te dije que tenía tres capítulos favoritos. El primero fue el capítulo 3, donde traté las bases de Express intentando darte una comprensión sólida del framework. El segundo favorito fue el capítulo 8, donde tus aplicaciones usaron bases de datos para volverse más reales. Bienvenido a mi último favorito: el capítulo sobre seguridad. 
@@ -19,12 +19,11 @@ Este capítulo no tiene un flujo tan lineal como los otros. Encontrarás que exp
 
 El famoso especialista en seguridad Bruce Schneier describe algo que llama **la mentalidad de seguridad**:
 
-> “Uncle Milton Industries lleva vendiendo granjas de hormigas a niños desde 1956. Algunos años atrás, recuerdo que abrí una con un amigo. No venían hormigas en la caja. En su lugar, había una tarjeta que rellenabas con tu dirección, y la empresa te enviaba hormigas por correo. Mi amigo se sorprendió de que pudieras recibir hormigas por correo. Yo respondí: ‘Lo realmente interesante es que estas personas enviarán un tubo de hormigas vivas a cualquier persona que les digas’. 
-> 
-> La seguridad requiere una mentalidad particular. Los profesionales de la seguridad —al menos los buenos— ven el mundo de forma distinta. No pueden entrar en una tienda sin notar cómo podrían robar. No pueden usar una computadora sin preguntarse por sus vulnerabilidades de seguridad. No pueden votar sin intentar averiguar cómo votar dos veces. Simplemente no pueden evitarlo.
+!!! info
 
-“La mentalidad de seguridad” por Bruce Schneier, en  
-https://www.schneier.com/blog/archives/2008/03/the_security_mi_1.html
+    Uncle Milton Industries lleva vendiendo granjas de hormigas a niños desde 1956. Algunos años atrás, recuerdo que abrí una con un amigo. No venían hormigas en la caja. En su lugar, había una tarjeta que rellenabas con tu dirección, y la empresa te enviaba hormigas por correo. Mi amigo se sorprendió de que pudieras recibir hormigas por correo. Yo respondí: ‘Lo realmente interesante es que estas personas enviarán un tubo de hormigas vivas a cualquier persona que les digas’. 
+
+    La seguridad requiere una mentalidad particular. Los profesionales de la seguridad —al menos los buenos— ven el mundo de forma distinta. No pueden entrar en una tienda sin notar cómo podrían robar. No pueden usar una computadora sin preguntarse por sus vulnerabilidades de seguridad. No pueden votar sin intentar averiguar cómo votar dos veces. Simplemente no pueden evitarlo. La mentalidad de seguridad” por Bruce Schneier, en  https://www.schneier.com/blog/archives/2008/03/the_security_mi_1.html
 
 Bruce Schneier no está sugiriendo que robes cosas ni que rompas la ley. Está proponiendo que la mejor forma de protegerte es pensar como un atacante: ¿cómo podría alguien subvertir un sistema? ¿Cómo podría alguien abusar de lo que se le da? Si puedes pensar como un atacante y buscar lagunas en tu propio código, entonces podrás descubrir cómo cerrar esos agujeros y hacer tu aplicación más segura.
 
@@ -106,7 +105,7 @@ Las callbacks son una parte bastante importante de Node. Cada middleware y cada 
 
 Mira si puedes detectar el error en este código:
 
-```js
+```js linenums="1"
 fs.readFile("myfile.txt", function(err, data) {
  if (err) { console.error(err); }
  console.log(data);
@@ -117,7 +116,7 @@ En este código estás leyendo un archivo y mostrando su contenido con `console.
 
 Si hay un error, debes detener la ejecución. Por ejemplo:
 
-```js
+```js linenums="1"
 fs.readFile("myfile.txt", function(err, data) {
  if (err) {
     console.error(err);
@@ -205,7 +204,8 @@ Primero, como siempre, ejecuta `npm install helmet` en el proyecto en el que est
 
 Ahora, HSTS se establecerá en cada petición.  
 
-__¿POR QUÉ NO PUEDO USAR SOLO HSTS? __ 
+__¿POR QUÉ NO PUEDO USAR SOLO HSTS?__ 
+
 Este encabezado solo es efectivo si tus usuarios ya están en HTTPS, por eso necesitas `express-enforces-ssl`.
 
 ### Prevención de ataques de secuencias de comandos entre sitios
@@ -223,6 +223,7 @@ La lista de contactos seguiría apareciendo igual, pero ahora mi navegador tambi
 
 
 __ESCAPAR LA ENTRADA DEL USUARIO__
+
 Cuando se recibe entrada del usuario, casi siempre existe la posibilidad de que introduzca algo malicioso. En el ejemplo anterior, podrías configurar tu nombre para que contenga etiquetas <script>, lo que causaría problemas de XSS. Puedes sanear o escapar la entrada del usuario para que, al insertarla, no ocurra nada inesperado.
 
 Dependiendo de dónde coloques la entrada del usuario, la sanitización variará. Como principio general, conviene sanitizar la entrada tanto como sea posible y tener siempre en cuenta el contexto. Si colocas contenido del usuario dentro de etiquetas HTML, por ejemplo, debes asegurarte de que no pueda definir ninguna etiqueta HTML. Necesitarás este tipo de cadena
@@ -286,7 +287,7 @@ En la página web del banco, hay un formulario para transferir dinero. En este f
 
 Puedes hacer la solicitud POST con la cantidad y el destinatario, pero no conoces mi cookie ni puedes adivinarla; es una larga cadena de caracteres. ¿Y si pudieras obligarme a hacer la solicitud POST? Lo harías mediante la falsificación de solicitudes entre sitios (CSRF y, a veces, XSRF). Para llevar a cabo este ataque CSRF, básicamente tendrás que hacer que envíe un formulario sin darme cuenta. Imagina que has creado un formulario como el que aparece en el siguiente listado.
 
-```html
+```html linenums="1"
 <h1>Transfer money</h1>
 <form method="post" action="https://mybank.biz/transfermoney">
  <input name="recipient" value="YourUsername" type="text">
@@ -341,7 +342,7 @@ Si necesitas un ejemplo, puedes revisar el código del capítulo 8 (`app.js`) o 
 
 Para usar el middleware, simplemente **requiere y úsalo**:
 
-```javascript
+```javascript linenums="1"
 app.use(session({ secret: 'tu-secreto' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(csurf({ cookie: true }));
@@ -349,14 +350,14 @@ app.use(csurf({ cookie: true }));
 
 Una vez usado el middleware, puedes **obtener el token al renderizar una vista**:
 
-```javascript
+```javascript linenums="1"
 app.get('/form', (req, res) => {
   res.render('form', { csrfToken: req.csrfToken() });
 });
 ```
 
 **En tu template EJS/Pug:**
-```html
+```html linenums="1"
 <form method="POST" action="/procesar">
   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
   <!-- resto del formulario -->
@@ -368,7 +369,7 @@ Y eso es todo. Una vez que hayas agregado el token CSRF a tus formularios, el mi
 
 Puedes definir un **middleware de error** que verifique errores CSRF, como se muestra en el siguiente listado:
 
-```javascript
+```javascript linenums="1"
 // Middleware de error para CSRF (colócalo DESPUÉS de todas tus rutas)
 app.use((err, req, res, next) => {
   if (err.code !== 'EBADCSRFTOKEN') return next(err);
@@ -517,7 +518,7 @@ X-Powered-By: Express
 ```
 
 Puedes desactivarlo fácilmente con una configuración:
-```javascript
+```javascript linenums="1"
 app.disable("x-powered-by");
 ```
 
@@ -553,7 +554,7 @@ La mayoría de los navegadores (y todos los modernos) escuchan un header llamado
 
 Si estás usando **Helmet**, puedes configurarlos fácilmente:
 
-```javascript
+```javascript linenums="1"
 const helmet = require('helmet');
 app.use(helmet.frameguard({
   action: 'SAMEORIGIN' // o 'DENY'
@@ -561,7 +562,7 @@ app.use(helmet.frameguard({
 ```
 
 O simplemente:
-```javascript
+```javascript linenums="1"
 app.use(helmet()); // Configuración por defecto segura
 ```
 
@@ -579,7 +580,7 @@ Cuando un producto de Adobe va a cargar un archivo de tu dominio, primero verifi
 
 Es probable que **no quieras ningún usuario Flash** en tu página. En ese caso, asegúrate de servir este contenido XML en la raíz de tu sitio (en `/crossdomain.xml`), como muestra el siguiente listado:
 
-```xml
+```xml linenums="1"
 <?xml version="1.0"?>
 <!DOCTYPE cross-domain-policy SYSTEM "http://www.adobe.com/xml/dtds/cross-domain-policy.dtd">
 <cross-domain-policy/>
@@ -597,7 +598,7 @@ Imagina que un usuario ha subido un archivo de texto plano a tu servidor llamado
 
 Pero ¿qué pasa si `file.txt` contiene algo como el script del siguiente listado?
 
-```javascript
+```javascript linenums="1"
 // Un script malicioso que podría almacenarse como texto plano.
 
 function stealUserData() {
@@ -614,7 +615,7 @@ Afortunadamente, puedes solucionarlo con **un solo header HTTP**. Puedes estable
 
 **Helmet viene con el middleware `noSniff`**, y puedes usarlo así:
 
-```javascript
+```javascript linenums="1"
 app.use(helmet.noSniff());
 ```
 

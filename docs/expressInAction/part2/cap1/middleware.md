@@ -1,9 +1,10 @@
 # Middleware
 Este capítulo cubre:
 
-- __Escribir funciones de middleware: una función con tres argumentos.__
-- __Escribir y usar middleware para manejo de errores: una función con cuatro argumentos.__
-- __Usar middleware de código abierto, como Morgan para registrar solicitudes y `express.static` para servir archivos estáticos.__
+- [x] __Escribir funciones de middleware: una función con tres argumentos.__
+- [x] __Escribir y usar middleware para manejo de errores: una función con cuatro argumentos.__
+- [x] __Usar middleware de código abierto, como Morgan para registrar solicitudes y `express.static` para servir archivos estáticos.__
+
 
 Sin ningún framework como Express, Node te ofrece una API bastante simple. Creas una función que maneje las solicitudes, la pasas a `http.createServer` y listo. Aunque esta API es sencilla, tu función manejadora de solicitudes puede volverse difícil de manejar a medida que tu aplicación crece. 
 
@@ -105,9 +106,11 @@ Si haces __cualquiera__ de esas dos cosas, tu aplicación funcionará perfectame
 
 Si haces ambas en el mismo flujo (es decir, __responder__ al cliente y luego llamas a `next()`), la primera función que envía la respuesta al cliente es la única que llega, porque en ese momento la respuesta ya se cierra y cualquier intento posterior de responder no tendrá efecto o generará un error. ¡lo cual es casi seguro que no es intencional!
 
-> Respondes o continúas, pero no ambas; si respondes, no deberías continuar (es una mala pratica y puede romper el codigo), y si continúas, es porque aún no has respondido.
-> 
-Estos errores suelen ser bastante fáciles de capturar una vez que sabes cómo identificarlos. Si no respondes a la solicitud y no llamar a `next`, parecerá que tu servidor es extremadamente lento. Puedes corregir tu middleware llamando a `next`, como se muestra en el siguiente listado.
+!!! note
+
+    Respondes o continúas, pero no ambas; si respondes, no deberías continuar (es una mala pratica y puede romper el codigo), y si continúas, es porque aún no has respondido.
+
+    Estos errores suelen ser bastante fáciles de capturar una vez que sabes cómo identificarlos. Si no respondes a la solicitud y no llamas a `next`, parecerá que tu servidor es extremadamente lento. Puedes corregir tu middleware llamando a `next`, como se muestra en el siguiente listado.
 
 ![](nextmiddleware.png)
 
@@ -115,14 +118,14 @@ Ahora, si detienes la aplicacion y vuelves a aejecutarla, deberas ver que el ser
 
 Ahora que ya has escrito tu registrador _(logger)_, vamos a escribir la siguiente parte: el middleware del servidor de archivos estáticos.
 
-> __¿Cansado de reiniciar tu servidor?__
+!!! tip "¿Cansado de reiniciar tu servidor?"
 
-Hasta ahora, cada vez que modificas el código, tienes que detener el servidor y volver a iniciarlo. ¡Esto puede volverse repetitivo! 
+    Hasta ahora, cada vez que modificas el código, tienes que detener el servidor y volver a iniciarlo. ¡Esto puede volverse repetitivo! 
 
-Para solucionar este problema, puedes instalar una herramienta llamada Node.js.mon, que monitoriza todos tus archivos en busca de cambios y reinicia el servidor si detecta alguno.
+    Para solucionar este problema, puedes instalar una herramienta llamada Node.js.mon, que monitoriza todos tus archivos en busca de cambios y reinicia el servidor si detecta alguno.
 
-Puedes instalar nodemon ejecutando `npm install nodemon --global`.
-Una vez instalado, puedes iniciar un archivo en modo de vigilancia reemplazando `node` por `nodemon` en tu comando. Si antes escribiste `node app.js`, simplemente cámbialo a `nodemon app.js`, y tu aplicación se recargará continuamente cuando cambie.
+    Puedes instalar nodemon ejecutando `npm install nodemon --global`.
+    Una vez instalado, puedes iniciar un archivo en modo de vigilancia reemplazando `node` por `nodemon` en tu comando. Si antes escribiste `node app.js`, simplemente cámbialo a `nodemon app.js`, y tu aplicación se recargará continuamente cuando cambie.
 
 ### The static file server middleware
 

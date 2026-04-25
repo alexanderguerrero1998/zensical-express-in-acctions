@@ -1,0 +1,2540 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<Alexander Guerrero>">
+      
+      
+      
+        <link rel="prev" href="../../cap3/Security/">
+      
+      
+        <link rel="next" href="../../cap5/bestPractices/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.36">
+    
+    
+      
+        <title>Deployment: assets and Heroku - Learning Express</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deployment-assets-and-heroku" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Learning Express" class="md-header__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning Express
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deployment: assets and Heroku
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Learning Express" class="md-nav__button md-logo" aria-label="Learning Express" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Learning Express
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alexanderguerrero1998/zensical-express-in-acctions" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zensical-express-in-acctions
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN ACTION
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EXPRESS IN ACTION
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap1/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WHAT IS EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap2/ThebasicsofNode.js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    THE BASICS OF NODE.JS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part1/cap3/FoundationsofExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FOUNDATIONS OF EXPRESS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap1/middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MIDDLEWARE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap2/Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROUTING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap3/buldingApi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BUILDING APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part2/cap4/ViewAndTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIEWS AND TEMPLATES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap0/ExpressInContext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EXPRESS IN CONTEXT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap1/persistingDataMongoDb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PERSISTING YOUR DATA WITH MONGODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap2/TestingExpressApplication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TESTING EXPRESS APPLICATION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap3/Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SECURITY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DEPLOYMENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#less-a-more-pleasant-way-to-write-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        LESS, a more pleasant way to write CSS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Variables
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Functions
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixins" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mixins
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nesting
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Includes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-to-less" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Alternatives to LESS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-browserify-to-require-modules-in-the-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using Browserify to require modules in the browser
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Browserify to require modules in the browser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-ejemplo-simple-de-browserify" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Un ejemplo simple de Browserify
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-grunt-to-compile-minify-and-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using Grunt to compile, minify, and more
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Grunt to compile, minify, and more">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalando-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Instalando Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilando-less-con-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Compilando LESS con Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minificando-javascript-con-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Minificando JavaScript con Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-grunt-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Usando Grunt watch
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otras-tareas-utiles-de-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Otras tareas útiles de Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-connect-assets-to-compile-less-and-coffeescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using connect-assets to compile LESS and CoffeeScript
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using connect-assets to compile LESS and CoffeeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-recordatorio-sobre-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        UN RECORDATORIO SOBRE CONNECT
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalando-todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Instalando todo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-el-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configurando el middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enlazando-assets-desde-las-vistas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Enlazando assets desde las vistas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenando-scripts-con-directivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Concatenando scripts con directivas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-to-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deploying to Heroku
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying to Heroku">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configurando-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configurando Heroku
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hacer-una-aplicacion-lista-para-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Hacer una aplicación lista para Heroku
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appjs-tu-hello-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        app.js (tu Hello World)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procfile-lo-mas-nuevo-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Procfile (lo más nuevo aquí)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        .gitignore
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desplegando-tu-primera-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Desplegando tu primera app
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resultado final
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutando-grunt-en-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejecutando Grunt en Heroku
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejecutando Grunt en Heroku">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#haciendo-tu-servidor-mas-resistente-a-fallos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Haciendo tu servidor más resistente a fallos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cap5/bestPractices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BEST PRACTICES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    REMPAZA AQUI OTRO LIBRO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Efficient_NodeJS/cap1/nodeFunfamentals.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NODE FUNDAMENTALS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#less-a-more-pleasant-way-to-write-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        LESS, a more pleasant way to write CSS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Variables
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Functions
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixins" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Mixins
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nesting
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Includes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-to-less" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Alternatives to LESS
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-browserify-to-require-modules-in-the-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using Browserify to require modules in the browser
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Browserify to require modules in the browser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-ejemplo-simple-de-browserify" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Un ejemplo simple de Browserify
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-grunt-to-compile-minify-and-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using Grunt to compile, minify, and more
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Grunt to compile, minify, and more">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalando-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Instalando Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilando-less-con-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Compilando LESS con Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minificando-javascript-con-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Minificando JavaScript con Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-grunt-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Usando Grunt watch
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otras-tareas-utiles-de-grunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Otras tareas útiles de Grunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-connect-assets-to-compile-less-and-coffeescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Using connect-assets to compile LESS and CoffeeScript
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using connect-assets to compile LESS and CoffeeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#un-recordatorio-sobre-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        UN RECORDATORIO SOBRE CONNECT
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalando-todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Instalando todo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-el-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configurando el middleware
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enlazando-assets-desde-las-vistas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Enlazando assets desde las vistas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenando-scripts-con-directivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Concatenando scripts con directivas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-to-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deploying to Heroku
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying to Heroku">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configurando-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configurando Heroku
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hacer-una-aplicacion-lista-para-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Hacer una aplicación lista para Heroku
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appjs-tu-hello-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        app.js (tu Hello World)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procfile-lo-mas-nuevo-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Procfile (lo más nuevo aquí)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        .gitignore
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desplegando-tu-primera-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Desplegando tu primera app
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resultado final
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutando-grunt-en-heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejecutando Grunt en Heroku
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejecutando Grunt en Heroku">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#haciendo-tu-servidor-mas-resistente-a-fallos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Haciendo tu servidor más resistente a fallos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Get started
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../part1/cap1/Intro/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    EXPRESS IN ACTION
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="deployment-assets-and-heroku">Deployment: assets and Heroku<a class="headerlink" href="#deployment-assets-and-heroku" title="Permanent link">&para;</a></h1>
+<p>Este capítulo cubre </p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>LESS para mejorar tu CSS</strong> </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Browserify para empaquetar JavaScript, permitiéndote compartir código entre   cliente y servidor</strong> </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>connect-assets como alternativa a Grunt para compilar y servir CSS y JavaScript</strong> </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Desplegar tus aplicaciones en Heroku para el internet real.</strong></li>
+</ul>
+<p>Es hora de llevar tus aplicaciones al mundo real. La primera parte de este capítulo discutirá los assets. Si estás construyendo cualquier tipo de sitio web, es muy probable que sirvas tanto CSS como JavaScript. Es común concatenar y minificar estos assets por rendimiento. También es común codificar en lenguajes que compilan a CSS (como SASS y LESS), al igual que es común codificar en lenguajes que se transpilan a JavaScript (como CoffeeScript o TypeScript), o concatenar y minificar JavaScript. Los debates se convierten rápidamente en guerras de llamas cuando se habla de cosas como estas; ¿deberías usar LESS o SASS? ¿Es CoffeeScript algo bueno? Whichever elijas, te mostraré cómo usar algunas de estas herramientas para empaquetar tus assets para la web.</p>
+<p>El resto de este capítulo te mostrará cómo construir tus aplicaciones Express y luego ponerlas en línea. Hay muchas opciones de despliegue, pero usarás una que es fácil y gratuita para probar: <strong>Heroku</strong>. Agregarás unas pocas cosas pequeñas a tu app y desplegarás una app Express en el mundo real.</p>
+<p>Después de este capítulo, sabrás:</p>
+<ul>
+<li>Desarrollar CSS con más facilidad usando el preprocesador <strong>LESS</strong></li>
+<li>Usar <strong>Browserify</strong> para usar <code>require</code> en el navegador, igual que en Node</li>
+<li>Minificar tus assets para hacer los archivos más pequeños posibles</li>
+<li>Usar <strong>Grunt</strong> para ejecutar esta compilación y mucho más</li>
+<li>Usar middleware de Express (<strong>connect-assets</strong>) como alternativa a este flujo de trabajo de Grunt</li>
+<li>Saber cómo desplegar aplicaciones Express en la web con <strong>Heroku</strong></li>
+</ul>
+<h3 id="less-a-more-pleasant-way-to-write-css">LESS, a more pleasant way to write CSS<a class="headerlink" href="#less-a-more-pleasant-way-to-write-css" title="Permanent link">&para;</a></h3>
+<p>Recuerda el capítulo 1, donde hablamos de las motivaciones para Express. En resumen, dijimos que Node.js es poderoso pero su sintaxis puede ser un poco engorrosa y limitada. Por eso se creó Express: no cambia fundamentalmente Node, solo lo suaviza un poco.</p>
+<p>De esa manera, <strong>LESS</strong> y CSS son como Express y Node. En resumen, CSS es una herramienta poderosa para el diseño de layouts, pero su sintaxis puede ser engorrosa y limitada. Por eso se creó <strong>LESS</strong>: no cambia fundamentalmente CSS, solo lo suaviza un poco.</p>
+<p>CSS es una herramienta poderosa para diseñar páginas web, pero le faltan varias características que la gente quería. Por ejemplo, los desarrolladores quieren reducir la repetición en su código con <strong>variables constantes</strong> en lugar de valores hardcodeados; las variables están en LESS pero no en CSS.</p>
+<p><strong>LESS</strong> extiende CSS y agrega varias características poderosas. A diferencia de Express, LESS es en realidad su propio lenguaje. Eso significa que debe compilarse a CSS para ser usado por los navegadores web: los navegadores no hablan LESS, hablan CSS.</p>
+<p>Verás dos formas de compilar <strong>LESS</strong> a CSS en aplicaciones Express. Por ahora, mientras pruebas LESS, visita <a href="http://less2css.org/">http://less2css.org/</a>. En el lado izquierdo de la página, podrás escribir código LESS, y el CSS compilado aparecerá en el derecho, como se muestra en la figura 11.1.</p>
+<p>Vamos a repasar algunos ejemplos en las siguientes secciones y podrás probarlos en ese sitio web. Cuando sea hora de integrar LESS en tus apps Express, pasaremos a un método mejor y automatizado.</p>
+<p><strong>LESS</strong> está lleno de características, pero tiene <strong>cinco puntos principales</strong>:</p>
+<ul>
+<li><strong>Variables</strong>. Te permiten definir cosas como colores una vez y usarlas en todas partes.</li>
+<li><strong>Funciones</strong>. Te permiten manipular variables (por ejemplo, oscurecer un color en un 10%).</li>
+<li><strong>Nesting de selectores</strong>. Te permiten estructurar tu hoja de estilos más como tu HTML y reducir la repetición.</li>
+<li><strong>Mixins</strong>. Te permiten definir componentes reutilizables y usarlos en varios selectores.</li>
+<li><strong>Includes</strong>. Te permiten dividir tus hojas de estilos en múltiples archivos ( como <code>require</code> en Node).</li>
+</ul>
+<p><img alt="" src="../less.png" /></p>
+<p>Haremos un repaso muy rápido de estas características principales. <strong>LESS</strong> es bastante complicado y no hablaremos de cada detalle.</p>
+<p>Si te interesan las características más específicas de LESS, mira su documentación en <a href="http://lesscss.org/">http://lesscss.org/</a>.</p>
+<h3 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h3>
+<p>CSS no tiene variables. Si el color de los enlaces de tu sitio web es #29A1A4, por ejemplo, y decides cambiarlo a #454545, tendrías que buscarlo en todas partes de tu archivo CSS y cambiarlo.</p>
+<p>Si quieres experimentar con un color que se usa en muchos lugares diferentes, estarás haciendo buscar-reemplazar, lo que puede llevar a problemas de confiabilidad. También es poco claro para otros desarrolladores cuál color es cuál; ¿dónde se usa ese color en varios lugares?</p>
+<p><strong>LESS</strong> agregó variables a CSS, permitiéndote solucionar este tipo de problema. Supongamos que quieres definir el color primario de tu sitio como #FF9900. En LESS, podrías hacer algo como lo que se muestra en el siguiente listado.</p>
+<p><img alt="" src="../variblesless.png" title="Variables en Less" /></p>
+<p>Si ejecutas el código <strong>LESS</strong> del listado 11.1 a través de un compilador LESS (como el que se encuentra en <a href="http://less2css.org/">http://less2css.org/</a>), se generará el CSS que se muestra en el siguiente listado.</p>
+<p><img alt="" src="../compilationcss.png" title="El CSS compilado del listado 11.1" /></p>
+<p>Como puedes ver, la variable se inserta en el CSS resultante. Ahora, si quieres cambiar el color primario de tu sitio, solo tienes que hacerlo en un lugar: la variable en la parte superior.</p>
+<p>También podrías notar que <strong>LESS</strong> se parece mucho a CSS, y eso es intencional: es un <strong>superset estricto</strong> del lenguaje. Eso significa que cualquier CSS válido es LESS válido (pero no al revés). Por lo tanto, puedes importar fácilmente tus hojas de estilos CSS existentes a LESS y todo funcionará.</p>
+<h3 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h3>
+<p><strong>LESS</strong> también tiene <strong>funciones</strong>, que te permiten manipular variables y valores justo como podrías hacerlo en un lenguaje de programación como JavaScript.</p>
+<p>Como un lenguaje de programación típico, hay varias funciones integradas que te pueden ayudar. A diferencia de un lenguaje típico, sin embargo, estas funciones <strong>están todas integradas en el lenguaje</strong>. No puedes definir las tuyas propias; tendrás que usar otra característica llamada <strong>mixins</strong>, de la que hablaremos en la siguiente sección.</p>
+<p><strong>LESS</strong> tiene varias funciones que puedes usar para manipular colores. Por ejemplo, imagina que tus enlaces (tus etiquetas <code>&lt;a&gt;</code>) tienen un color base. Cuando pasas el mouse sobre ellos, deberían aclararse. Cuando los haces clic, deberían oscurecerse. En <strong>LESS</strong>, las funciones y variables hacen esto fácil, como muestra el siguiente listado.</p>
+<p><img alt="" src="../usingfunctions.png" title="Utilizar funciones para aclarar y oscurecer los colores." /></p>
+<p>Después de compilar este LESS a CSS, obtendrás algo como el siguiente listado.</p>
+<p><img alt="" src="../compiledcss.png" title="El CSS compilado del listado 11.3" /></p>
+<p>Como puedes ver, <strong>LESS</strong> hace más fácil aclarar y oscurecer colores. Sí, podrías haber escrito ese CSS tú mismo, pero elegir los colores aclarados y oscurecidos habría sido un poco engorroso.</p>
+<p>Hay un montón de otras funciones integradas en <strong>LESS</strong>. <a href="http://lesscss.org/functions/">http://lesscss.org/functions/</a> las lista todas.</p>
+<h3 id="mixins">Mixins<a class="headerlink" href="#mixins" title="Permanent link">&para;</a></h3>
+<p>Quizás estés leyendo esta sección deseando poder definir tus propias funciones; ¿por qué <strong>LESS</strong> tiene todo el poder? Aquí entran los <strong>mixins</strong>, una forma de definir declaraciones CSS reutilizables que puedes usar a lo largo de tus hojas de estilos.</p>
+<p>Quizás el ejemplo más común es con el <strong>prefijo del proveedor</strong>. Si quieres usar la propiedad CSS <code>border-radius</code>, tienes que prefilarla para asegurarte de que funcione en Chrome, Firefox, Internet Explorer, Safari y similares. Probablemente hayas visto algo como esto:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.my-element<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w"> </span>-webkit-border-radius:<span class="w"> </span>5px<span class="p">;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w"> </span>-moz-border-radius:<span class="w"> </span>5px<span class="p">;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w"> </span>-ms-border-radius:<span class="w"> </span>5px<span class="p">;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w"> </span>border-radius:<span class="w"> </span>5px<span class="p">;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="o">}</span>
+</span></code></pre></div>
+<p>En <strong>CSS</strong>, si quieres usar <code>border-radius</code> y que funcione en todos los navegadores, necesitarás los <strong>prefijos del proveedor</strong>. Tendrás que escribir todos esos cada vez que uses <code>border-radius</code>. Esto puede volverse tedioso y propenso a errores.</p>
+<p>En <strong>LESS</strong>, en lugar de definir <code>border-radius</code> y luego hacer varias copias con prefijos de vendor, puedes definir un <strong>mixin</strong>, o un componente reutilizable que puedes usar en múltiples declaraciones, como se muestra en el siguiente listado. Se parecen mucho a las funciones en otros lenguajes de programación.</p>
+<p><img alt="" src="../mixins.png" title="Mixins en LESS" /></p>
+<p>Ahora bien, si ejecutas ese código LESS a través de un compilador, se generará el CSS que aparece en el siguiente listado.</p>
+<p><div class="language-css highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">.</span><span class="nc">my-element</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w"> </span><span class="kp">-webkit-</span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w"> </span><span class="kp">-moz-</span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w"> </span><span class="kp">-ms-</span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="p">}</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="p">.</span><span class="nc">my-other-element</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w"> </span><span class="kp">-webkit-</span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w"> </span><span class="kp">-moz-</span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w"> </span><span class="kp">-ms-</span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Como puedes ver, el mixin se expande en las tediosas declaraciones con prefijo de proveedor, para que no tengas que escribirlas cada vez.</p>
+<h3 id="nesting">Nesting<a class="headerlink" href="#nesting" title="Permanent link">&para;</a></h3>
+<p>En HTML, tus elementos están anidados. Todo va dentro de la etiqueta <code>&lt;html&gt;</code>, y luego tu contenido va en la etiqueta <code>&lt;body&gt;</code>. Dentro del body, podrías tener un <code>&lt;header&gt;</code> con un <code>&lt;nav&gt;</code> para navegación. Tu CSS no refleja exactamente esto; si quisieras estilizar tu header y la navegación dentro de tu header, podrías escribir CSS como este próximo listado.</p>
+<p><div class="language-css highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span>
+<span class="normal"><a href="#__codelineno-2-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="o">//</span><span class="w"> </span><span class="nt">Listing</span><span class="w"> </span><span class="nt">11</span><span class="p">.</span><span class="nc">7</span><span class="w"> </span><span class="nt">CSS</span><span class="w"> </span><span class="nt">example</span><span class="w"> </span><span class="nt">with</span><span class="w"> </span><span class="nt">no</span><span class="w"> </span><span class="nt">nesting</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nt">header</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w"> </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">blue</span><span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">}</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="nt">header</span><span class="w"> </span><span class="nt">nav</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">yellow</span><span class="p">;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+En LESS, el listado 11.7 se mejoraría a este listado.</p>
+<p><img alt="" src="../nestingExam.png" title="" /></p>
+<p>LESS mejora CSS para permitir reglas anidadas. Esto significa que tu código será más corto, más legible y un mejor reflejo de tu HTML.</p>
+<p><strong>ANIDADOS LOS SELECTORES PADRE</strong></p>
+<p>Las reglas anidadas pueden referirse a su elemento padre. Esto es útil en muchos lugares, y un buen ejemplo son los enlaces y sus estados hover. Podrías tener un selector para <code>a</code>, <code>a:visited</code>, <code>a:hover</code> y <code>a:active</code>. </p>
+<p>En CSS, lo harías con <strong>cuatro selectores separados</strong>. En LESS, definirás un <strong>selector exterior</strong> y <strong>tres selectores interiores</strong>, uno para cada estado del enlace. Podría verse algo así.</p>
+<p><img alt="" src="../refering.png" title="Referencia a selectores de padres en LESS" /></p>
+<p>El anidamiento LESS puede hacer cosas sencillas como anidar tus selectores para que coincidan con tu HTML, pero también puede anidar selectores en relación con los selectores padres.</p>
+<h3 id="includes">Includes<a class="headerlink" href="#includes" title="Permanent link">&para;</a></h3>
+<p><strong>Includes</strong></p>
+<p>A medida que tu sitio se hace más y más grande, empezarás a tener cada vez más estilos. En CSS, puedes dividir tu código en múltiples archivos, pero esto conlleva la penalización de rendimiento de múltiples solicitudes HTTP. </p>
+<p>LESS te permite dividir tus estilos en múltiples archivos, que se concatenan todos en <strong>un solo archivo CSS</strong> en tiempo de compilación, ahorrando rendimiento. </p>
+<p>Esto significa que los desarrolladores pueden dividir sus <strong>variables y mixins</strong> en archivos separados según sea necesario, haciendo un código más modular. También podrías hacer un archivo LESS para la página de inicio, otro para la página de perfiles de usuario, etc. </p>
+<p><strong>La sintaxis es bastante simple</strong>:</p>
+<p><img alt="" src="../imporless.png" /></p>
+<h3 id="alternatives-to-less">Alternatives to LESS<a class="headerlink" href="#alternatives-to-less" title="Permanent link">&para;</a></h3>
+<p>En este punto del libro, no debería ser sorpresa: hay más de una manera de hacer preprocesamiento de CSS. El elefante en la habitación es el mayor "rival" de LESS, <strong>Sass</strong>. </p>
+<p>Sass es muy similar a LESS; ambos tienen variables, mixins, selectores anidados, includes e integración con Express. En cuanto a los lenguajes, son bastante similares. </p>
+<p><strong>Sass no es originalmente un proyecto de Node</strong>, pero es muy popular y ha hecho un buen trabajo integrándose en el mundo de Node. Puedes verlo en <a href="http://sass-lang.com/">http://sass-lang.com/</a>.</p>
+<p>La mayoría de los lectores querrán usar <strong>LESS o Sass</strong>. Aunque usaremos LESS en este libro, usualmente puedes sustituir la palabra "LESS" por "Sass" y será lo mismo. </p>
+<p>LESS y Sass varían ligeramente en sintaxis, pero son <strong>en gran medida iguales conceptualmente</strong> y en cómo los integras con Express.</p>
+<p>Hay preprocesadores CSS de menor tiempo que buscan cambiar fundamentalmente CSS de una u otra manera. <strong>Stylus</strong> hace la sintaxis de CSS mucho más agradable y <strong>Roole</strong> agrega varias características poderosas, y aunque ambos son geniales, no son tan populares como LESS o Sass.</p>
+<p>Otros preprocesadores CSS como <strong>Myth</strong> y <strong>cssnext</strong> toman un ángulo diferente. En lugar de intentar hacer un nuevo lenguaje que compile a CSS, compilan <strong>versiones futuras de CSS a CSS actual</strong>. Por ejemplo, la próxima versión de CSS tiene variables, así que estos preprocesadores compilan esta nueva sintaxis a CSS actual.</p>
+<h2 id="using-browserify-to-require-modules-in-the-browser">Using Browserify to require modules in the browser<a class="headerlink" href="#using-browserify-to-require-modules-in-the-browser" title="Permanent link">&para;</a></h2>
+<p>En resumen, <strong>Browserify</strong> (<a href="http://browserify.org/">http://browserify.org/</a>) es una herramienta para empaquetar JavaScript que te permite usar la función <code>require</code> tal como lo haces en Node. Y amo Browserify. Quiero aclarar eso de inmediato. <strong>Me encanta esta herramienta</strong>.</p>
+<p>Una vez escuché a alguien describir la programación basada en navegador como <strong>hostil</strong>. Me encanta hacer proyectos del lado del cliente, pero debo admitir que hay muchos baches en el camino: inconsistencias del navegador, ningún sistema de módulos confiable, un número abrumador de paquetes de calidad variable, ninguna elección real de lenguaje de programación... la lista continúa.</p>
+<p>A veces es genial, ¡pero a veces apesta! <strong>Browserify</strong> resuelve el problema de módulos de manera ingeniosa: te permite usar <code>require</code> exactamente como lo harías en Node (en contraste con cosas como RequireJS, que son asíncronas y requieren un callback feo). </p>
+<p>Esto es poderoso por un par de razones:</p>
+<ol>
+<li>
+<p><strong>Te permite definir módulos fácilmente</strong>. Si Browserify ve que <code>evan.js</code> requiere <code>cake.js</code> y <code>burrito.js</code>, empaquetará <code>cake.js</code> y <code>burrito.js</code> y los concatenará en el archivo de salida compilado.</p>
+</li>
+<li>
+<p><strong>Es casi completamente consistente con los módulos de Node</strong>. Esto es enorme —tanto el JavaScript basado en Node como el basado en navegador pueden requerir módulos de Node, permitiéndote compartir código entre servidor y cliente sin trabajo extra. </p>
+</li>
+</ol>
+<p>Incluso puedes requerir la mayoría de módulos nativos de Node en el navegador, y muchos "Node-ismos" como <code>__dirname</code> se resuelven.</p>
+<p>Podría escribir sonetos sobre Browserify. <strong>Esta herramienta es realmente genial</strong>. Déjame mostrártela.</p>
+<h3 id="un-ejemplo-simple-de-browserify">Un ejemplo simple de Browserify<a class="headerlink" href="#un-ejemplo-simple-de-browserify" title="Permanent link">&para;</a></h3>
+<p>Supongamos que quieres escribir una página web que genere un color aleatorio y establezca ese color como fondo. Tal vez quieras inspirarte para el próximo gran esquema de colores. Vas a usar un módulo npm llamado <strong>random-color</strong> (en <a href="https://www.npmjs.com/package/random-color">https://www.npmjs.com/package/random-color</a>), que genera una cadena de color RGB aleatoria.</p>
+<p>Si revisas el código fuente de este módulo, verás que <strong>no sabe nada del navegador</strong> —solo está diseñado para funcionar con el sistema de módulos de Node.</p>
+<p>Crea una nueva carpeta para construir esto. Harás un <code>package.json</code> que se vea algo como este próximo listado (tus versiones de paquetes pueden variar):</p>
+<p><strong>Listado 11.10</strong> <code>package.json</code> para tu ejemplo simple de Browserify
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;private&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;build-my-js&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;browserify main.js -o compiled.js&quot;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">&quot;browserify&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^7.0.0&quot;</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">&quot;random-color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^0.0.1&quot;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p>Ejecuta <code>npm install</code> y luego crea un archivo llamado <code>main.js</code>. Pon lo siguiente dentro:</p>
+<p><strong>Listado 11.11</strong> <code>main.js</code> para tu ejemplo simple de Browserify
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">randomColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;random-color&quot;</span><span class="p">);</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">randomColor</span><span class="p">();</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Nota que este archivo usa la declaración <code>require</code>, pero está hecho para el navegador, que no la tiene nativamente.</p>
+<p>Finalmente, define un archivo HTML simple en el mismo directorio con el siguiente contenido:</p>
+<div class="language-html highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span>
+<span class="normal"><a href="#__codelineno-5-8">8</a></span>
+<span class="normal"><a href="#__codelineno-5-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Colores Aleatorios<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a>  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;compiled.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ahora, si guardas todo eso y ejecutas <code>npm run build-my-js</code>, <strong>Browserify compilará <code>main.js</code> en un nuevo archivo, <code>compiled.js</code></strong>. ¡Abre el archivo HTML que guardaste para ver una página web que genera colores aleatorios cada vez que la recargas!</p>
+<p>Puedes abrir <code>compiled.js</code> para ver que tu código está ahí, junto con el módulo <code>random-color</code>. El código será feo, pero se verá así:</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">e</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">r</span><span class="p">){</span><span class="kd">function</span><span class="w"> </span><span class="nx">s</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">n</span><span class="p">[</span><span class="nx">o</span><span class="p">]){</span><span class="cm">/* código compilado... */</span><span class="p">}}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>¡Tu pequeña mente va a explotar!</strong></p>
+<p><strong>NOTA</strong> Aunque puedes requerir muchos bibliotecas de utilidades (incluso las integradas), hay algunas cosas que <strong>no puedes simular en el navegador</strong> y por lo tanto no puedes usar en Browserify. Por ejemplo, no puedes ejecutar un servidor web en el navegador, así que parte del módulo <code>http</code> está fuera de límites. Pero muchas cosas como <code>util</code> o módulos que escribes son <strong>totalmente válidos</strong>.</p>
+<p>A medida que escribes tu código con Browserify, querrás una manera <strong>más agradable de construir</strong> esto que tener que ejecutar el comando de build cada vez. Vamos a ver una herramienta que te ayuda a usar <strong>Browserify, LESS y mucho, mucho más</strong>.</p>
+<h2 id="using-grunt-to-compile-minify-and-more">Using Grunt to compile, minify, and more<a class="headerlink" href="#using-grunt-to-compile-minify-and-more" title="Permanent link">&para;</a></h2>
+<p>Hemos visto <strong>LESS</strong> y <strong>Browserify</strong>, pero aún no hemos encontrado una manera elegante de integrarlos en nuestras apps Express. Veremos <strong>dos maneras</strong> de manejar esto, con <strong>Grunt</strong> y <strong>connect-assets</strong>.</p>
+<p><strong>Grunt</strong> (<a href="http://gruntjs.com/">http://gruntjs.com/</a>) se autodenomina "The JavaScript Task Runner", que es exactamente lo que suena: <strong>ejecuta tareas</strong>. Si alguna vez usaste Make o Rake, Grunt te resultará familiar. </p>
+<p>Grunt define un <strong>framework</strong> sobre el cual defines tareas. Como Express, Grunt es un framework mínimo. No puede hacer mucho solo; necesitarás instalar y configurar otras tareas para que Grunt las ejecute. </p>
+<p>Estas tareas incluyen compilar <strong>CoffeeScript o LESS o SASS</strong>, concatenar JavaScript y CSS, ejecutar tests, y mucho más. Puedes encontrar una lista completa de tareas en <a href="http://gruntjs.com/plugins">http://gruntjs.com/plugins</a>, pero hoy usarás <strong>cuatro</strong>:</p>
+<ul>
+<li>Compilar y concatenar JavaScript con <strong>Browserify</strong></li>
+<li>Compilar <strong>LESS</strong> en CSS</li>
+<li><strong>Minificar</strong> JavaScript y CSS</li>
+<li>Usar <strong>watch</strong> para evitar escribir los mismos comandos una y otra vez</li>
+</ul>
+<p>Empecemos instalando Grunt.</p>
+<h3 id="instalando-grunt">Instalando Grunt<a class="headerlink" href="#instalando-grunt" title="Permanent link">&para;</a></h3>
+<p>Estas instrucciones se desvían un poco de las instrucciones oficiales de Grunt. La documentación te dirá que instales Grunt globalmente, pero creo que deberías instalar <strong>todo localmente</strong> si puedes. Esto te permite instalar múltiples versiones de Grunt en tu sistema y no contamina tus paquetes globales. Hablaremos más sobre estas mejores prácticas en el capítulo 12.</p>
+<p>Cada proyecto tiene un <code>package.json</code>. Si quieres agregar Grunt a un proyecto, querrás definir un <strong>nuevo script</strong> para poder ejecutar el Grunt local:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;grunt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grunt&quot;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Listado 11.13</strong> Un script para ejecutar el Grunt local</p>
+<p>Si quieres seguir estos ejemplos, puedes hacer un nuevo proyecto con un <code>package.json</code> básico:</p>
+<p><strong>Listado 11.14</strong> Un <code>package.json</code> básico para estos ejemplos
+<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;private&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;grunt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grunt&quot;</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p>Grunt no está configurado aún, pero cuando lo esté, esto te permite escribir <code>npm run grunt</code> para ejecutar el Grunt local.</p>
+<p>Luego, ejecuta <code>npm install grunt --save-dev</code> y <code>npm install grunt-cli --save-dev</code> (o simplemente <code>npm install grunt grunt-cli --save-dev</code>) para guardar Grunt y su herramienta de línea de comandos como dependencias locales.</p>
+<p>Entonces, querrás crear algo llamado <strong>Gruntfile</strong>, que Grunt examina para saber qué hacer. El <strong>Gruntfile vive en la raíz de tu proyecto</strong> (misma carpeta que <code>package.json</code>) y se llama <code>Gruntfile.js</code>.</p>
+<p><strong>Listado 11.15</strong> Un esqueleto Gruntfile "Hello World"
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Say Hello World.&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">);</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="p">};</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Para probarlo, escribe <code>npm run grunt</code> en tu terminal. Deberías ver:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Running &quot;default&quot; task
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Hello, world!
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Done, without errors.
+</span></code></pre></div>
+<p>¡Grunt ahora está ejecutando la tarea "hello world"! Desafortunadamente, Hello World no te sirve de mucho. Veamos tareas más útiles.</p>
+<p>Si quieres seguir, mira los ejemplos de código del libro en <a href="https://github.com/EvanHahn/Express.js-in-Action-code/tree/master/Chapter_11/grunt-examples">https://github.com/EvanHahn/Express.js-in-Action-code/tree/master/Chapter_11/grunt-examples</a>.</p>
+<h3 id="compilando-less-con-grunt">Compilando LESS con Grunt<a class="headerlink" href="#compilando-less-con-grunt" title="Permanent link">&para;</a></h3>
+<p>Cuando aprendiste sobre LESS antes en este capítulo, recomendé un sitio web que compila tu código en vivo. Es genial para aprender y verificar que se compila correctamente, pero <strong>no es una solución automatizada</strong>. ¡No quieres tener que pegar todo tu código en un sitio web, copiar el CSS resultante y pegarlo en un archivo CSS!</p>
+<p>Hagamos que <strong>Grunt lo haga</strong>.</p>
+<p>(Si no usas LESS, hay otras tareas de Grunt para tu preprocesador favorito. Busca en <a href="http://gruntjs.com/plugins">http://gruntjs.com/plugins</a>.)</p>
+<p>Empieza escribiendo un archivo LESS simple:</p>
+<p><strong>article.less</strong>
+<div class="language-less highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nt">article</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">  </span><span class="err">h1</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">pt</span><span class="p">;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#900</span><span class="p">;</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8"></a>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">  </span><span class="err">p</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">    </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">em</span><span class="p">;</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Esto debería traducirse al CSS:</p>
+<div class="language-css highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nt">article</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="p">}</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="nt">article</span><span class="w"> </span><span class="nt">h1</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">pt</span><span class="p">;</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#900</span><span class="p">;</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="p">}</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="nt">article</span><span class="w"> </span><span class="nt">p</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">  </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">em</span><span class="p">;</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Y si lo minificas, debería verse así:</p>
+<div class="language-css highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nt">article</span><span class="p">{</span><span class="k">display</span><span class="p">:</span><span class="kc">block</span><span class="p">}</span><span class="nt">article</span><span class="w"> </span><span class="nt">h1</span><span class="p">{</span><span class="k">font-size</span><span class="p">:</span><span class="mi">16</span><span class="kt">pt</span><span class="p">;</span><span class="k">color</span><span class="p">:</span><span class="mh">#900</span><span class="p">}</span><span class="nt">article</span><span class="w"> </span><span class="nt">p</span><span class="p">{</span><span class="k">line-height</span><span class="p">:</span><span class="mf">1.5</span><span class="kt">em</span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Puedes usar una tarea LESS de terceros para Grunt para lograrlo. Comienza instalando esta tarea LESS de Grunt con <code>npm install grunt-contrib-less --save-dev</code>. Luego, agrega lo siguiente a tu Gruntfile.</p>
+<p><strong>Listado 11.19</strong> Un Gruntfile con LESS
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span>
+<span class="normal"><a href="#__codelineno-14-12">12</a></span>
+<span class="normal"><a href="#__codelineno-14-13">13</a></span>
+<span class="normal"><a href="#__codelineno-14-14">14</a></span>
+<span class="normal"><a href="#__codelineno-14-15">15</a></span>
+<span class="normal"><a href="#__codelineno-14-16">16</a></span>
+<span class="normal"><a href="#__codelineno-14-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="nx">less</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="w">      </span><span class="nx">main</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">        </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">          </span><span class="nx">paths</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;my_css&quot;</span><span class="p">]</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">        </span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">          </span><span class="s2">&quot;tmp/build/main.css&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my_css/main.less&quot;</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14"></a>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s2">&quot;grunt-contrib-less&quot;</span><span class="p">);</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;less&quot;</span><span class="p">]);</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="p">};</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Ahora, cuando ejecutes Grunt con <code>npm run grunt</code>, tu LESS se compilará en <code>tmp/build/main.css</code>.</p>
+<p><strong>Después de hacer eso, necesitarás asegurarte de servir ese archivo.</strong></p>
+<p><strong>SIRVIENDO ESTOS ASSETS COMPILADOS</strong></p>
+<p>Ahora que has compilado algo, ¡necesitas servirlo a tus visitantes! Usarás el <strong>middleware estático de Express</strong> para eso. Agrega <code>tmp/build</code> como parte de tu stack de middleware:</p>
+<p><strong>Listado 11.20</strong> Middleware estático con archivos compilados
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;express&quot;</span><span class="p">);</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">);</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="k">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="p">)));</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="k">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;tmp/build&quot;</span><span class="p">)));</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mf">3000</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;App started on port 3000.&quot;</span><span class="p">);</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Ahora puedes servir archivos desde <code>public</code> y <strong>archivos compilados desde <code>tmp/build</code></strong>.</p>
+<p><strong>NOTA</strong> Probablemente no quieras hacer commit de archivos compilados en tu repositorio, así que guárdalos en un directorio que ignorarás con control de versiones. Si usas Git, agrega <code>tmp</code> a tu <code>.gitignore</code> para asegurarte de que tus assets compilados no entren en control de versiones. Algunas personas sí hacen commit de estos, así que haz lo que te parezca correcto para ti.</p>
+<p><strong>Listado 11.21</strong> Un Gruntfile con Browserify
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="nx">less</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">      </span><span class="cm">/* … */</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="nx">browserify</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">      </span><span class="nx">client</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">        </span><span class="nx">src</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;my_javascripts/main.js&quot;</span><span class="p">],</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">        </span><span class="nx">dest</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;tmp/build/main.js&quot;</span><span class="p">,</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13"></a>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s2">&quot;grunt-contrib-less&quot;</span><span class="p">);</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s2">&quot;grunt-browserify&quot;</span><span class="p">);</span>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;browserify&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;less&quot;</span><span class="p">]);</span>
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="p">};</span>
+</span></code></pre></div></td></tr></table></div></p>
+<h3 id="minificando-javascript-con-grunt">Minificando JavaScript con Grunt<a class="headerlink" href="#minificando-javascript-con-grunt" title="Permanent link">&para;</a></h3>
+<p>Desafortunadamente, Browserify no minifica tu JavaScript, su único defecto. Deberías hacerlo para reducir tamaños de archivo y tiempos de carga lo mejor que puedas.</p>
+<p><strong>UglifyJS</strong> es un minificador JavaScript popular que comprime tu código a tamaños minúsculos. Usarás una tarea Grunt que aprovecha UglifyJS para minificar tu código ya Browserificado, llamada <code>grunt-contrib-uglify</code>.</p>
+<p>Instala la tarea con <code>npm install grunt-contrib-uglify --save-dev</code>. Luego agrega este código a tu Gruntfile:</p>
+<p><strong>Listado 11.23</strong> Un Gruntfile con Browserify, LESS y Uglify
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span>
+<span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="nx">less</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* … */</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="nx">browserify</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* … */</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="nx">uglify</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">      </span><span class="nx">myApp</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">        </span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">          </span><span class="s2">&quot;tmp/build/main.min.js&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tmp/build/main.js&quot;</span><span class="p">]</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13"></a>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s2">&quot;grunt-browserify&quot;</span><span class="p">);</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s2">&quot;grunt-contrib-less&quot;</span><span class="p">);</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s2">&quot;grunt-contrib-uglify&quot;</span><span class="p">);</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17"></a>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;browserify&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;less&quot;</span><span class="p">]);</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">  </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;browserify&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;less&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;uglify&quot;</span><span class="p">]);</span>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="p">};</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p><code>npm run grunt</code> ejecutará la tarea por defecto (Browserify + LESS). Pero <code>npm run grunt build</code> también ejecutará <strong>Uglify</strong> y minificará tu JavaScript.</p>
+<h3 id="usando-grunt-watch">Usando Grunt watch<a class="headerlink" href="#usando-grunt-watch" title="Permanent link">&para;</a></h3>
+<p>Mientras desarrollas, no quieres ejecutar <code>npm run grunt</code> cada vez que editas un archivo. Hay una tarea Grunt que <strong>vigila tus archivos</strong> y vuelve a ejecutar tareas cuando hay cambios: <strong>grunt-contrib-watch</strong>.</p>
+<p>Instálala con <code>npm install grunt-contrib-watch --save-dev</code> y agrega esto a tu Gruntfile:</p>
+<p><strong>Listado 11.24</strong> Un Gruntfile con watch agregado
+<div class="language-javascript highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="nx">watch</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">  </span><span class="nx">scripts</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;**/*.js&quot;</span><span class="p">],</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="nx">tasks</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;browserify&quot;</span><span class="p">]</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">  </span><span class="nx">styles</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;**/*.less&quot;</span><span class="p">],</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="nx">tasks</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;less&quot;</span><span class="p">]</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Y actualiza tus tareas:
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s2">&quot;grunt-contrib-watch&quot;</span><span class="p">);</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;browserify&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;less&quot;</span><span class="p">]);</span>
+</span></code></pre></div></p>
+<p>Ahora ejecuta <code>npm run grunt</code> y Grunt <strong>vigilará automáticamente</strong> tus archivos. Si cambias un <code>.less</code>, compilará LESS. Si cambias un <code>.js</code>, ejecutará Browserify. <strong>¡Super útil para desarrollo!</strong></p>
+<h3 id="otras-tareas-utiles-de-grunt">Otras tareas útiles de Grunt<a class="headerlink" href="#otras-tareas-utiles-de-grunt" title="Permanent link">&para;</a></h3>
+<p>Hay muchas más tareas Grunt. Algunas útiles:</p>
+<ul>
+<li><strong><code>grunt-contrib-sass</code></strong>: Versión Sass del plugin LESS</li>
+<li><strong><code>grunt-contrib-requirejs</code></strong>: Usa Require.js en lugar de Browserify</li>
+<li><strong><code>grunt-contrib-concat</code></strong>: Concatena archivos</li>
+<li><strong><code>grunt-contrib-imagemin</code></strong>: Minifica imágenes (JPEG, PNG)</li>
+<li><strong><code>grunt-contrib-coffee</code></strong>: Escribe CoffeeScript para cliente</li>
+<li></li>
+</ul>
+<h2 id="using-connect-assets-to-compile-less-and-coffeescript">Using connect-assets to compile LESS and CoffeeScript<a class="headerlink" href="#using-connect-assets-to-compile-less-and-coffeescript" title="Permanent link">&para;</a></h2>
+<p>Aquí tienes la traducción al español, manteniendo el sentido técnico y natural:</p>
+<p>No me gusta mucho Grunt, siendo totalmente honesto. Lo incluyo en el libro porque es increíblemente popular y potente, pero encuentro que el código es verboso y un poco confuso. Hay otra solución para usuarios de Express: un middleware llamado <strong>connect-assets</strong> (en <a href="https://github.com/adunkman/connect-assets">https://github.com/adunkman/connect-assets</a>).</p>
+<p><strong>connect-assets</strong> puede concatenar, compilar y minificar JavaScript y CSS. Soporta CoffeeScript, Stylus, LESS, SASS e incluso algo de EJS. No soporta Browserify y no es tan configurable como herramientas de construcción como Grunt o Gulp, pero es muy fácil de usar.</p>
+<p><strong>connect-assets</strong> está fuertemente inspirado en el <em>asset pipeline</em> de Sprockets del mundo de Ruby on Rails. Si has usado eso, esto te resultará bastante familiar, pero si no lo has hecho, no te preocupes.</p>
+<h3 id="un-recordatorio-sobre-connect">UN RECORDATORIO SOBRE CONNECT<a class="headerlink" href="#un-recordatorio-sobre-connect" title="Permanent link">&para;</a></h3>
+<p>Connect es otro framework web para Node, y en resumen, el middleware de Express es compatible con el middleware de Connect. Mucho middleware compatible con Express tiene “connect” en el nombre, como connect-assets.</p>
+<h3 id="instalando-todo">Instalando todo<a class="headerlink" href="#instalando-todo" title="Permanent link">&para;</a></h3>
+<p>Necesitarás ejecutar <code>npm install connect-assets --save</code> y cualquier otro compilador que necesites:</p>
+<ul>
+<li><strong>coffee-script</strong> para soporte de CoffeeScript</li>
+<li><strong>stylus</strong> para Stylus</li>
+<li><strong>less</strong> para LESS</li>
+<li><strong>node-sass</strong> para SASS</li>
+<li><strong>ejs</strong> para soporte parcial de EJS</li>
+<li><strong>uglify-js</strong> para minificación de JavaScript</li>
+<li><strong>csswring</strong> para minificación de CSS</li>
+</ul>
+<p>Los dos últimos no se usan por defecto en modo desarrollo, pero sí en producción. Si no cambias las opciones por defecto y olvidas instalarlos, tu aplicación fallará en producción. ¡Asegúrate de instalarlos!</p>
+<p>Para instalar LESS, ejecuta:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>npm install less --save
+</span></code></pre></div>
+<p>También necesitas elegir un directorio donde vivirán tus assets. Por defecto, connect-assets buscará los assets de CSS en <code>assets/css</code> y los de JavaScript en <code>assets/js</code>, pero esto es configurable. Recomiendo usar los valores por defecto mientras empiezas, así que crea un directorio llamado <code>assets</code> y dentro coloca <code>css</code> y <code>js</code>.</p>
+<hr />
+<h3 id="configurando-el-middleware">Configurando el middleware<a class="headerlink" href="#configurando-el-middleware" title="Permanent link">&para;</a></h3>
+<p>El middleware tiene opciones de inicio rápido que facilitan comenzar, pero recomiendo encarecidamente configurarlo. Por ejemplo, una de las opciones evita que connect-assets ensucie el espacio global, lo cual hace por defecto.</p>
+<p>El siguiente listado muestra cómo podría verse una configuración simple:</p>
+<div class="language-js highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span>
+<span class="normal"><a href="#__codelineno-21-5">5</a></span>
+<span class="normal"><a href="#__codelineno-21-6">6</a></span>
+<span class="normal"><a href="#__codelineno-21-7">7</a></span>
+<span class="normal"><a href="#__codelineno-21-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;express&quot;</span><span class="p">);</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">assets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;connect-assets&quot;</span><span class="p">);</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">assets</span><span class="p">({</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">  </span><span class="nx">helperContext</span><span class="o">:</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">,</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">  </span><span class="nx">paths</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;assets/css&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;assets/js&quot;</span><span class="p">]</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="p">}));</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Este middleware tiene varios valores por defecto razonables. Por ejemplo, habilita minificación y caché en producción, pero los desactiva en desarrollo. Puedes sobrescribir esta configuración si quieres; revisa la documentación para más detalles.</p>
+<p>Aquí sobrescribimos un valor: <code>helperContext</code>. Por defecto, connect-assets adjunta sus helpers al objeto global. En su lugar, los adjuntamos a <code>app.locals</code> para no contaminar el espacio global, pero seguir teniendo acceso a los helpers desde las vistas.</p>
+<p>Ahora que configuraste el middleware, necesitas enlazar estos assets desde las vistas.</p>
+<hr />
+<h3 id="enlazando-assets-desde-las-vistas">Enlazando assets desde las vistas<a class="headerlink" href="#enlazando-assets-desde-las-vistas" title="Permanent link">&para;</a></h3>
+<p>connect-assets proporciona dos funciones principales para tus vistas: <strong>js</strong> y <strong>css</strong>.</p>
+<ul>
+<li><code>js("archivo")</code> genera una etiqueta <code>&lt;script&gt;</code> para ese archivo.</li>
+<li><code>css("archivo")</code> hace lo mismo pero con <code>&lt;link&gt;</code> para CSS.</li>
+</ul>
+<p>Estas funciones devuelven HTML que incluye la versión más reciente de tus assets, lo que significa que agregan un hash largo al nombre para evitar que el navegador use archivos en caché antiguos.</p>
+<p>Si usas Pug:</p>
+<div class="language-pug highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="err">!= </span><span class="nt">css</span>(<span class="err">&quot;</span><span class="na">my-css-file</span><span class="err">&quot;</span>)
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="err">!= </span><span class="nt">js</span>(<span class="err">&quot;</span><span class="na">my-javascript-file</span><span class="err">&quot;</span>)
+</span></code></pre></div>
+<p>Si usas EJS:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>&lt;%- css(&quot;my-css-file&quot;) %&gt;
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>&lt;%- js(&quot;my-javascript-file&quot;) %&gt;
+</span></code></pre></div>
+<p>Si usas otro motor de vistas, debes asegurarte de no escapar HTML, porque estos helpers generan etiquetas HTML en crudo que no deben ser escapadas.</p>
+<p>En cualquier caso, generarán algo como:</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/assets/my-css-file-{{HASH}}.css&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/assets/my-javascript-file-{{HASH}}.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>y tus assets se cargarán.</p>
+<hr />
+<h3 id="concatenando-scripts-con-directivas">Concatenando scripts con directivas<a class="headerlink" href="#concatenando-scripts-con-directivas" title="Permanent link">&para;</a></h3>
+<p>No puedes concatenar archivos CSS de esta forma. En su lugar, debes usar <code>@import</code> en tu preprocesador CSS (LESS o Sass).</p>
+<p>Pero connect-assets permite concatenar archivos JavaScript usando comentarios especiales.</p>
+<p>Por ejemplo, si tu archivo JavaScript necesita jQuery, solo tienes que escribir:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1">//= require jquery</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="c1">// haz lo que necesites con jQuery</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Y connect-assets concatenará esos archivos automáticamente.</p>
+<hr />
+<p>Y eso es la concatenación. Así de simple.</p>
+<hr />
+<p>Ahora que hemos visto dos formas de compilar tus assets, vamos a ver cómo desplegar tus aplicaciones en la web real con Heroku.</p>
+<h2 id="deploying-to-heroku">Deploying to Heroku<a class="headerlink" href="#deploying-to-heroku" title="Permanent link">&para;</a></h2>
+<p>El sitio web de Heroku tiene buzzwords como <strong>"cloud platform"</strong> y <strong>"built by developers for developers"</strong>. Para nosotros, es una manera de desplegar nuestras aplicaciones Node.js en el <strong>verdadero internet gratis</strong>. ¡<strong>No más localhost:3000</strong>! Podrás tener tus apps en el internet de la vida real.</p>
+<p><strong>Esencialmente</strong>, cuando despliegas tu sitio, estás enviando tu código para que se ejecute en algún lugar. En este caso, cuando despliegas en Heroku, enviarás código a los servidores de Heroku y ellos ejecutarán tus aplicaciones Express.</p>
+<p>Como todo, hay muchas maneras de desplegar tu sitio. <strong>Heroku puede no ser la mejor opción para ti</strong>. Lo elegimos aquí porque es <strong>relativamente simple y no cuesta nada empezar</strong>.</p>
+<h3 id="configurando-heroku">Configurando Heroku<a class="headerlink" href="#configurando-heroku" title="Permanent link">&para;</a></h3>
+<p>Primero, necesitarás una <strong>cuenta de Heroku</strong>. Visita <a href="https://www.heroku.com">www.heroku.com</a> y regístrate (si no tienes cuenta). El proceso de registro debería ser bastante directo si alguna vez te has registrado en alguna cuenta online. La figura 11.2 muestra su página de inicio.</p>
+<p><img alt="" src="../heroku.png" /></p>
+<p>A continuación, querrás <strong>descargar e instalar el Heroku Toolbelt</strong> desde <a href="https://toolbelt.heroku.com/">https://toolbelt.heroku.com/</a>. Sigue las instrucciones para tu sistema operativo específico.</p>
+<p>Instalar el <strong>Heroku Toolbelt</strong> en tu computadora instalará <strong>tres cosas</strong>:</p>
+<ul>
+<li><strong>Heroku client</strong>: Una herramienta de línea de comandos para gestionar apps de Heroku. La usarás para crear y administrar tus apps Express.</li>
+<li><strong>Foreman</strong>: Otra herramienta de línea de comandos. La usarás para definir cómo quieres que corran tus aplicaciones.</li>
+<li><strong>Git</strong>: El sistema de control de versiones que probablemente ya tienes instalado.</li>
+</ul>
+<p>Una vez instalado, hay <strong>una última cosa que hacer</strong>: autenticar tu computadora con Heroku. Abre una línea de comandos y escribe:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>heroku<span class="w"> </span>login
+</span></code></pre></div>
+<p>Esto te pedirá tu <strong>usuario y contraseña de Heroku</strong>.</p>
+<p>¡Una vez hecho todo eso, <strong>Heroku debería estar configurado</strong>!</p>
+<p>Aquí tienes la traducción al español, manteniendo el tono técnico claro y natural:</p>
+<h3 id="hacer-una-aplicacion-lista-para-heroku">Hacer una aplicación lista para Heroku<a class="headerlink" href="#hacer-una-aplicacion-lista-para-heroku" title="Permanent link">&para;</a></h3>
+<p>Vamos a crear una aplicación simple “Hello World” y desplegarla en Heroku, ¿te parece?</p>
+<p>Para preparar tu app para Heroku, no tienes que hacer demasiadas cosas distintas a lo normal. Aunque hay algunos comandos que necesitarás ejecutar para desplegar, los únicos cambios que debes hacer son:</p>
+<ul>
+<li>Asegúrate de iniciar la app usando <code>process.env.PORT</code></li>
+<li>Asegúrate de que tu <code>package.json</code> incluya una versión de Node</li>
+<li>Crea un archivo que se ejecutará cuando Heroku inicie tu app (llamado <strong>Procfile</strong>). En nuestra app simple, este archivo tendrá solo una línea</li>
+<li>Agrega un archivo llamado <code>.gitignore</code> a tu proyecto</li>
+</ul>
+<p>Ahora crea una app simple y asegúrate de cumplir con estos puntos.</p>
+<p>La parte de Express de esta aplicación “Hello World” debería ser bastante fácil a este punto del libro, y no hay mucho especial que tengas que hacer para que funcione en Heroku; solo una o dos líneas.</p>
+<p>Primero, define tu <code>package.json</code>, como en el siguiente listado:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="p">{</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w"> </span><span class="nt">&quot;private&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w"> </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">   </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node app&quot;</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w"> </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="w">   </span><span class="nt">&quot;express&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^5.0.0&quot;</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w"> </span><span class="nt">&quot;engines&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="w">   </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.2.x&quot;</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Esto no tiene muchas cosas nuevas, excepto la definición de qué versión de Node usar. Indica a Heroku (y a cualquiera que ejecute tu app) que tu aplicación requiere Node 4.2.</p>
+<h3 id="appjs-tu-hello-world">app.js (tu Hello World)<a class="headerlink" href="#appjs-tu-hello-world" title="Permanent link">&para;</a></h3>
+<div class="language-js highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;express&quot;</span><span class="p">);</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3"></a>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">3000</span><span class="p">);</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5"></a>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">);</span>
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="p">});</span>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9"></a>
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">),</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;App started on port &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">));</span>
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div>
+<p>No hay mucho nuevo aquí. Lo único específico de Heroku es cómo se define el puerto. Heroku establece una variable de entorno para el puerto, a la que accedes mediante <code>process.env.PORT</code>. Si no usas esa variable, tu app no podrá arrancar correctamente en Heroku.</p>
+<h3 id="procfile-lo-mas-nuevo-aqui">Procfile (lo más nuevo aquí)<a class="headerlink" href="#procfile-lo-mas-nuevo-aqui" title="Permanent link">&para;</a></h3>
+<p>El siguiente paso es lo más extraño hasta ahora: un <strong>Procfile</strong>. Puede sonar como algo complejo de Heroku, pero es muy simple.</p>
+<p>Cuando ejecutas tu app normalmente escribes:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>npm<span class="w"> </span>start
+</span></code></pre></div>
+<p>El Procfile formaliza eso y le dice a Heroku que ejecute <code>npm start</code> cuando la app inicie.</p>
+<p>Crea un archivo en la raíz del proyecto llamado <strong>Procfile</strong> (P mayúscula, sin extensión):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>web: npm start
+</span></code></pre></div>
+<h3 id="gitignore">.gitignore<a class="headerlink" href="#gitignore" title="Permanent link">&para;</a></h3>
+<p>Como último paso, agrega un archivo para decirle a Git qué ignorar. No necesitamos subir <code>node_modules</code> al servidor:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>node_modules
+</span></code></pre></div>
+<hr />
+<h3 id="desplegando-tu-primera-app">Desplegando tu primera app<a class="headerlink" href="#desplegando-tu-primera-app" title="Permanent link">&para;</a></h3>
+<p>Lo primero que necesitas es poner tu app bajo control de versiones con Git. Asumiendo que conoces lo básico:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>git<span class="w"> </span>init
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>git<span class="w"> </span>add<span class="w"> </span>.
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial commit&quot;</span>
+</span></code></pre></div>
+<p>Luego ejecuta:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>heroku<span class="w"> </span>create
+</span></code></pre></div>
+<p>Esto crea una nueva URL para tu app en Heroku. Los nombres suelen ser algo aleatorios (tipo <code>mighty-ravine-4205.herokuapp.com</code>), pero ese es el precio del hosting gratuito. Puedes cambiarlo o asociar tu propio dominio más adelante.</p>
+<p>Después, configura el entorno de producción:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>heroku<span class="w"> </span>config:set<span class="w"> </span><span class="nv">NODE_ENV</span><span class="o">=</span>production
+</span></code></pre></div>
+<p>Cuando ejecutaste <code>heroku create</code>, Heroku agregó un repositorio remoto de Git. Para desplegar tu app, solo haces:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>git<span class="w"> </span>push<span class="w"> </span>heroku<span class="w"> </span>master
+</span></code></pre></div>
+<p>Esto sube tu código y Heroku instala dependencias automáticamente. Cada vez que quieras redeplegar, vuelves a usar ese mismo comando.</p>
+<p>Finalmente, debes indicarle a Heroku que ejecute un proceso para tu app:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>heroku<span class="w"> </span>ps:scale<span class="w"> </span><span class="nv">web</span><span class="o">=</span><span class="m">1</span>
+</span></code></pre></div>
+<h3 id="resultado-final">Resultado final<a class="headerlink" href="#resultado-final" title="Permanent link">&para;</a></h3>
+<p>De repente, tu app estará corriendo en internet real.</p>
+<p>Puedes abrirla con:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>heroku<span class="w"> </span>open
+</span></code></pre></div>
+<p>y verla en el navegador. Incluso puedes compartir el enlace con tus amigos.</p>
+<p>Se acabó el <code>localhost</code>, baby.</p>
+<p><img alt="" src="../deployherorku.png" /></p>
+<h2 id="ejecutando-grunt-en-heroku">Ejecutando Grunt en Heroku<a class="headerlink" href="#ejecutando-grunt-en-heroku" title="Permanent link">&para;</a></h2>
+<p>Si estás usando <strong>connect-assets</strong> para compilar tus assets, Heroku funcionará perfectamente (asumiendo que instalaste todas las dependencias correctamente). Pero si quieres usar <strong>Grunt</strong> (u otro task runner como Gulp), necesitarás ejecutar Grunt para construir tus assets cuando despliegues tu sitio.</p>
+<p>Hay un pequeño truco que puedes usar, aprovechando una característica genial de npm: el <strong>script postinstall</strong>. Heroku ejecutará <code>npm install</code> cuando despliegues tu app, y puedes decirle a Heroku que ejecute Grunt justo después para construir todos tus assets.</p>
+<p>Es tan simple como agregar otro script a tu <code>package.json</code>:</p>
+<p><strong>Listado 11.27</strong> Ejecutando Grunt en un script postinstall
+<div class="language-json highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="p">{</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="w">    </span><span class="c1">// ...</span>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="w">    </span><span class="nt">&quot;postinstall&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grunt build&quot;</span>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p>Ahora, cuando cualquiera (incluyendo Heroku) ejecute <code>npm install</code>, se ejecutará <code>grunt build</code>.</p>
+<h3 id="haciendo-tu-servidor-mas-resistente-a-fallos">Haciendo tu servidor más resistente a fallos<a class="headerlink" href="#haciendo-tu-servidor-mas-resistente-a-fallos" title="Permanent link">&para;</a></h3>
+<p>Sin ofender, pero <strong>tu servidor podría fallar</strong>. Podría ser que te quedes sin memoria, o que tengas una excepción no capturada, o que un usuario haya encontrado una manera de romper tu servidor.</p>
+<p>Si alguna vez te ha pasado esto mientras desarrollas, probablemente viste que un error hace que tu proceso del servidor se detenga en seco. Mientras desarrollas, esto es bastante útil —¡quieres saber que tu app no funciona!</p>
+<p><strong>En producción</strong>, sin embargo, es mucho más probable que quieras que tu app funcione <strong>a toda costa</strong>. Si hay un fallo, querrás que tu app sea <strong>resiliente y se reinicie</strong>.</p>
+<p>Viste <strong>Forever</strong> en el capítulo de seguridad, pero aquí va un repaso: es una herramienta para mantener tu servidor funcionando, incluso ante fallos. En lugar de escribir <code>node app.js</code>, escribirás <code>forever app.js</code>. Entonces, si tu app falla, Forever la reiniciará.</p>
+<p>Primero, ejecuta <code>npm install forever --save</code> para instalar Forever como dependencia.</p>
+<p>Ahora, ejecutas <code>forever app.js</code> para iniciar tu servidor. Podrías agregarlo al Procfile o cambiar tu script <code>npm start</code>, pero me gusta agregar un <strong>nuevo script</strong> a <code>package.json</code>:</p>
+<p><strong>Listado 11.28</strong> Definiendo un script para producción
+<div class="language-json highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="p">{</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="c1">// ...</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="w">    </span><span class="nt">&quot;production&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;forever app.js&quot;</span>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p>Ahora, cuando ejecutes <code>npm run production</code>, tu app iniciará con Forever.</p>
+<p>El siguiente paso es hacer que <strong>Heroku ejecute este script</strong>, y eso es tan simple como cambiar tu <strong>Procfile</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>web: npm run production
+</span></code></pre></div>
+<p>Después de este cambio, Heroku ejecutará tu app con Forever y mantendrá tu app reiniciándose tras fallos.</p>
+<p><strong>Como siempre con Heroku, haz commit de estos cambios en Git</strong> (<code>git add .</code> y <code>git commit -m "Tu mensaje de commit aquí!"</code>). Una vez hecho, puedes desplegarlos a Heroku con <code>git push heroku master</code>.</p>
+<p>Puedes usar <strong>Forever en cualquier tipo de despliegue</strong>, no solo Heroku. Parte de tu configuración de despliegue cambiará dependiendo de tu setup de servidor, pero puedes usar Forever donde elijas desplegar.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>LESS</strong> es un lenguaje que compila a CSS. Agrega muchas comodidades como <strong>variables y mixins</strong>.</li>
+<li><strong>Browserify</strong> es una herramienta para empaquetar JavaScript para ejecutarse en el navegador. Empaqueta archivos para que puedas usar el <strong>sistema de módulos de Node.js en el navegador</strong>, permitiéndote compartir código entre tu cliente y servidor.</li>
+<li><strong>Grunt</strong> es un <strong>task runner genérico</strong> que puede hacer muchas cosas. Una de las cosas que harás con Grunt es <strong>compilar CSS con LESS</strong> y <strong>empaquetar JavaScript con Browserify</strong>.</li>
+<li><strong>connect-assets</strong> es una <strong>alternativa a Grunt</strong> en algunos aspectos y te permite compilar CSS y JavaScript usando <strong>middleware de Express</strong>.</li>
+<li><strong>Heroku</strong> es una de muchas plataformas de aplicaciones en la nube que te permiten desplegar fácilmente tus aplicaciones Express al <strong>mundo real</strong>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../cap3/Security/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SECURITY">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                SECURITY
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../cap5/bestPractices/" class="md-footer__link md-footer__link--next" aria-label="Next: BEST PRACTICES">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                BEST PRACTICES
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>
