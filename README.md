@@ -1,0 +1,9 @@
+Para subir a git hub desde cero
+```sh
+git init
+git add .
+git commit -m "primer commit"
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/TU_REPO.git
+git push -u origin main
+```
