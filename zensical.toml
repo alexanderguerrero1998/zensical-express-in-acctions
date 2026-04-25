@@ -11,12 +11,25 @@ site_name = "Learning Express"
 site_description = "A new project generated from the default template project."
 site_author = "<Alexander Guerrero>"
 
-[[project.nav]]
-title = "EXPRESS IN ACTION"
-
-[[project.nav.children]]
-title = "What is Express"
-path = "expressInAction/part1/cap1/Intro.md"
+nav = [
+  {
+    "EXPRESS IN ACTION" = [
+      { "WHAT IS EXPRESS" = "expressInAction/part1/cap1/Intro.md" },
+      { "THE BASICS OF NODE.JS" = "expressInAction/part1/cap2/ThebasicsofNode.js.md" },
+      { "FOUNDATIONS OF EXPRESS" = "expressInAction/part1/cap3/FoundationsofExpress.md" },
+      { "MIDDLEWARE" = "expressInAction/part2/cap1/middleware.md" },
+      { "ROUTING" = "expressInAction/part2/cap2/Routing.md" },
+      { "BUILDING APIS" = "expressInAction/part2/cap3/buldingApi.md" },
+      { "VIEWS AND TEMPLATES" = "expressInAction/part2/cap4/ViewAndTemplates.md" },
+      { "EXPRESS IN CONTEXT" = "expressInAction/part3/cap0/ExpressInContext.md" },
+      { "PERSISTING YOUR DATA WITH MONGODB" = "expressInAction/part3/cap1/persistingDataMongoDb.md" },
+      { "TESTING EXPRESS APPLICATION" = "expressInAction/part3/cap2/TestingExpressApplication.md" },
+      { "SECURITY" = "expressInAction/part3/cap3/Security.md" },
+      { "DEPLOYMENT" = "expressInAction/part3/cap4/Deplyment.md" },
+      { "BEST PRACTICES" = "expressInAction/part3/cap5/bestPractices.md" },
+    ]
+  }
+]
 
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
